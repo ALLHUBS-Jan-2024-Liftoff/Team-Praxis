@@ -1,1 +1,2 @@
-# jessicas-group-3
+# Team-Praxis
+*aka: jessicas-group-3*
