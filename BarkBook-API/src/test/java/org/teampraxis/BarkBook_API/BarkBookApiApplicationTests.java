@@ -1,10 +1,10 @@
-package com.teampraxis;
+package org.teampraxis.BarkBook_API;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BookBarkApiApplicationTests {
+class BarkBookApiApplicationTests {
 
 	@Test
 	void contextLoads() {
