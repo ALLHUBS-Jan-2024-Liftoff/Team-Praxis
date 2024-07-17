@@ -6,6 +6,7 @@ const destinations = [
     {name: 'about', href: '/about', valid: true},
     {name: 'noRender', href: '/notReady', valid: false},
     {name: 'new link', href: '/newpage', valid: false},
+    {name: 'create events', href: '/create-event', valid: true},
 ]
 
 // TODO: make navbar sticky
