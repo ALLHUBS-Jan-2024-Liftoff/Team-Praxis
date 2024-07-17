@@ -1,9 +1,13 @@
 import Navbar from "./components/Navbar.jsx";
 
-function App() {
+import TailwindExample from "./components/TailwindExample.jsx";
+
+const App = () => {
   return (
     <>
         <Navbar />
+        {/*<TailwindExample />*/}
+
     </>
   )
 }
