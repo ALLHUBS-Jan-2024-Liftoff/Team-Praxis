@@ -1,0 +1,12 @@
+[
+  {
+    "id": 0,
+    "name": "Jane Doe",
+    "location": "Overland Park"
+  },
+  {
+    "id": 1,
+    "name": "John Smith",
+    "location": "Kansas City"
+  }
+]
