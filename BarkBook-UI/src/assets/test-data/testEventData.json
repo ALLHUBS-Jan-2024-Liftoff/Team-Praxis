@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "name": "Cool event",
+    "location": "Plaza",
+    "date": "10/24/23",
+    "description": "everybody's talking about it"
+  },
+  {
+    "id": 1,
+    "name": "Huge party",
+    "location": "The club",
+    "date": "8/21/24",
+    "description": "celebrating a nice mans bday"
+  },
+  {
+    "id": 2,
+    "name": "Code-a-thon",
+    "location": "My mom's basement",
+    "date": "9/24/24",
+    "description": "bring your own gatorade"
+  },
+  {
+    "id": 3,
+    "name": "Puppy playdate",
+    "location": "The greenest park",
+    "date": "23/10/23",
+    "description": "so cute!!"
+  }
+]
