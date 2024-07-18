@@ -4,7 +4,7 @@ const destinations = [
     {name: 'home', href: '/', valid: true},
     {name: 'login', href: '/login', valid: true},
     {name: 'about', href: '/about', valid: true},
-    {name: 'noRender', href: '/notReady', valid: false},
+    {name: 'add dog', href: '/add-dog', valid: true},
     {name: 'new link', href: '/newpage', valid: false},
 ]
 
