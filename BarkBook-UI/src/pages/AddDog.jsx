@@ -2,7 +2,9 @@ const AddDog = () => {
     return (
         <form>
             
-            {/* <div className="col-span-full">
+            {/* ---to be used later to upload pic---
+            
+            <div className="col-span-full"> 
               <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
                 Photo
               </label>
