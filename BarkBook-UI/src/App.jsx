@@ -8,7 +8,7 @@ import TailwindExample from "./components/TailwindExample.jsx";
 import {MainLayout} from "./layouts/MainLayout.jsx";
 import {HomePage} from "./pages/HomePage.jsx";
 import {AboutPage} from "./pages/AboutPage.jsx";
-import CreateEventForm from "./components/Events/CreateEventForm.jsx";
+import CreateEventForm from "./pages/CreateEventForm.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
