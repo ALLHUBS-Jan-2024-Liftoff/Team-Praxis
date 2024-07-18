@@ -3,11 +3,11 @@ import {Link} from "react-router-dom";
 // edit and add destinations as needed, for now
 // setting `valid` to false means it will not render in the navbar
 const destinations = [
-    {name: 'home', href: '/', valid: true},
-    {name: 'login', href: '/login', valid: true},
-    {name: 'about', href: '/about', valid: true},
-    {name: 'add dog', href: '/add-dog', valid: true},
-    {name: 'new link', href: '/newpage', valid: false},
+    {name: 'home', path: '/', valid: true},
+    {name: 'test', path: '/test', valid: true},
+    {name: 'about', path: '/about', valid: true},
+    {name: 'create-event', path: '/create-event', valid: true},
+    {name: 'add-dog', path: '/add-dog', valid: true},
 ]
 
 // TODO: make navbar sticky
