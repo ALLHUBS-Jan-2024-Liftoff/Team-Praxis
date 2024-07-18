@@ -1,7 +1,7 @@
 import testDogData from "/src/assets/test-data/testDogData.json";
 import testEventData from "/src/assets/test-data/testEventData.json";
 import testUserData from "/src/assets/test-data/testUserData.json";
-import {DynamicTable} from "./common/DynamicTable.jsx";
+import {DynamicTable} from "../components/DynamicTable.jsx";
 
 export const AccountPage = () => {
 
