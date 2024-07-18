@@ -9,6 +9,7 @@ import {MainLayout} from "./layouts/MainLayout.jsx";
 import {HomePage} from "./pages/HomePage.jsx";
 import {AboutPage} from "./pages/AboutPage.jsx";
 import BarkBookLogin from "./components/BarkBookLogin.jsx"
+import BarkBookRegistration from "./components/BarkBookRegistration.jsx"
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
             <Route path={"test"} element={<TailwindExample />} />
             <Route path={"about"} element={<AboutPage />} />
             <Route path={"login"} element={<BarkBookLogin />} />
+            <Route path={"register"} element={<BarkBookRegistration />} />
             {/*To add a path, edit and uncomment...*/}
             {/*<Route path={"myPath"} element={<myPage />} />*/}
             {/*And add it to the Navbar array*/}

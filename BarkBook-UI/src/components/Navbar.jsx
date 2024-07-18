@@ -6,6 +6,8 @@ const destinations = [
     {name: 'home', path: '/', valid: true},
     {name: 'test', path: '/test', valid: true},
     {name: 'about', path: '/about', valid: true},
+    {name: 'login', path: '/login', valid: true},
+    {name: 'register', path: '/register', valid: true},
 ]
 
 // TODO: make navbar sticky
