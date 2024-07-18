@@ -8,8 +8,8 @@ import TailwindExample from "./components/TailwindExample.jsx";
 import {MainLayout} from "./layouts/MainLayout.jsx";
 import {HomePage} from "./pages/HomePage.jsx";
 import {AboutPage} from "./pages/AboutPage.jsx";
-import BarkBookLogin from "./components/BarkBookLogin.jsx"
-import BarkBookRegistration from "./components/BarkBookRegistration.jsx"
+import BarkBookLogin from "./pages/BarkBookLogin.jsx"
+import BarkBookRegistration from "./pages/BarkBookRegistration.jsx"
 import CreateEventForm from "./pages/CreateEventForm.jsx";
 import AddDog from './pages/AddDog.jsx';
 
