@@ -7,32 +7,42 @@ export default function AddDog() {
 
     // get the information
 
-    const [dog, setDog] = useState({
-        dogName: '',
-        dogAge: 0, // dogAge and weight initialize as integers, set them as 0
-        breed: '',
-        weight: 0,
-    });
+    // const [dog, setDog] = useState({
+    //     dogName: '',
+    //     dogAge: 0, // dogAge and weight initialize as integers, set them as 0
+    //     breed: '',
+    //     weight: 0,
+    // });
 
-    const { dogName, dogAge, breed, weight } = dog;
+    const [dogName, setDogName] = useState("")
+    const handleDogName = e => setDogName(e.target.value);
 
-    const onInput = (e) => {
-        setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
-    };
+    const [dogAge, setDogAge] = useState("")
+    const handleDogAge = e => setDogAge(e.target.value);
 
-  // this is supposed to ensure that dogAge and weight will convert to integers, backend should ensure its int
-  //   const onInput = (e) => {
-  //     const { name, value } = e.target;
-  //     setDog((prevDog) => ({
-  //         ...prevDog,
-  //         [name]: name === 'dogAge' || name === 'weight' ? parseFloat(value) : value,
-  //     }));
-  // };
+    const [breed, setBreed] = useState("")
+    const handleBreed = e => setBreed(e.target.value);
+
+    const [weight, setWeight] = useState("")
+    const handleWeight = e => setWeight(e.target.value);
+
+    // const { dogName, dogAge, breed, weight } = dog;
+
+    // const onInput = (e) => {
+    //     setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
+    // };
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted");  // Debugging statement
-        console.log(dog);  // Debugging statement
+
+        const dog = {
+          dogName,
+          dogAge,
+          breed,
+          weight
+        };
+
         try {
           await axios.post('http://localhost:8080/add-dog', dog);  // post the dog obj
           navigate('/user'); // navigate back to /user after submission
@@ -43,8 +53,8 @@ export default function AddDog() {
   
 
     return (
-       <form onSubmit={onSubmit}>
-        {/*<form onSubmit={(e) => onSubmit(e)}>    */}
+      //  <form onSubmit={onSubmit}>
+        <form onSubmit={(e) => onSubmit(e)}>
             <h5 className="text-base font-semibold leading-7 flex justify-center">
                 Enter your dog information
             </h5>
@@ -63,7 +73,7 @@ export default function AddDog() {
                                 name="dogName"
                                 type="text"
                                 value={dogName}
-                                onChange={onInput}  // change to onChange={onInput}?
+                                onChange={handleDogName}  
                                 className="block w-3/4 rounded-md border-2"
                             />
                         </div>
@@ -82,7 +92,7 @@ export default function AddDog() {
                                 name="dogAge"
                                 type="number"
                                 value={dogAge}
-                                onChange={onInput}
+                                onChange={handleDogAge}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>
@@ -100,7 +110,7 @@ export default function AddDog() {
                                 id="breed"
                                 name="breed"
                                 value={breed}
-                                onChange={onInput}
+                                onChange={handleBreed}
                                 className="block rounded-md border-2"
                             >
                                 <option value = "">Select Breed</option>
@@ -126,7 +136,7 @@ export default function AddDog() {
                                 name="weight"
                                 type="number"
                                 value={weight}
-                                onChange={onInput}
+                                onChange={handleWeight}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>
