@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -12,27 +13,27 @@ public class Dog {
     @GeneratedValue
     private int id;
 
+    private Dog() {}
+
     @NotBlank(message = "Name your dog!")
     @Size(max = 10, message = "Are you trying to confuse your dog? One or two syllables long!")
     private String dogName;
 
-    @NotBlank(message = "Enter your dogs age.")
+    @NotNull(message = "Enter your dogs age.")
     private int dogAge;
 
     @NotBlank(message = "Enter your dogs breed.")
     private String breed;
 
-    @NotBlank(message = "Enter your dogs weight")
+    @NotNull(message = "Enter your dogs weight")
     private int weight;
 
-    public Dog(String dogName, int dogAge, String breed, int weight) {
+    public Dog(String dogName, Integer dogAge, String breed, Integer weight) {
         this.dogName = dogName;
         this.dogAge = dogAge;
         this.breed = breed;
         this.weight = weight;
     }
-
-    public Dog() {}
 
     public int getId() {
         return id;
