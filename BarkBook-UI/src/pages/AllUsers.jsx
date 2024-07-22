@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, Link } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ export default function AllUsers() {
 
     const [users, setUsers] = useState([])
     
-    let { id } = useParams();
+    const { id } = useParams();
 
     useEffect(()=> {
         loadUsers();
@@ -47,9 +47,9 @@ export default function AllUsers() {
             <td>{user.username}</td>
             <td>{user.password}</td>
             <td>
-                <button className='mr-3'>View</button>
-                <button className='mr-3'>Edit</button>
-                <Link onClick={() => deleteUser(users.id)}>Delete</Link>
+                <Link className='mr-3' to={`/viewuser/${user.id}`} >View</Link>
+                <Link className='mr-3' to={`/edituser/${user.id}`}>Edit</Link>
+                <Link onClick={() => deleteUser(user.id)}>Delete</Link>
             </td>
             </tr>
         ))

@@ -25,6 +25,22 @@ public class BarkBookAuthController {
        return barkBookRepository.findAll();
     }
 
+    @GetMapping("/api/user/{id}")
+    BarkBookAuth getUserById(@PathVariable Long id) {
+        return barkBookRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @PutMapping("/api/user/{id}")
+    BarkBookAuth updateUser(@RequestBody BarkBookAuth newUser, @PathVariable Long id) {
+        return barkBookRepository.findById(id)
+                .map(user -> {
+                    user.setUsername(newUser.getUsername());
+                    user.setPassword(newUser.getPassword());
+                    return barkBookRepository.save(user);
+                }).orElseThrow(() -> new UserNotFoundException(id));
+    }
+
     @DeleteMapping("/api/users/{id}")
     String deleteUser(@PathVariable Long id){
         if(!barkBookRepository.existsById(id)){
@@ -33,8 +49,4 @@ public class BarkBookAuthController {
         barkBookRepository.deleteById(id);
         return  "User with id "+id+" has been deleted.";
     }
-
-
-
-
 }
