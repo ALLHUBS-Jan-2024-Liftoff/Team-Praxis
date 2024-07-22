@@ -5,32 +5,28 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function AddDog() {
     let navigate = useNavigate();
 
-    // get the information
 
-    // const [dog, setDog] = useState({
-    //     dogName: '',
-    //     dogAge: 0, // dogAge and weight initialize as integers, set them as 0
-    //     breed: '',
-    //     weight: 0,
-    // });
+    const [dog, setDog] = useState({
+        dogName: '',
+        dogAge: 0, // dogAge and weight initialize as integers, set them as 0
+        breed: '',
+        weight: 0,
+    });
 
-    const [dogName, setDogName] = useState("")
-    const handleDogName = e => setDogName(e.target.value);
+    // const [dogName, setDogName] = useState("")
+    // const handleDogName = e => setDogName(e.target.value);
+    // const [dogAge, setDogAge] = useState("")
+    // const handleDogAge = e => setDogAge(e.target.value);
+    // const [breed, setBreed] = useState("")
+    // const handleBreed = e => setBreed(e.target.value);
+    // const [weight, setWeight] = useState("")
+    // const handleWeight = e => setWeight(e.target.value);
 
-    const [dogAge, setDogAge] = useState("")
-    const handleDogAge = e => setDogAge(e.target.value);
+    const { dogName, dogAge, breed, weight } = dog;
 
-    const [breed, setBreed] = useState("")
-    const handleBreed = e => setBreed(e.target.value);
-
-    const [weight, setWeight] = useState("")
-    const handleWeight = e => setWeight(e.target.value);
-
-    // const { dogName, dogAge, breed, weight } = dog;
-
-    // const onInput = (e) => {
-    //     setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
-    // };
+    const onInput = (e) => {
+        setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
+    };
 
 
     const onSubmit = async (e) => {
@@ -53,8 +49,7 @@ export default function AddDog() {
   
 
     return (
-      //  <form onSubmit={onSubmit}>
-        <form onSubmit={(e) => onSubmit(e)}>
+        <form onSubmit={onSubmit}>
             <h5 className="text-base font-semibold leading-7 flex justify-center">
                 Enter your dog information
             </h5>
@@ -73,7 +68,7 @@ export default function AddDog() {
                                 name="dogName"
                                 type="text"
                                 value={dogName}
-                                onChange={handleDogName}  
+                                onChange={onInput}  
                                 className="block w-3/4 rounded-md border-2"
                             />
                         </div>
@@ -92,7 +87,7 @@ export default function AddDog() {
                                 name="dogAge"
                                 type="number"
                                 value={dogAge}
-                                onChange={handleDogAge}
+                                onChange={onInput}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>
@@ -110,7 +105,7 @@ export default function AddDog() {
                                 id="breed"
                                 name="breed"
                                 value={breed}
-                                onChange={handleBreed}
+                                onChange={onInput}
                                 className="block rounded-md border-2"
                             >
                                 <option value = "">Select Breed</option>
@@ -136,7 +131,7 @@ export default function AddDog() {
                                 name="weight"
                                 type="number"
                                 value={weight}
-                                onChange={handleWeight}
+                                onChange={onInput}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>
