@@ -10,7 +10,9 @@ const destinations = [
     {name: 'register', path: '/register', valid: true},
     {name: 'create-event', path: '/create-event', valid: true},
     {name: 'add-dog', path: '/add-dog', valid: true},
+    {name: 'allusers', path: '/allusers', valid: true},
     {name: 'user page', path: '/user', valid: true},
+
 ]
 
 // TODO: make navbar sticky
