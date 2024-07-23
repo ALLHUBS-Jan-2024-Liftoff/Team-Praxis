@@ -2,6 +2,7 @@ import testDogData from "/src/assets/test-data/testDogData.json";
 import testEventData from "/src/assets/test-data/testEventData.json";
 import testUserData from "/src/assets/test-data/testUserData.json";
 import {DynamicTable} from "../components/DynamicTable.jsx";
+import { Link } from 'react-router-dom';
 
 export const AccountPage = () => {
 
@@ -27,9 +28,9 @@ export const AccountPage = () => {
             <br/>
             <div className={"flex place-content-around"}>
                 <h1 className={"underline font-bold"}>My Dogs</h1>
-                <button className="bg-sky-500 hover:bg-sky-700 ...">
+                <Link className="bg-sky-500 hover:bg-sky-700 ..." to="/add-dog">
                     Add a Dog!
-                </button>
+                </Link>
             </div>
             <DynamicTable data={testDogData}/>
 
