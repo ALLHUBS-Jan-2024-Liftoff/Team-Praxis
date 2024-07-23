@@ -15,6 +15,8 @@ import AddDog from './pages/AddDog.jsx';
 import AllUsers from "./pages/AllUsers.jsx";
 import EditBarkBookReg from "./pages/EditBarkBookReg.jsx";
 import ViewBarkBookReg from "./pages/ViewBarkBookReg.jsx";
+import {AccountPage} from "./pages/AccountPage.jsx";
+
 
 
 const router = createBrowserRouter(
@@ -30,6 +32,7 @@ const router = createBrowserRouter(
             <Route path={"allusers"} element={<AllUsers />} />
             <Route path={"edituser/:id"} element={<EditBarkBookReg />} />
             <Route path={"viewuser/:id"} element={<ViewBarkBookReg />} />
+            <Route path={"user"} element={<AccountPage />} />
             {/*To add a path, edit and uncomment...*/}
             {/*<Route path={"myPath"} element={<myPage />} />*/}
             {/*And add it to the Navbar array*/}

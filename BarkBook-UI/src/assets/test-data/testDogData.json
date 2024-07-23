@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "name": "Alfredo",
+    "age": 11,
+    "breed": "Mix: Chihuahua Dachshund",
+    "weight": 10
+  },
+  {
+    "id": 1,
+    "name": "Beaux",
+    "age": 3,
+    "breed": "Full Standard Poodle",
+    "weight": 70
+  },
+  {
+    "id": 2,
+    "name": "Zoe",
+    "age": 6,
+    "breed": "German Shepherd",
+    "weight": 65
+  }
+]
