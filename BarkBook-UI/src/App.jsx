@@ -12,7 +12,11 @@ import BarkBookLogin from "./pages/BarkBookLogin.jsx"
 import BarkBookRegistration from "./pages/BarkBookRegistration.jsx"
 import CreateEventForm from "./pages/CreateEventForm.jsx";
 import AddDog from './pages/AddDog.jsx';
+import AllUsers from "./pages/AllUsers.jsx";
+import EditBarkBookReg from "./pages/EditBarkBookReg.jsx";
+import ViewBarkBookReg from "./pages/ViewBarkBookReg.jsx";
 import {AccountPage} from "./pages/AccountPage.jsx";
+
 
 
 const router = createBrowserRouter(
@@ -25,6 +29,9 @@ const router = createBrowserRouter(
             <Route path={"register"} element={<BarkBookRegistration />} />
             <Route path={"create-event"} element={<CreateEventForm />} />
             <Route path={"add-dog"} element={<AddDog />} />
+            <Route path={"allusers"} element={<AllUsers />} />
+            <Route path={"edituser/:id"} element={<EditBarkBookReg />} />
+            <Route path={"viewuser/:id"} element={<ViewBarkBookReg />} />
             <Route path={"user"} element={<AccountPage />} />
             {/*To add a path, edit and uncomment...*/}
             {/*<Route path={"myPath"} element={<myPage />} />*/}

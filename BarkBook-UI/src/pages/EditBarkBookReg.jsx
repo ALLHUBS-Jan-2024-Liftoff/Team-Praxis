@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 
-const BarkBookRegistration = () => {
+const EditBarkBookReg = () => {
 
     let navigate=useNavigate();
+
+    const {id} = useParams()
 
     const [username, setusernameReg] = useState("")
     const handleUserNameCreate = e => setusernameReg(e.target.value);
@@ -19,17 +21,27 @@ const BarkBookRegistration = () => {
             username,
             password,
         };
-        await axios.post(`http://localhost:8080/api/register`, val);
+        await axios.put(`http://localhost:8080/api/user/${id}`, val);
         navigate("/");
-
     }
+
+        useEffect(() => {
+            loadUser();
+        }, [])
+
+    const loadUser = async () => {
+        const result=await axios.get(`http://localhost:8080/api/user/${id}`)
+        setusernameReg(result.data.username);
+        setPasswordReg(result.data.password);
+    }
+
 
   return (
 
     <div>
         <div>
             <div>
-                    <h2>Bark Book Registration</h2>
+                    <h2>Edit User Authorization</h2>
                 <form onSubmit={(e) => onSubmit(e)}>
                     <div>
                         <input type="text" placeholder="Username *" value={username} onChange={handleUserNameCreate}/>
@@ -41,10 +53,10 @@ const BarkBookRegistration = () => {
                         <input type="password" placeholder="Confirm Password *" value={confirm} onChange={handlePasswordConfirmReg} />
                     </div>
                     <div className='mb-3'>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Register" />
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value="Submit" />
                     </div>
                     {/* <div> */}
-                        <Link className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" value="Cancel" to="/" />
+                        <Link className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" value="Back to all Users" to="/allusers" />
                     {/* </div> */}
                 </form>
             </div>
@@ -56,4 +68,4 @@ const BarkBookRegistration = () => {
   )
 }
 
-export default BarkBookRegistration
+export default EditBarkBookReg
