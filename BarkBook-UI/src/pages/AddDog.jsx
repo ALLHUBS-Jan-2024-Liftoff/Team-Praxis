@@ -13,15 +13,6 @@ export default function AddDog() {
         weight: 0,
     });
 
-    // const [dogName, setDogName] = useState("")
-    // const handleDogName = e => setDogName(e.target.value);
-    // const [dogAge, setDogAge] = useState("")
-    // const handleDogAge = e => setDogAge(e.target.value);
-    // const [breed, setBreed] = useState("")
-    // const handleBreed = e => setBreed(e.target.value);
-    // const [weight, setWeight] = useState("")
-    // const handleWeight = e => setWeight(e.target.value);
-
     const { dogName, dogAge, breed, weight } = dog;
 
     const onInput = (e) => {
@@ -31,13 +22,6 @@ export default function AddDog() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-        const dog = {
-          dogName,
-          dogAge,
-          breed,
-          weight
-        };
 
         try {
           await axios.post('http://localhost:8080/add-dog', dog);  // post the dog obj
