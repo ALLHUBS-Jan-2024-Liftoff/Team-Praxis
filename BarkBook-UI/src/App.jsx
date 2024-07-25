@@ -13,6 +13,7 @@ import BarkBookRegistration from "./pages/BarkBookRegistration.jsx"
 import CreateEventForm from "./pages/CreateEventForm.jsx";
 import AddDog from './pages/AddDog.jsx';
 import {AccountPage} from "./pages/AccountPage.jsx";
+import {MapContainer} from "./api/MapContainer.jsx";
 
 
 const router = createBrowserRouter(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
             <Route path={"create-event"} element={<CreateEventForm />} />
             <Route path={"add-dog"} element={<AddDog />} />
             <Route path={"user"} element={<AccountPage />} />
+            <Route path={"map"} element={<MapContainer />} />
             {/*To add a path, edit and uncomment...*/}
             {/*<Route path={"myPath"} element={<myPage />} />*/}
             {/*And add it to the Navbar array*/}
