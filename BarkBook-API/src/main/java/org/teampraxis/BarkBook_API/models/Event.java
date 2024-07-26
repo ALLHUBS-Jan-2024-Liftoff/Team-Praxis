@@ -28,8 +28,7 @@ public class Event {
     @Size(max = 500, message = "Description is too long!")
     private String description;
 
-    public Event(int id, String name, String location, Date date, String description) {
-        this.id = id;
+    public Event(String name, String location, Date date, String description) {
         this.name = name;
         this.location = location;
         this.date = date;
