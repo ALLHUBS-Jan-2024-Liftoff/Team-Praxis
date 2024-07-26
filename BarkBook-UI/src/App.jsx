@@ -16,6 +16,7 @@ import AllUsers from "./pages/AllUsers.jsx";
 import EditBarkBookReg from "./pages/EditBarkBookReg.jsx";
 import ViewBarkBookReg from "./pages/ViewBarkBookReg.jsx";
 import {AccountPage} from "./pages/AccountPage.jsx";
+import {MapContainer} from "./api/MapContainer.jsx";
 
 
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
             <Route path={"edituser/:id"} element={<EditBarkBookReg />} />
             <Route path={"viewuser/:id"} element={<ViewBarkBookReg />} />
             <Route path={"user"} element={<AccountPage />} />
+            <Route path={"map"} element={<MapContainer />} />
             {/*To add a path, edit and uncomment...*/}
             {/*<Route path={"myPath"} element={<myPage />} />*/}
             {/*And add it to the Navbar array*/}
