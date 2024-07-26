@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import org.teampraxis.BarkBook_API.models.Event;
 import org.teampraxis.BarkBook_API.models.dto.EventRepository;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/events")
+//@RequestMapping("/events")
 public class EventController {
 
     @Autowired
@@ -16,6 +18,11 @@ public class EventController {
     @PostMapping("/create-event")
     Event newEvent(@RequestBody Event newEvent) {
         return eventRepository.save(newEvent);
+    }
+
+    @GetMapping("/events")
+    List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 }
 
