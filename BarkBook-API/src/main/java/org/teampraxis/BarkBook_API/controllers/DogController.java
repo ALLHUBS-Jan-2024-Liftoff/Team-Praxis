@@ -23,19 +23,19 @@ public class DogController {
     }
 
     // both methods below used for displaying dog data
-    @GetMapping("/users")
+    @GetMapping("/user")
     List<Dog> getAllDogs() {
         return dogRepository.findAll();
     }
 
-    @GetMapping("/users/dog/{id}")
+    @GetMapping("/user/dog/{id}")
     public Dog getUserById(@PathVariable Integer id) {
         return dogRepository.findById(id)
                 .orElseThrow(() -> new DogNotFoundException(id));
     }
 
     // used for editing specific data dog by id
-    @PutMapping("/users/dog/{id}")
+    @PutMapping("/user/edit-dog/{id}")
     public Dog updateDogById(@RequestBody Dog reqDog, @PathVariable Integer id) {
         return dogRepository.findById(id)
                 .map(dog -> {
@@ -48,7 +48,7 @@ public class DogController {
     }
 
     // used to delete dog by id
-    @DeleteMapping("/users/dog/{id}")
+    @DeleteMapping("/user/dog/{id}")
     String deleteDogById(@PathVariable Integer id){
         if(!dogRepository.existsById(id)){
             throw new DogNotFoundException(id);

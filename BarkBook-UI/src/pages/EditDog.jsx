@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-export default function AddDog() {
+export default function EditDog() {
     let navigate = useNavigate();
+
+    const {id} = useParams()
 
 
     const [dog, setDog] = useState({
@@ -19,23 +21,32 @@ export default function AddDog() {
         setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
     };
 
+    useEffect(() => {
+        loadDog();
+      }, []);
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
         try {
-          await axios.post('http://localhost:8080/add-dog', dog);  // post the dog obj
+          await axios.put(`http://localhost:8080/user/edit-dog/${id}`, dog);  // post the dog obj
           navigate('/user'); // navigate back to /user after submission
         } catch (error) {
           console.error("Error submitting form:", error); // handle error 
         }
     };
+
+    const loadDog = async () => {
+        const result=await axios.get(`http://localhost:8080/user/edit-dog/${id}`)
+        setDog(result.data)
+    }
   
 
     return (
         <form onSubmit={onSubmit}>
             <h5 className="text-base font-semibold leading-7 flex justify-center text-2xl">
-                Enter your dog information
+                Edit your dog information
             </h5>
             <div className="border-b border-gray-900/10 pb-12 flex justify-center">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
