@@ -29,13 +29,19 @@ public class DogController {
     }
 
     @GetMapping("/user/dog/{id}")
-    public Dog getUserById(@PathVariable Integer id) {
+    public Dog getDogById(@PathVariable Integer id) {
         return dogRepository.findById(id)
                 .orElseThrow(() -> new DogNotFoundException(id));
     }
 
+//    @GetMapping("/user/edit-dog/{id}")
+//    public Dog getEditDogById(@PathVariable Integer id) {
+//        return dogRepository.findById(id)
+//                .orElseThrow(() -> new DogNotFoundException(id));
+//    }
+
     // used for editing specific data dog by id
-    @PutMapping("/user/edit-dog/{id}")
+    @PutMapping("/user/dog/{id}")
     public Dog updateDogById(@RequestBody Dog reqDog, @PathVariable Integer id) {
         return dogRepository.findById(id)
                 .map(dog -> {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ export default function EditDog() {
     let navigate = useNavigate();
 
     const {id} = useParams()
-
 
     const [dog, setDog] = useState({
         dogName: '',
@@ -25,20 +24,19 @@ export default function EditDog() {
         loadDog();
       }, []);
 
-
     const onSubmit = async (e) => {
         e.preventDefault();
 
         try {
-          await axios.put(`http://localhost:8080/user/edit-dog/${id}`, dog);  // post the dog obj
-          navigate('/user'); // navigate back to /user after submission
+          await axios.put(`http://localhost:8080/user/dog/${id}`, dog);  // post the dog obj
+          navigate(`/user/dog/${id}`); // navigate back to /user after submission
         } catch (error) {
           console.error("Error submitting form:", error); // handle error 
         }
     };
 
     const loadDog = async () => {
-        const result=await axios.get(`http://localhost:8080/user/edit-dog/${id}`)
+        const result=await axios.get(`http://localhost:8080/user/dog/${id}`)
         setDog(result.data)
     }
   
@@ -146,7 +144,7 @@ export default function EditDog() {
             <div className="flex justify-center">
                 <Link
                     className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500"
-                    to="/user"
+                    to={`/user/dog/${id}`}
                 >
                     Cancel
                 </Link>

@@ -13,16 +13,16 @@ export default function ViewDog() {
 
     const { id } = useParams(); // get specific data by id
 
-
-    // load data
-    useEffect(() => {
-        loadDog();
-      }, []);
-
       const loadDog = async () => {
         const result=await axios.get(`http://localhost:8080/user/dog/${id}`)
         setDog(result.data)
     }
+
+
+    // load data
+    useEffect(() => {
+        loadDog();
+        }, []);
 
     // delete dog data, window pops up first
     const deleteDog = async (id) => {
