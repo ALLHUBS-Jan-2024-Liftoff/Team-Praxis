@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateEventForm = () => {
+
+  let navigate = useNavigate();
+
+  const [event, setEvent] = useState({
+    name:"",
+    location:"",
+    date:"",
+    description:""
+  });
+
+  const { name, location, date, description } = event;
+
+  const onInput = (e) => {
+    setEvent({...event, [e.target.name]: e.target.value })
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+    await axios.post("http://localhost:8080/create-event", event)
+    navigate("/user")
+    } catch (error) {
+      console.error("Error submitting form", error);
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <h1 className="text-base font-semibold leading-7 flex justify-center">
           Create A New Event
         </h1>
@@ -20,6 +49,8 @@ const CreateEventForm = () => {
                   id="name"
                   name="name"
                   type="text"
+                  value={name}
+                  onChange={onInput}
                   className="block rounded-md border-2"
                   placeholder="Enter text here..."
                 >
@@ -39,6 +70,8 @@ const CreateEventForm = () => {
                   id="location"
                   name="location"
                   type="text"
+                  value={location}
+                  onChange={onInput}
                   className="block rounded-md border-2"
                   placeholder="Enter text here..."
                 >
@@ -58,6 +91,8 @@ const CreateEventForm = () => {
                   id="date"
                   name="date"
                   type="datetime-local" 
+                  value={date}
+                  onChange={onInput}
                   className="block rounded-md border-2"
                 >
                 </input>
@@ -76,6 +111,8 @@ const CreateEventForm = () => {
                   id="description"
                   name="description"
                   type="text"
+                  value={description}
+                  onChange={onInput}
                   rows={4}
                   cols={35}
                   className="block rounded-md border-2"
@@ -93,12 +130,12 @@ const CreateEventForm = () => {
         </button>
       </div>
       <div className="flex justify-center">
-        <button
-        type="submit"
+        <Link
         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        to="/user"
         >
           Cancel
-        </button>
+        </Link>
       </div>
     </form>
   );

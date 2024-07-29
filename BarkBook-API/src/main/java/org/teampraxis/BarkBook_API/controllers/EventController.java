@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-//@RequestMapping("/events")
+@CrossOrigin("http://localhost:5173")
 public class EventController {
 
     @Autowired
@@ -25,5 +25,3 @@ public class EventController {
         return eventRepository.findAll();
     }
 }
-
-//@CrossOrigin("http://localhost:8080")
