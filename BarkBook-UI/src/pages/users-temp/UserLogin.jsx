@@ -1,13 +1,13 @@
 import { useState } from "react"
 
-const BarkBookLogin = () => {    
+const UserLogin = () => {
     const [usernameReg, setusernameReg] = useState("")
-    const handleUserNameCreate = e => setusernameReg(e.target.value);
     const [passwordReg, setPasswordReg] = useState("")
+
+    const handleUserNameCreate = e => setusernameReg(e.target.value);
     const handlePasswordCreate = e => setPasswordReg(e.target.value)
 
   return (
-
         <form>
             <div>
                 <div>
@@ -37,4 +37,4 @@ const BarkBookLogin = () => {
 
   )
 }
-export default BarkBookLogin;
+export default UserLogin;

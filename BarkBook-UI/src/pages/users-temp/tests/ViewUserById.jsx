@@ -1,33 +1,27 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import {getUserById} from "/src/api/UserAPI.js";
 
-const ViewBarkBookReg = () => {
 
+const ViewUserById = () => {
 
-    const [username, setusernameReg] = useState("")
-    // const handleUserNameCreate = e => setusernameReg(e.target.value);
-    const [password, setPasswordReg] = useState("")
-    // const handlePasswordCreate = e => setPasswordReg(e.target.value)
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
     const { id } = useParams();
 
+    // could convert to try/catch/finally, so it looks cleaner
     useEffect(() => {
-        loadUser();
-      }, []);
-
-      const loadUser = async () => {
-        const result=await axios.get(`http://localhost:8080/api/user/${id}`)
-        setusernameReg(result.data.username);
-        setPasswordReg(result.data.password);
-    }
-
-
-
-
+        const getUser = async () => {
+            const result = await getUserById(id);
+            setUsername(result.username);
+            setPassword(result.password);
+        }
+        getUser();
+    }, [id]);
 
   return (
-  
     <div>
         <div>
             <div>
@@ -51,12 +45,7 @@ const ViewBarkBookReg = () => {
             </div>
         </div>
     </div>
-
-
-
-
-
   )
 }
 
-export default ViewBarkBookReg
+export default ViewUserById
