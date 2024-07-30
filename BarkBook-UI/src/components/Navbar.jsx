@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 // setting `valid` to false means it will not render in the navbar
 const destinations = [
     {name: 'home', path: '/', valid: true},
-    {name: 'test', path: '/test', valid: true},
     {name: 'about', path: '/about', valid: true},
     {name: 'login', path: '/login', valid: true},
     {name: 'register', path: '/register', valid: true},
