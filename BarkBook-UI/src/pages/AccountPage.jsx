@@ -39,9 +39,9 @@ export const AccountPage = () => {
             <br/>
             <div className={"flex place-content-around"}>
                 <h1 className={"underline font-bold"}>My Events</h1>
-                <button className="bg-sky-500 hover:bg-sky-700 ...">
+                <Link className="bg-sky-500 hover:bg-sky-700 ..." to="/create-event">
                     Find Events!
-                </button>
+                </Link>
             </div>
             <DynamicTable data={testEventData}/>
         </>

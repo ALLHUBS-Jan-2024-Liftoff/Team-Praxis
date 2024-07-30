@@ -4,9 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Event {
@@ -22,13 +23,13 @@ public class Event {
     @NotBlank(message = "Location is required.")
     private String location;
 
-    @NotBlank(message = "Event date is required.")
-    private Date date;
+    @NotNull(message = "Event date is required.")
+    private LocalDateTime date;
 
     @Size(max = 500, message = "Description is too long!")
     private String description;
 
-    public Event(String name, String location, Date date, String description) {
+    public Event(String name, String location, LocalDateTime date, String description) {
         this.name = name;
         this.location = location;
         this.date = date;
@@ -57,11 +58,11 @@ public class Event {
         this.location = location;
     }
 
-    public @NotBlank(message = "Event date is required.") Date getDate() {
+    public @NotNull(message = "Event date is required.") LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(@NotBlank(message = "Event date is required.") Date date) {
+    public void setDate(@NotNull(message = "Event date is required.") LocalDateTime date) {
         this.date = date;
     }
 
