@@ -20,8 +20,8 @@ public class EventController {
         return eventRepository.save(newEvent);
     }
 
-    @GetMapping("/user")
-    List<Event> getAllEvents() {
-        return eventRepository.findAll();
-    }
+    // @GetMapping("/user")
+    // List<Event> getAllEvents() {
+    //     return eventRepository.findAll();
+    // }
 }
