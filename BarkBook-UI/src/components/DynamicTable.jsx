@@ -5,30 +5,30 @@ export const DynamicTable = (props) => {
     if (data.length > 0) {
         columns = Object.keys(data[0]);
     } else {
-        console.log("no data");
+        console.log("DynamicTable.jsx found no data");
     }
 
     return (
-        <div className={"container mx-auto bg-green-200"}>
+        <div className={"container h-64 w-auto overflow-scroll overscroll-auto mx-auto"}>
             <div className={"flex flex-col"}>
-                <table className="table-auto">
+                <table className="table-auto bg-green-200">
                     <thead>
-                        <tr>
-                            {columns.map((column, index) => (
-                                <th key={index} className={"text-left"}>
-                                    {column}
-                                </th>
-                            ))}
-                        </tr>
+                    <tr>
+                        {columns.map((column, index) => (
+                            <th key={index} className={"text-left"}>
+                                {column}
+                            </th>
+                        ))}
+                    </tr>
                     </thead>
                     <tbody>
-                        {data.map((dog, index) => (
-                            <tr key={index}>
-                                {columns.map((column, colIndex) => (
-                                    <td key={colIndex}>{dog[column]}</td>
-                                ))}
-                            </tr>
-                        ))}
+                    {data.map((dog, index) => (
+                        <tr key={index}>
+                            {columns.map((column, colIndex) => (
+                                <td key={colIndex}>{dog[column]}</td>
+                            ))}
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
