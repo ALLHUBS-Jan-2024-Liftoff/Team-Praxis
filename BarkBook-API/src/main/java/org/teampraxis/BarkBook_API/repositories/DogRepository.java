@@ -1,4 +1,4 @@
-package org.teampraxis.BarkBook_API.models.dto;
+package org.teampraxis.BarkBook_API.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
