@@ -3,7 +3,7 @@ package org.teampraxis.BarkBook_API.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.teampraxis.BarkBook_API.models.Event;
-import org.teampraxis.BarkBook_API.models.dto.EventRepository;
+import org.teampraxis.BarkBook_API.repositories.EventRepository;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class EventController {
         return eventRepository.save(newEvent);
     }
 
-    @GetMapping("/events")
+    @GetMapping("/user")
     List<Event> getAllEvents() {
         return eventRepository.findAll();
     }
