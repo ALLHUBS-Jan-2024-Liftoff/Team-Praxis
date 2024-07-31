@@ -23,7 +23,7 @@ const CreateEventForm = () => {
     e.preventDefault();
 
     try {
-    await axios.post("http://localhost:8080/create-event", event)
+    await axios.post("http://localhost:8080/api/event/create-event", event)
     navigate("/user")
     } catch (error) {
       console.error("Error submitting form", error);

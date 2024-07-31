@@ -18,6 +18,24 @@ export const AccountPage = () => {
     const userDisplayName = testUserData[0].name;
     const userLocation = testUserData[0].location;
 
+    const [dog, setDog] = useState([]);
+    const [event, setEvent] = useState([]);
+
+    useEffect(() => {
+        loadDog();
+        loadEvent();
+    }, []);
+
+    const loadDog = async () => {
+        const result = await axios.get(`http://localhost:8080/api/dog`)
+        setDog(result.data)
+    }
+
+    const loadEvent = async () => {
+        const result = await axios.get(`http://localhost:8080/api/event`)
+        setEvent(result.data)
+    }
+
     return (
         <>
             <br />
@@ -34,7 +52,7 @@ export const AccountPage = () => {
                     Add a Dog!
                 </Link>
             </div>
-            <DynamicTable data={testDogData}/>
+            <DynamicTable data={dog}/>
 
             <br/>
             <div className={"flex place-content-around"}>
@@ -43,7 +61,7 @@ export const AccountPage = () => {
                     Find Events!
                 </Link>
             </div>
-            <DynamicTable data={testEventData}/>
+            <DynamicTable data={event}/>
         </>
     )
 }

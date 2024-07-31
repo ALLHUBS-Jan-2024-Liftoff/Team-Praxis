@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 export const DynamicTable = (props) => {
     const data = props.data;
 
@@ -13,22 +16,25 @@ export const DynamicTable = (props) => {
             <div className={"flex flex-col"}>
                 <table className="table-auto bg-green-200">
                     <thead>
-                    <tr>
-                        {columns.map((column, index) => (
-                            <th key={index} className={"text-left"}>
-                                {column}
+                        <tr>
+                            {columns.map((column, index) => (
+                                <th key={index} className={"text-left"}>
+                                    {column}
+                                </th>
+                            ))}
+                            <th className="text-left">
+                                Actions
                             </th>
-                        ))}
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
-                    {data.map((dog, index) => (
-                        <tr key={index}>
-                            {columns.map((column, colIndex) => (
-                                <td key={colIndex}>{dog[column]}</td>
-                            ))}
-                        </tr>
-                    ))}
+                        {data.map((item, index) => (
+                            <tr key={index}>
+                                {columns.map((column, colIndex) => (
+                                    <td key={colIndex}>{item[column]}</td>
+                                ))}
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
