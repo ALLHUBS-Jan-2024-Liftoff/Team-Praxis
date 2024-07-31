@@ -1,6 +1,6 @@
 import MapEmbed from "./MapEmbed.jsx";
 import {useState} from "react";
-import {Slider} from "../components/Slider.jsx";
+import {Slider} from "../../components/Slider.jsx";
 import {useLocation} from "react-router-dom";
 
 export const MapContainer = () => {
