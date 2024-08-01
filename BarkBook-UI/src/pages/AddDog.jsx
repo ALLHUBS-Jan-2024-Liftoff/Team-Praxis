@@ -39,11 +39,11 @@ export default function AddDog() {
             </h5>
             <div className="border-b border-gray-900/10 pb-12 flex justify-center">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="dogName"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                            className="block text-sm font-medium leading-6 text-gray-900">
                             Dog name
                         </label>
                         <div className="mt-2">
@@ -53,16 +53,14 @@ export default function AddDog() {
                                 type="text"
                                 value={dogName}
                                 onChange={onInput}  
-                                className="block w-3/4 rounded-md border-2"
-                            />
+                                className="block w-3/4 rounded-md border-2"/>
                         </div>
                     </div>
 
                     <div className="sm:col-span-1">
                         <label
                             htmlFor="dogAge"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                            className="block text-sm font-medium leading-6 text-gray-900">
                             Age
                         </label>
                         <div className="mt-2">
@@ -72,41 +70,31 @@ export default function AddDog() {
                                 type="number"
                                 value={dogAge}
                                 onChange={onInput}
-                                className="block w-1/2 rounded-md border-2"
-                            />
+                                className="block w-1/2 rounded-md border-2"/>
                         </div>
                     </div>
 
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="breed"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                            className="block text-sm font-medium leading-6 text-gray-900">
                             Breed
                         </label>
                         <div className="mt-2">
-                            <select
+                            <input
                                 id="breed"
                                 name="breed"
+                                type="text"
                                 value={breed}
                                 onChange={onInput}
-                                className="block rounded-md border-2"
-                            >
-                                <option value = "">Select Breed</option>
-                                <option value = "German Shepherd">German Shepherd</option>
-                                <option value = "Bulldog">Bulldog</option>
-                                <option value = "Golden Retriever">Golden Retriever</option>
-                                <option value = "Beagle">Beagle</option>
-                                <option value = "Corgi">Corgi</option>
-                            </select>
+                                className="block w-3/4 rounded-md border-2"/>  
                         </div>
                     </div>
 
                     <div className="sm:col-span-1">
                         <label
                             htmlFor="weight"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                            className="block text-sm font-medium leading-6 text-gray-900">
                             Weight (Pounds)
                         </label>
                         <div className="mt-2">
@@ -116,8 +104,7 @@ export default function AddDog() {
                                 type="number"
                                 value={weight}
                                 onChange={onInput}
-                                className="block w-1/2 rounded-md border-2"
-                            />
+                                className="block w-1/2 rounded-md border-2"/>
                         </div>
                     </div>
                 </div>
@@ -126,8 +113,7 @@ export default function AddDog() {
             <div className="flex justify-center my-5">
                 <button
                     type="submit"
-                    className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500"
-                >
+                    className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500">
                     Save
                 </button>
             </div>
@@ -135,8 +121,7 @@ export default function AddDog() {
             <div className="flex justify-center">
                 <Link
                     className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500"
-                    to="/user"
-                >
+                    to="/user">
                     Cancel
                 </Link>
             </div>
