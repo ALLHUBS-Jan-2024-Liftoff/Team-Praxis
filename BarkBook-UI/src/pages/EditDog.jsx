@@ -28,15 +28,15 @@ export default function EditDog() {
         e.preventDefault();
 
         try {
-          await axios.put(`http://localhost:8080/user/dog/${id}`, dog);  // post the dog obj
-          navigate(`/user/dog/${id}`); // navigate back to /user after submission
+          await axios.put(`http://localhost:8080/api/dog/${id}`, dog);  // post the dog obj
+          navigate(`/user`); // navigate back to /user after submission
         } catch (error) {
           console.error("Error submitting form:", error); // handle error 
         }
     };
 
     const loadDog = async () => {
-        const result=await axios.get(`http://localhost:8080/user/dog/${id}`)
+        const result=await axios.get(`http://localhost:8080/api/dog/${id}`)
         setDog(result.data)
     }
   

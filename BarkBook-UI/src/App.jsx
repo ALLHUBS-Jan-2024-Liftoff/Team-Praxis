@@ -18,6 +18,8 @@ import {AccountPage} from "./pages/AccountPage.jsx";
 import {MapContainer} from "./api/MapContainer.jsx";
 import ViewDog from './pages/ViewDog.jsx';
 import EditDog from './pages/EditDog.jsx';
+import EditEvent from "./pages/EditEvent.jsx";
+import ViewEvent from "./pages/ViewEvent.jsx";
 
 
 
@@ -35,8 +37,10 @@ const router = createBrowserRouter(
             <Route path={"viewuser/:id"} element={<ViewBarkBookReg />} />
             <Route path={"user"} element={<AccountPage />} />
             <Route path={"map"} element={<MapContainer />} />
-            <Route path={"/user/dog/:id"} element={<ViewDog />} />
-            <Route path={"/user/edit-dog/:id"} element={<EditDog />} />
+            <Route path={"/dog/details/:id"} element={<ViewDog />} />
+            <Route path={"/dog/edit/:id"} element={<EditDog />} />
+            <Route path={"/event/edit/:id"} element={<EditEvent />} />
+            <Route path={"/event/details/:id"} element={<ViewEvent />} />
             {/*To add a path, edit and uncomment...*/}
             {/*<Route path={"myPath"} element={<myPage />} />*/}
             {/*And add it to the Navbar array*/}

@@ -52,7 +52,7 @@ export const AccountPage = () => {
                     Add a Dog!
                 </Link>
             </div>
-            <DynamicTable data={dog}/>
+            <DynamicTable data={dog} type="dog"/>
 
             <br/>
             <div className={"flex place-content-around"}>
@@ -61,7 +61,7 @@ export const AccountPage = () => {
                     Find Events!
                 </Link>
             </div>
-            <DynamicTable data={event}/>
+            <DynamicTable data={event} type="event"/>
         </>
     )
 }
