@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useEffect,useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import {getUserById} from "/src/api/UserAPI.js";
+import {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import {getUserById} from "/src/service/UserService.js";
 
 
 const ViewUserById = () => {
@@ -9,9 +9,8 @@ const ViewUserById = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    const { id } = useParams();
+    const {id} = useParams();
 
-    // could convert to try/catch/finally, so it looks cleaner
     useEffect(() => {
         const getUser = async () => {
             const result = await getUserById(id);
@@ -21,10 +20,10 @@ const ViewUserById = () => {
         getUser();
     }, [id]);
 
-  return (
-    <div>
+    return (
         <div>
             <div>
+                <div>
                     <h2>View Book User Registration</h2>
                     <div>
                         <div>
@@ -42,10 +41,10 @@ const ViewUserById = () => {
                         </div>
                     </div>
                     <Link to={"/allusers"}>Back To all Users</Link>
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default ViewUserById
