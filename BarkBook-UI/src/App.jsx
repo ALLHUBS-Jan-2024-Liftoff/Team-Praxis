@@ -39,9 +39,9 @@ const router = createBrowserRouter(
             <Route path={"create-event"} element={<CreateEventForm />} />
             <Route path={"add-dog"} element={<AddDog />} />
             <Route path={"map"} element={<MapContainer />} />
-            <Route path={"allusers"} element={<AllUsers />} />
-            <Route path={"edituser/:id"} element={<EditBarkBookReg />} />
-            <Route path={"viewuser/:id"} element={<ViewBarkBookReg />} />
+            <Route path={"allusers"} element={<ViewAllUsers />} />
+            <Route path={"edituser/:id"} element={<EditUser />} />
+            <Route path={"viewuser/:id"} element={<ViewUserById />} />
             <Route path={"user"} element={<AccountPage />} />
             <Route path={"map"} element={<MapContainer />} />
             <Route path={"/dog/details/:id"} element={<ViewDog />} />
