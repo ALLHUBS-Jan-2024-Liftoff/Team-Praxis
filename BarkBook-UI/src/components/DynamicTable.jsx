@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getAllEvents } from "../service/EventService";
 
 export const DynamicTable = (props) => {
   const { data, type } = props;
@@ -28,7 +29,7 @@ export const DynamicTable = (props) => {
   };
 
   const loadEvent = async () => {
-    const result = await axios.get("http://localhost:8080/api/event");
+    const result = await getAllEvents();
     setEvent(result.data);
   };
 
@@ -50,7 +51,7 @@ export const DynamicTable = (props) => {
   };
 
   function confirmDelete() {
-    return window.confirm("Are you sure you want to delete this dog?");
+    return window.confirm("Are you sure you want to delete this?");
   }
 
   return (

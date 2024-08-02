@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { getEventById, updateEventById } from "../service/EventService";
 
 const EditEvent = () => {
 
@@ -8,38 +8,32 @@ const EditEvent = () => {
 
   const { id } = useParams();
 
-  const [event, setEvent] = useState({
-    name:"",
-    location:"",
-    date:"",
-    description:""
-  });
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
 
-  const { name, location, date, description } = event;
-
-  const onInput = (e) => {
-    setEvent({...event, [e.target.name]: e.target.value })
-  };
+  const handleName = e => setName(e.target.value);
+  const handleLocation = e => setLocation(e.target.value);
+  const handleDate = e => setDate(e.target.value);
+  const handleDescription = e => setDescription(e.target.value);
 
   useEffect(() => {
-    loadEvent();
-  }, []);
+      const loadEvent = async () => {
+          const result = await getEventById(id);
+          setName(result.name);
+          setLocation(result.location);
+          setDate(result.date);
+          setDescription(result.description);
+      }
+      loadEvent();
+    }, [id]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-    await axios.put(`http://localhost:8080/api/event/${id}`, event)
-    navigate("/user")
-    } catch (error) {
-      console.error("Error submitting form", error);
-    }
+      await updateEventById(id, name, location, date, description)
+      navigate("/user")
   };
-
-  const loadEvent = async () => {
-    const result = await axios.get(`http://localhost:8080/api/event/${id}`)
-    setEvent(result.data);
-  }
 
   return (
     <form onSubmit={onSubmit}>
@@ -61,7 +55,7 @@ const EditEvent = () => {
                   name="name"
                   type="text"
                   value={name}
-                  onChange={onInput}
+                  onChange={handleName}
                   className="block rounded-md border-2"
                   placeholder="Enter text here..."
                 >
@@ -82,7 +76,7 @@ const EditEvent = () => {
                   name="location"
                   type="text"
                   value={location}
-                  onChange={onInput}
+                  onChange={handleLocation}
                   className="block rounded-md border-2"
                   placeholder="Enter text here..."
                 >
@@ -103,7 +97,7 @@ const EditEvent = () => {
                   name="date"
                   type="datetime-local" 
                   value={date}
-                  onChange={onInput}
+                  onChange={handleDate}
                   className="block rounded-md border-2"
                 >
                 </input>
@@ -123,7 +117,7 @@ const EditEvent = () => {
                   name="description"
                   type="text"
                   value={description}
-                  onChange={onInput}
+                  onChange={handleDescription}
                   rows={4}
                   cols={35}
                   className="block rounded-md border-2"
