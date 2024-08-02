@@ -35,15 +35,11 @@ const router = createBrowserRouter(
             <Route path={"allusers"} element={<ViewAllUsers />} />
             <Route path={"viewuser/:id"} element={<ViewUserById />} />
             <Route path={"user/:id"} element={<AccountPage />} />
+            <Route path={"user"} element={<AccountPage />} /> {/*TODO: make this a redirect */}
             <Route path={"user/:id/edit"} element={<EditUser />} />
+            <Route path={"map"} element={<MapContainer />} />
             <Route path={"create-event"} element={<CreateEventForm />} />
             <Route path={"add-dog"} element={<AddDog />} />
-            <Route path={"map"} element={<MapContainer />} />
-            <Route path={"allusers"} element={<ViewAllUsers />} />
-            <Route path={"edituser/:id"} element={<EditUser />} />
-            <Route path={"viewuser/:id"} element={<ViewUserById />} />
-            <Route path={"user"} element={<AccountPage />} />
-            <Route path={"map"} element={<MapContainer />} />
             <Route path={"/dog/details/:id"} element={<ViewDog />} />
             <Route path={"/dog/edit/:id"} element={<EditDog />} />
             <Route path={"/event/edit/:id"} element={<EditEvent />} />
