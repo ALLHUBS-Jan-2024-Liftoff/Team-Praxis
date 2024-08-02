@@ -1,4 +1,5 @@
 import {Navigate, Outlet} from "react-router-dom";
+import {isAuthenticated} from "../service/AuthService.js";
 
 export const ProtectedRoutes = ({
                                     user,
@@ -7,8 +8,12 @@ export const ProtectedRoutes = ({
                                 }) => {
 
     if (!user) {
-        return <Navigate to={"/login"} replace/>;
+        if (!isAuthenticated()) {
+            return <Navigate to={redirectPath} replace/>;
+        } else {
+            return <Navigate to={"/"} replace/>
+        }
     }
 
-    return children ? children : <Outlet />;
+    return children ? children : <Outlet/>;
 }

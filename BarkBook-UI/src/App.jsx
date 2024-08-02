@@ -41,8 +41,11 @@ const App = () => {
             <Route path="/" element={<MainLayout />}>
                 <Route path={"about"} element={<AboutPage />} />
                 <Route path={"userstuff"} element={<UserStuff />} />
-                <Route path={"login"} element={<UserLogin />} />
-                <Route path={"register"} element={<UserRegister />} />
+
+                <Route element={<ProtectedRoutes user={!user}/>} >
+                    <Route path={"login"} element={<UserLogin />} />
+                    <Route path={"register"} element={<UserRegister />} />
+                </Route>
 
                 <Route element={<ProtectedRoutes user={user}/>} >
                     {/* users */}
