@@ -8,8 +8,9 @@ import org.teampraxis.BarkBook_API.repositories.DogRepository;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController // combines ResponseBody and Controller annotation. Used in restful web services. Automatically  converts return value of the methods to JSON
+@RequestMapping("/api/dog")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DogController {
 
     @Autowired
@@ -23,12 +24,12 @@ public class DogController {
     }
 
     // both methods below used for displaying dog data
-    @GetMapping("/user")
+    @GetMapping
     List<Dog> getAllDogs() {
         return dogRepository.findAll();
     }
 
-    @GetMapping("/user/dog/{id}")
+    @GetMapping("/{id}")
     public Dog getDogById(@PathVariable Integer id) {
         return dogRepository.findById(id)
                 .orElseThrow(() -> new DogNotFoundException(id));
@@ -41,7 +42,7 @@ public class DogController {
 //    }
 
     // used for editing specific data dog by id
-    @PutMapping("/user/dog/{id}")
+    @PutMapping("/{id}")
     public Dog updateDogById(@RequestBody Dog reqDog, @PathVariable Integer id) {
         return dogRepository.findById(id)
                 .map(dog -> {
@@ -54,7 +55,7 @@ public class DogController {
     }
 
     // used to delete dog by id
-    @DeleteMapping("/user/dog/{id}")
+    @DeleteMapping("/{id}")
     String deleteDogById(@PathVariable Integer id){
         if(!dogRepository.existsById(id)){
             throw new DogNotFoundException(id);

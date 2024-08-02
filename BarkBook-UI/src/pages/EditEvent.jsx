@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const CreateEventForm = () => {
+const EditEvent = () => {
 
   let navigate = useNavigate();
+
+  const { id } = useParams();
 
   const [event, setEvent] = useState({
     name:"",
@@ -19,21 +21,30 @@ const CreateEventForm = () => {
     setEvent({...event, [e.target.name]: e.target.value })
   };
 
+  useEffect(() => {
+    loadEvent();
+  }, []);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-    await axios.post("http://localhost:8080/api/event/create-event", event)
+    await axios.put(`http://localhost:8080/api/event/${id}`, event)
     navigate("/user")
     } catch (error) {
       console.error("Error submitting form", error);
     }
   };
 
+  const loadEvent = async () => {
+    const result = await axios.get(`http://localhost:8080/api/event/${id}`)
+    setEvent(result.data);
+  }
+
   return (
     <form onSubmit={onSubmit}>
       <h1 className="text-base font-semibold leading-7 flex justify-center">
-          Create A New Event
+          Update Your Event's Details
         </h1>
         <div className="border-b border-gray-900/10 pb-12 flex justify-center">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -141,4 +152,4 @@ const CreateEventForm = () => {
   );
 };
 
-export default CreateEventForm;
+export default EditEvent;

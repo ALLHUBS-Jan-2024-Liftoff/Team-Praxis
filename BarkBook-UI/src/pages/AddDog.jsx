@@ -24,7 +24,7 @@ export default function AddDog() {
         e.preventDefault();
 
         try {
-          await axios.post('http://localhost:8080/add-dog', dog);  // post the dog obj
+          await axios.post('http://localhost:8080/api/dog/add-dog', dog);  // post the dog obj
           navigate('/user'); // navigate back to /user after submission
         } catch (error) {
           console.error("Error submitting form:", error); // handle error 
