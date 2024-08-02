@@ -22,41 +22,55 @@ import {AuthProvider} from "./AuthContext.jsx";
 import {UserStuff} from "./pages/user/temp/UserStuff.jsx";
 import EditEvent from "./pages/EditEvent.jsx";
 import ViewEvent from "./pages/ViewEvent.jsx";
+import {ProtectedRoutes} from "./components/ProtectedRoutes.jsx";
+import {useEffect, useState} from "react";
+import {getCurrentUser, isAuthenticated} from "./service/AuthService.js";
 
-
-const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path="/" element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path={"about"} element={<AboutPage />} />
-            <Route path={"userstuff"} element={<UserStuff />} />
-            <Route path={"login"} element={<UserLogin />} />
-            <Route path={"register"} element={<UserRegister />} />
-            <Route path={"allusers"} element={<ViewAllUsers />} />
-            <Route path={"viewuser/:id"} element={<ViewUserById />} />
-            <Route path={"user/:id"} element={<AccountPage />} />
-            <Route path={"user"} element={<AccountPage />} /> {/*TODO: make this a redirect */}
-            <Route path={"user/:id/edit"} element={<EditUser />} />
-            <Route path={"map"} element={<MapContainer />} />
-            <Route path={"create-event"} element={<CreateEventForm />} />
-            <Route path={"add-dog"} element={<AddDog />} />
-            <Route path={"/dog/details/:id"} element={<ViewDog />} />
-            <Route path={"/dog/edit/:id"} element={<EditDog />} />
-            <Route path={"/event/edit/:id"} element={<EditEvent />} />
-            <Route path={"/event/details/:id"} element={<ViewEvent />} />
-            {/*To add a path, edit and uncomment...*/}
-            {/*<Route path={"myPath"} element={<myPage />} />*/}
-            {/*And add it to the Navbar array*/}
-        </Route>
-    )
-);
 
 const App = () => {
+
+    const [user, setUser] = useState(false);
+
+    useEffect(() => {
+        if (!isAuthenticated()) return;
+        setUser(getCurrentUser())
+    }, []);
+
+    const router = createBrowserRouter(
+        createRoutesFromElements(
+            <Route path="/" element={<MainLayout />}>
+                <Route path={"about"} element={<AboutPage />} />
+                <Route path={"userstuff"} element={<UserStuff />} />
+                <Route path={"login"} element={<UserLogin />} />
+                <Route path={"register"} element={<UserRegister />} />
+
+                <Route element={<ProtectedRoutes user={user}/>} >
+                    {/* users */}
+                    <Route path={"allusers"} element={<ViewAllUsers />} />
+                    <Route path={"viewuser/:id"} element={<ViewUserById />} />
+                    <Route path={"user"} element={<AccountPage />} /> {/*TODO: make this a redirect */}
+                    <Route path={"user/:id"} element={<AccountPage />} />
+                    <Route path={"user/:id/edit"} element={<EditUser />} />
+                    {/* dogs */}
+                    <Route path={"add-dog"} element={<AddDog />} />
+                    <Route path={"/dog/details/:id"} element={<ViewDog />} />
+                    <Route path={"/dog/edit/:id"} element={<EditDog />} />
+                    {/* events */}
+                    <Route path={"create-event"} element={<CreateEventForm />} />
+                    <Route path={"/event/details/:id"} element={<ViewEvent />} />
+                    <Route path={"/event/edit/:id"} element={<EditEvent />} />
+                    {/* misc */}
+                    <Route index element={<HomePage />} />
+                    <Route path={"map"} element={<MapContainer />} />
+                </Route>
+            </Route>
+        )
+    );
+
     return (
         <AuthProvider>
             <RouterProvider router={router} />
         </AuthProvider>
     );
 }
-
 export default App
