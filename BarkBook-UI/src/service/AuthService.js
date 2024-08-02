@@ -1,4 +1,5 @@
 import axios from "axios";
+import {useEffect, useState} from "react";
 
 const BASEAPIURL = "http://localhost:8080/api";
 
@@ -40,4 +41,21 @@ export const getCurrentUser = () => {
 
 export const isAuthenticated = () => {
     return !!localStorage.getItem("token");
+};
+
+export const usePageOwnership = (pageId) => {
+    const [ownership, setOwnership] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const currentUserId = getCurrentUser().id.toString();
+        if (currentUserId === pageId) {
+            setOwnership(true);
+            setLoading(false);
+        } else {
+            setLoading(false);
+        }
+    }, [pageId]);
+
+    return {ownership, loading};
 };
