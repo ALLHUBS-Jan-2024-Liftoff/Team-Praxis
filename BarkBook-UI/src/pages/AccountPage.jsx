@@ -2,7 +2,7 @@ import testDogData from "/src/assets/test-data/testDogData.json";
 import testEventData from "/src/assets/test-data/testEventData.json";
 import testUserData from "/src/assets/test-data/testUserData.json";
 import {DynamicTable} from "../components/DynamicTable.jsx";
-import {Link, useParams} from 'react-router-dom';
+import {Link, Navigate, useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {getCurrentUser, isAuthenticated} from "../service/AuthService.js";
@@ -66,6 +66,8 @@ export const AccountPage = () => {
         const result = await axios.get(`http://localhost:8080/api/event`)
         setEvent(result.data)
     }
+
+    if (!id) return <Navigate to={"/"} />
 
     return (
         <>
