@@ -8,8 +8,6 @@ export const DynamicTable = (props) => {
   let columns = [];
   if (data.length > 0) {
     columns = Object.keys(data[0]);
-  } else {
-    console.log("DynamicTable.jsx found no data");
   }
 
   const [dog, setDog] = useState([]);
