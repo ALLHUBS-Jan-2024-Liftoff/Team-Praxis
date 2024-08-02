@@ -1,36 +1,29 @@
 import axios from "axios";
-import { useEffect,useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import {getUserById} from "/src/service/UserService.js";
 
-const ViewBarkBookReg = () => {
 
+const ViewUserById = () => {
 
-    const [username, setusernameReg] = useState("")
-    // const handleUserNameCreate = e => setusernameReg(e.target.value);
-    const [password, setPasswordReg] = useState("")
-    // const handlePasswordCreate = e => setPasswordReg(e.target.value)
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
-    const { id } = useParams();
+    const {id} = useParams();
 
     useEffect(() => {
-        loadUser();
-      }, []);
+        const getUser = async () => {
+            const result = await getUserById(id);
+            setUsername(result.username);
+            setPassword(result.password);
+        }
+        getUser();
+    }, [id]);
 
-      const loadUser = async () => {
-        const result=await axios.get(`http://localhost:8080/api/user/${id}`)
-        setusernameReg(result.data.username);
-        setPasswordReg(result.data.password);
-    }
-
-
-
-
-
-  return (
-  
-    <div>
+    return (
         <div>
             <div>
+                <div>
                     <h2>View Book User Registration</h2>
                     <div>
                         <div>
@@ -48,15 +41,10 @@ const ViewBarkBookReg = () => {
                         </div>
                     </div>
                     <Link to={"/allusers"}>Back To all Users</Link>
+                </div>
             </div>
         </div>
-    </div>
-
-
-
-
-
-  )
+    )
 }
 
-export default ViewBarkBookReg
+export default ViewUserById
