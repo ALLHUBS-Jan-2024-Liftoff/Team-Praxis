@@ -66,10 +66,13 @@ public class UserController {
             throw new IllegalArgumentException("Wrong password");
         }
 
+        User secureUser = user;
+        secureUser.setPassword(null);
+
         Map<String, Object> response = new HashMap<>();
         String token = jwtService.generateToken(user);
         response.put("token", token);
-        response.put("user", user);
+        response.put("user", secureUser);
 
         return ResponseEntity.ok(response);
     }
