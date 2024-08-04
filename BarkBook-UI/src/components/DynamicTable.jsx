@@ -11,7 +11,7 @@ export const DynamicTable = (props) => {
   if (data.length > 0) {
     columns = Object.keys(data[0]);
   }
-  
+
   const [dog, setDog] = useState([]);
   const [event, setEvent] = useState([]);
 
@@ -39,14 +39,6 @@ export const DynamicTable = (props) => {
       window.location.reload();
     }
   };
-
-        // console.log(request);
-      // window.location.reload();
-      // if (type === dog) {
-      //   loadDog();
-      // } else {
-      //   loadEvent();
-      // }
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
