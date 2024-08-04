@@ -133,7 +133,7 @@ export default function EditDog() {
             <div className="flex justify-center">
                 <Link
                     className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500"
-                    to={`/user/dog/${id}`}
+                    to={`/dog/details/${id}`}
                 >
                     Cancel
                 </Link>
