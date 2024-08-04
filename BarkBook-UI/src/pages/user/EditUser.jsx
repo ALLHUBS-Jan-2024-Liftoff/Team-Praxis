@@ -31,10 +31,14 @@ const EditUser = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const confirmed = window.confirm("Are you sure you want to update your account?");
-        if (confirmed) {
-            await updateUserById(id, username, password, verifyPassword); // returns user object
-            navigate("/");
+        if (!password.length > 0) {
+            window.alert("Password cannot be blank")
+        } else {
+            const confirmed = window.confirm("Are you sure you want to update your account?");
+            if (confirmed) {
+                await updateUserById(id, username, password, verifyPassword); // returns user object
+                navigate("/");
+            }
         }
     }
 
