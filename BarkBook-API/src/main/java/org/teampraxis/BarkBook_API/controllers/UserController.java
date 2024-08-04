@@ -96,6 +96,10 @@ public class UserController {
 
         User user = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Could not find user with id: " + id));
 
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Password cannot be blank");
+        }
+
         if (password.equals(verifyPassword)) {
             String hashedPassword = passwordEncoder.encode(password);
             user.setUsername(username);
