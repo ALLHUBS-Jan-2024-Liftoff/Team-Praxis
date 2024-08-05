@@ -5,23 +5,19 @@ import {Link} from "react-router-dom";
 const destinations = [
     {name: 'home', path: '/', valid: true},
     {name: 'about', path: '/about', valid: true},
-    {name: 'login', path: '/login', valid: true},
-    {name: 'register', path: '/register', valid: true},
     {name: 'create-event', path: '/create-event', valid: true},
     {name: 'add-dog', path: '/add-dog', valid: true},
-    {name: 'allusers', path: '/allusers', valid: true},
-    {name: 'user page', path: '/user', valid: true},
     {name: 'map test', path: '/map', valid: true},
+    {name: 'user stuff', path: '/userstuff', valid: true},
 ]
 
 // TODO: make navbar sticky
 const Navbar = () => {
+
     return (
-        <div className={"flex flex-col items-center bg-gray-400"}>
-            <div className="space-x-4">
-                {/*iterate over array of destination objects*/}
+        <div className={"flex flex-row bg-gray-400"}>
+            <div className="flex flex-grow justify-center space-x-4">
                 {destinations.map((item) => (
-                    // if item.valid is true, render the button
                     item.valid ? (
                         <Link
                             key={item.name}

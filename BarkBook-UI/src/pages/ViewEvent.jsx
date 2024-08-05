@@ -1,34 +1,34 @@
 import { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getDogById, deleteDogById } from "../service/DogService";
+import { getEventById, deleteEventById } from "../service/EventService";
 
-export default function ViewDog() {
+export default function ViewEvent() {
 
-    const { id } = useParams(); // get specific data by id
+    const { id } = useParams();
 
-    const [dogName, setDogName] = useState("");
-    const [dogAge, setDogAge] = useState("");
-    const [breed, setBreed] = useState("");
-    const [weight, setWeight] = useState("");
+    const [name, setName] = useState("");
+    const [location, setLocation] = useState("");
+    const [date, setDate] = useState("");
+    const [description, setDescription] = useState("");
 
-    const loadDog = async () => {
-        const result = await getDogById(id);
-        setDogName(result.dogName);
-        setDogAge(result.dogAge);
-        setBreed(result.breed);
-        setWeight(result.weight);
+    const loadEvent = async () => {
+        const result = await getEventById(id);
+        setName(result.name);
+        setLocation(result.location);
+        setDate(result.date);
+        setDescription(result.description);
     }
 
     useEffect(() => {
-        loadDog();
+        loadEvent();
     }, [id]);
 
-    // delete dog data, window pops up first to confirm
-    const deleteDog = async (id) => {
-        const confirmed = window.confirm("Are you sure you want to delete this dog? This cannot be undone.");
+    //delete event data, window pops up first to confirm
+    const deleteEvent = async (id) => {
+        const confirmed = window.confirm("Are you sure you want to delete this event? This cannot be undone.")
         if (confirmed) {
-            await deleteDogById(id);
-            loadDog();
+            await deleteEventById(id);
+            loadEvent();
         }
     };
 
@@ -36,26 +36,26 @@ export default function ViewDog() {
         <div className='container'>
             <div className='row'>
                 <div className='col-md-6 offset-md-3 border round p-4 mt-2 shadow'>
-                    <h1 className='text-center text-2xl'>Dog Details</h1>
+                    <h1 className='text-center text-2xl'>Event Details</h1>
 
                     <div className='card'>
                         <div className='card-header'>
                             <ul className='list-group list-group-flush'>
                                 <li className='list-group-item'>
                                     <b>Name: </b>
-                                    {dogName}
+                                    {name}
                                 </li>
                                 <li className='list-group-item'>
-                                    <b>Age: </b>
-                                    {dogAge}                                    
+                                    <b>Location: </b>
+                                    {location}                                    
                                 </li>
                                 <li className='list-group-item'>
-                                    <b>Breed: </b>
-                                    {breed}                                    
+                                    <b>Date: </b>
+                                    {date}                                    
                                 </li>
                                 <li className='list-group-item'>
-                                    <b>Weight (Pounds): </b>
-                                    {weight}
+                                    <b>Description: </b>
+                                    {description}
                                 </li>
                             </ul>
                         </div>
@@ -70,14 +70,14 @@ export default function ViewDog() {
 
                     <div className='flex justify-center'>
                         <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-green-500'
-                            to={`/dog/edit/${id}`}>
+                            to={`/event/edit/${id}`}>
                                 Edit
                         </Link>
                     </div>
 
                     <div className='flex justify-center'>
                         <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500' 
-                            onClick={() => deleteDog(id)} 
+                            onClick={() => deleteEvent(id)} 
                             to="/user">
                                 Delete
                         </Link>

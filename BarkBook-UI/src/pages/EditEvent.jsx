@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { createNewEvent } from "../service/EventService";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { getEventById, updateEventById } from "../service/EventService";
 
-const CreateEventForm = () => {
+const EditEvent = () => {
 
   let navigate = useNavigate();
+
+  const { id } = useParams();
 
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -16,20 +18,27 @@ const CreateEventForm = () => {
   const handleDate = e => setDate(e.target.value);
   const handleDescription = e => setDescription(e.target.value);
 
+  useEffect(() => {
+      const loadEvent = async () => {
+          const result = await getEventById(id);
+          setName(result.name);
+          setLocation(result.location);
+          setDate(result.date);
+          setDescription(result.description);
+      }
+      loadEvent();
+    }, [id]);
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await createNewEvent(name, location, date, description);
+      await updateEventById(id, name, location, date, description)
       navigate("/user")
-    } catch (error) {
-      console.error("Error submitting form", error);
-    }
   };
 
   return (
     <form onSubmit={onSubmit}>
       <h1 className="text-base font-semibold leading-7 flex justify-center">
-          Create A New Event
+          Update Your Event's Details
         </h1>
         <div className="border-b border-gray-900/10 pb-12 flex justify-center">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -128,7 +137,7 @@ const CreateEventForm = () => {
       <div className="flex justify-center">
         <Link
         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        to="/user"
+        to={`/event/details/${id}`}
         >
           Cancel
         </Link>
@@ -137,4 +146,4 @@ const CreateEventForm = () => {
   );
 };
 
-export default CreateEventForm;
+export default EditEvent;

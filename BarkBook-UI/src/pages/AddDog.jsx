@@ -1,37 +1,32 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { createNewDog } from '../service/DogService';
 
 export default function AddDog() {
+
     let navigate = useNavigate();
 
+    const [dogName, setDogName] = useState("");
+    const [dogAge, setDogAge] = useState("");
+    const [breed, setBreed] = useState("");
+    const [weight, setWeight] = useState("");
 
-    const [dog, setDog] = useState({
-        dogName: '',
-        dogAge: 0, // dogAge and weight initialize as integers, set them as 0
-        breed: '',
-        weight: 0,
-    });
 
-    const { dogName, dogAge, breed, weight } = dog;
-
-    const onInput = (e) => {
-        setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
-    };
-
+    const handleDogName = e => setDogName(e.target.value);
+    const handleDogAge = e => setDogAge(e.target.value);
+    const handleBreed = e => setBreed(e.target.value);
+    const handleWeight = e => setWeight(e.target.value);
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         try {
-          await axios.post('http://localhost:8080/add-dog', dog);  // post the dog obj
+          await createNewDog(dogName, dogAge, breed, weight);  // post the dog obj
           navigate('/user'); // navigate back to /user after submission
         } catch (error) {
           console.error("Error submitting form:", error); // handle error 
         }
     };
-  
-
+    
     return (
         <form onSubmit={onSubmit}>
             <h5 className="text-base font-semibold leading-7 flex justify-center text-2xl">
@@ -39,6 +34,25 @@ export default function AddDog() {
             </h5>
             <div className="border-b border-gray-900/10 pb-12 flex justify-center">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                <div className="col-span-full">
+                        <label
+                            htmlFor="dogImage"
+                            className="block text-sm font-medium leading-6 text-gray-900">
+                            Upload an image of your dog (only png/jpeg)
+                        </label>
+                        <div className="mt-2">
+                            <input
+                                id="dogImage"
+                                name="dogImage"
+                                type="file"
+                                accept="image/png, image/jpeg"
+                                // will need to change this to dogImage
+                                value={dogName}
+                                onChange={onInput}  
+                                className="block w-3/4 rounded-md border-2"/>
+                        </div>
+                    </div>
                     
                     <div className="sm:col-span-3">
                         <label
@@ -52,8 +66,9 @@ export default function AddDog() {
                                 name="dogName"
                                 type="text"
                                 value={dogName}
-                                onChange={onInput}  
-                                className="block w-3/4 rounded-md border-2"/>
+                                onChange={handleDogName}  
+                                className="block w-3/4 rounded-md border-2"
+                            />
                         </div>
                     </div>
 
@@ -69,8 +84,9 @@ export default function AddDog() {
                                 name="dogAge"
                                 type="number"
                                 value={dogAge}
-                                onChange={onInput}
-                                className="block w-1/2 rounded-md border-2"/>
+                                onChange={handleDogAge}
+                                className="block w-1/2 rounded-md border-2"
+                            />
                         </div>
                     </div>
 
@@ -86,8 +102,10 @@ export default function AddDog() {
                                 name="breed"
                                 type="text"
                                 value={breed}
-                                onChange={onInput}
-                                className="block w-3/4 rounded-md border-2"/>  
+                                onChange={handleBreed}
+                                className="block rounded-md border-2"
+                            >
+                            </input>
                         </div>
                     </div>
 
@@ -103,8 +121,9 @@ export default function AddDog() {
                                 name="weight"
                                 type="number"
                                 value={weight}
-                                onChange={onInput}
-                                className="block w-1/2 rounded-md border-2"/>
+                                onChange={handleWeight}
+                                className="block w-1/2 rounded-md border-2"
+                            />
                         </div>
                     </div>
                 </div>
