@@ -1,41 +1,36 @@
-import axios from "axios";
 import { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getDogById, deleteDogById } from "../service/DogService";
 
 export default function ViewDog() {
 
-    const [dog, setDog] = useState({
-        dogName: '',
-        dogAge: 0, // dogAge and weight initialize as integers, set them as 0
-        breed: '',
-        weight: 0,
-    });
-
     const { id } = useParams(); // get specific data by id
 
-      const loadDog = async () => {
-        const result=await axios.get(`http://localhost:8080/api/dog/${id}`)
-        setDog(result.data)
+    const [dogName, setDogName] = useState("");
+    const [dogAge, setDogAge] = useState("");
+    const [breed, setBreed] = useState("");
+    const [weight, setWeight] = useState("");
+
+    const loadDog = async () => {
+        const result = await getDogById(id);
+        setDogName(result.dogName);
+        setDogAge(result.dogAge);
+        setBreed(result.breed);
+        setWeight(result.weight);
     }
 
-
-    // load data
     useEffect(() => {
         loadDog();
-        }, []);
+    }, [id]);
 
-    // delete dog data, window pops up first
+    // delete dog data, window pops up first to confirm
     const deleteDog = async (id) => {
-        if (confirmDelete()){
-        await axios.delete(`http://localhost:8080/api/dog/${id}`);
-        loadDog();
+        const confirmed = window.confirm("Are you sure you want to delete this dog? This cannot be undone.");
+        if (confirmed) {
+            await deleteDogById(id);
+            loadDog();
         }
     };
-
-    // window pops up after hitting delete
-    function confirmDelete () {
-        return window.confirm("Are you sure you want to delete this dog?");
-    }
 
     return (
         <div className='container'>
@@ -48,45 +43,44 @@ export default function ViewDog() {
                             <ul className='list-group list-group-flush'>
                                 <li className='list-group-item'>
                                     <b>Name: </b>
-                                    {dog.dogName}
+                                    {dogName}
                                 </li>
                                 <li className='list-group-item'>
                                     <b>Age: </b>
-                                    {dog.dogAge}                                    
+                                    {dogAge}                                    
                                 </li>
                                 <li className='list-group-item'>
                                     <b>Breed: </b>
-                                    {dog.breed}                                    
+                                    {breed}                                    
                                 </li>
                                 <li className='list-group-item'>
                                     <b>Weight (Pounds): </b>
-                                    {dog.weight}
+                                    {weight}
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div className='flex justify-center'>
-                    <Link 
-                    className='btn btn-primary my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500' 
-                    to={"/user"}>
-                        Back to user
-                    </Link>
-                    </div>
-
-                    <div className='flex justify-center'>
-                    <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-green-500'
-                    to={`/dog/edit/${dog.id}`}>
-                        Edit
+                        <Link 
+                        className='btn btn-primary my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500' 
+                            to={"/user"}>
+                                Back to user
                         </Link>
                     </div>
 
                     <div className='flex justify-center'>
-                    <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500' 
-                    onClick={() => deleteDog(dog.id)} 
-                    to="/user">
-                        Delete
+                        <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-green-500'
+                            to={`/dog/edit/${id}`}>
+                                Edit
                         </Link>
+                    </div>
 
+                    <div className='flex justify-center'>
+                        <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500' 
+                            onClick={() => deleteDog(id)} 
+                            to="/user">
+                                Delete
+                        </Link>
                     </div>
                 </div>
             </div>

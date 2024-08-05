@@ -1,30 +1,26 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { createNewEvent } from "../service/EventService";
 
 const CreateEventForm = () => {
 
   let navigate = useNavigate();
 
-  const [event, setEvent] = useState({
-    name:"",
-    location:"",
-    date:"",
-    description:""
-  });
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
 
-  const { name, location, date, description } = event;
-
-  const onInput = (e) => {
-    setEvent({...event, [e.target.name]: e.target.value })
-  };
+  const handleName = e => setName(e.target.value);
+  const handleLocation = e => setLocation(e.target.value);
+  const handleDate = e => setDate(e.target.value);
+  const handleDescription = e => setDescription(e.target.value);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     try {
-    await axios.post("http://localhost:8080/api/event/create-event", event)
-    navigate("/user")
+      await createNewEvent(name, location, date, description);
+      navigate("/user")
     } catch (error) {
       console.error("Error submitting form", error);
     }
@@ -50,7 +46,7 @@ const CreateEventForm = () => {
                   name="name"
                   type="text"
                   value={name}
-                  onChange={onInput}
+                  onChange={handleName}
                   className="block rounded-md border-2"
                   placeholder="Enter text here..."
                 >
@@ -71,7 +67,7 @@ const CreateEventForm = () => {
                   name="location"
                   type="text"
                   value={location}
-                  onChange={onInput}
+                  onChange={handleLocation}
                   className="block rounded-md border-2"
                   placeholder="Enter text here..."
                 >
@@ -92,7 +88,7 @@ const CreateEventForm = () => {
                   name="date"
                   type="datetime-local" 
                   value={date}
-                  onChange={onInput}
+                  onChange={handleDate}
                   className="block rounded-md border-2"
                 >
                 </input>
@@ -112,7 +108,7 @@ const CreateEventForm = () => {
                   name="description"
                   type="text"
                   value={description}
-                  onChange={onInput}
+                  onChange={handleDescription}
                   rows={4}
                   cols={35}
                   className="block rounded-md border-2"
