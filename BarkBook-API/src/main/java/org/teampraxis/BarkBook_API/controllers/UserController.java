@@ -34,12 +34,12 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    // this works, but is not yet implemented in front end. Could replace several getUserById calls.
+    // TODO: implement this into front end so that user object needn't be stored in client localStorage
     @GetMapping("/get/me")
     public ResponseEntity<User> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User) authentication.getPrincipal();
-
+        currentUser.setPassword(null);
         return ResponseEntity.ok(currentUser);
     }
 
