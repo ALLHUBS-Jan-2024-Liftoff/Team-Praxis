@@ -12,7 +12,7 @@ import UserRegister from "./pages/user/UserRegister.jsx"
 import CreateEventForm from "./pages/CreateEventForm.jsx";
 import AddDog from './pages/AddDog.jsx';
 import ViewAllUsers from "./pages/user/temp/ViewAllUsers.jsx";
-import EditUser from "./pages/user/EditUser.jsx";
+import UserEdit from "./pages/user/UserEdit.jsx";
 import ViewUserById from "./pages/user/temp/ViewUserById.jsx";
 import {AccountPage} from "./pages/AccountPage.jsx";
 import {MapContainer} from "./api/google/MapContainer.jsx";
@@ -53,7 +53,7 @@ const App = () => {
                     <Route path={"viewuser/:id"} element={<ViewUserById />} />
                     <Route path={"user"} element={<AccountPage />} /> {/*TODO: make this a redirect */}
                     <Route path={"user/:id"} element={<AccountPage />} />
-                    <Route path={"user/:id/edit"} element={<EditUser />} />
+                    <Route path={"user/:id/edit"} element={<UserEdit />} />
                     {/* dogs */}
                     <Route path={"add-dog"} element={<AddDog />} />
                     <Route path={"/dog/details/:id"} element={<ViewDog />} />

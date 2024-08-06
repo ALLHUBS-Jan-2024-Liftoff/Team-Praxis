@@ -20,7 +20,7 @@ export const AccountPage = () => {
     // change into GET user data
 
     const [thisUser, setThisUser] = useState(false);
-    const [thisUsername, setThisUsername] = useState("");
+    const [thisDisplayName, setThisDisplayName] = useState("");
     const [thisUserLocation, setThisUserLocation] = useState("Kansas City");
 
     const [viewingUser, setViewingUser] = useState(false);
@@ -30,7 +30,7 @@ export const AccountPage = () => {
     useEffect(() => {
         const getUser = async () => {
             const result = await getUserById(id);
-            setThisUsername(result.username);
+            setThisDisplayName(result.displayName);
             setThisUser(result)
         }
         getUser();
@@ -73,7 +73,7 @@ export const AccountPage = () => {
         <>
             <br/>
             <div className={"flex justify-center"}>
-                <h1 className={"font-bold p-4"}>{thisUsername}</h1>
+                <h1 className={"font-bold p-4"}>{thisDisplayName}</h1>
                 <p className={"p-4"}>{thisUserLocation}</p>
                 <div className={"grid place-content-center"}>
                     {viewingUserIsThisUser ? (
