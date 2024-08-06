@@ -1,6 +1,3 @@
-import testDogData from "/src/assets/test-data/testDogData.json";
-import testEventData from "/src/assets/test-data/testEventData.json";
-import testUserData from "/src/assets/test-data/testUserData.json";
 import {DynamicTable} from "../components/DynamicTable.jsx";
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
@@ -52,11 +49,6 @@ export const AccountPage = () => {
     const [dog, setDog] = useState([]);
     const [event, setEvent] = useState([]);
 
-    useEffect(() => {
-        loadDog();
-        loadEvent();
-    }, []);
-
     const loadDog = async () => {
         const result = await axios.get(`http://localhost:8080/api/dog`)
         setDog(result.data)
@@ -68,6 +60,11 @@ export const AccountPage = () => {
     }
 
     if (!id) return <Navigate to={"/"} />
+
+    useEffect(() => {
+        loadDog();
+        loadEvent();
+    }, []);
 
     return (
         <>
@@ -88,7 +85,7 @@ export const AccountPage = () => {
             <br/>
             <div className={"flex place-content-around"}>
                 <h1 className={"underline font-bold"}>My Dogs</h1>
-                <Link className="bg-sky-500 hover:bg-sky-700 ..." to="/add-dog">
+                <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-4 rounded" to="/add-dog">
                     Add a Dog!
                 </Link>
             </div>
@@ -97,7 +94,7 @@ export const AccountPage = () => {
             <br/>
             <div className={"flex place-content-around"}>
                 <h1 className={"underline font-bold"}>My Events</h1>
-                <Link className="bg-sky-500 hover:bg-sky-700 ..." to="/create-event">
+                <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-4 rounded" to="/create-event">
                     Find Events!
                 </Link>
             </div>

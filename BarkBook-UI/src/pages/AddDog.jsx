@@ -1,37 +1,31 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { createNewDog } from '../service/DogService';
 
 export default function AddDog() {
+
     let navigate = useNavigate();
 
+    const [dogName, setDogName] = useState("");
+    const [dogAge, setDogAge] = useState("");
+    const [breed, setBreed] = useState("");
+    const [weight, setWeight] = useState("");
 
-    const [dog, setDog] = useState({
-        dogName: '',
-        dogAge: 0, // dogAge and weight initialize as integers, set them as 0
-        breed: '',
-        weight: 0,
-    });
-
-    const { dogName, dogAge, breed, weight } = dog;
-
-    const onInput = (e) => {
-        setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
-    };
-
+    const handleDogName = e => setDogName(e.target.value);
+    const handleDogAge = e => setDogAge(e.target.value);
+    const handleBreed = e => setBreed(e.target.value);
+    const handleWeight = e => setWeight(e.target.value);
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         try {
-          await axios.post('http://localhost:8080/api/dog/add-dog', dog);  // post the dog obj
+          await createNewDog(dogName, dogAge, breed, weight);  // post the dog obj
           navigate('/user'); // navigate back to /user after submission
         } catch (error) {
           console.error("Error submitting form:", error); // handle error 
         }
     };
-  
-
+    
     return (
         <form onSubmit={onSubmit}>
             <h5 className="text-base font-semibold leading-7 flex justify-center text-2xl">
@@ -52,7 +46,7 @@ export default function AddDog() {
                                 name="dogName"
                                 type="text"
                                 value={dogName}
-                                onChange={onInput}  
+                                onChange={handleDogName}  
                                 className="block w-3/4 rounded-md border-2"
                             />
                         </div>
@@ -71,7 +65,7 @@ export default function AddDog() {
                                 name="dogAge"
                                 type="number"
                                 value={dogAge}
-                                onChange={onInput}
+                                onChange={handleDogAge}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>
@@ -85,20 +79,15 @@ export default function AddDog() {
                             Breed
                         </label>
                         <div className="mt-2">
-                            <select
+                            <input
                                 id="breed"
                                 name="breed"
+                                type="text"
                                 value={breed}
-                                onChange={onInput}
+                                onChange={handleBreed}
                                 className="block rounded-md border-2"
                             >
-                                <option value = "">Select Breed</option>
-                                <option value = "German Shepherd">German Shepherd</option>
-                                <option value = "Bulldog">Bulldog</option>
-                                <option value = "Golden Retriever">Golden Retriever</option>
-                                <option value = "Beagle">Beagle</option>
-                                <option value = "Corgi">Corgi</option>
-                            </select>
+                            </input>
                         </div>
                     </div>
 
@@ -115,7 +104,7 @@ export default function AddDog() {
                                 name="weight"
                                 type="number"
                                 value={weight}
-                                onChange={onInput}
+                                onChange={handleWeight}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>

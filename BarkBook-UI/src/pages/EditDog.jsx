@@ -1,45 +1,39 @@
 import { useEffect,useState } from 'react';
-import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { getDogById, updateDogById } from '../service/DogService';
 
 export default function EditDog() {
+
     let navigate = useNavigate();
 
-    const {id} = useParams()
+    const { id } = useParams()
 
-    const [dog, setDog] = useState({
-        dogName: '',
-        dogAge: 0, // dogAge and weight initialize as integers, set them as 0
-        breed: '',
-        weight: 0,
-    });
+    const [dogName, setDogName] = useState("");
+    const [dogAge, setDogAge] = useState("");
+    const [breed, setBreed] = useState("");
+    const [weight, setWeight] = useState("");
 
-    const { dogName, dogAge, breed, weight } = dog;
-
-    const onInput = (e) => {
-        setDog({ ...dog, [e.target.name]: e.target.value }); // ... keeps on adding new object
-    };
+    const handleDogName = e => setDogName(e.target.value);
+    const handleDogAge = e => setDogAge(e.target.value);
+    const handleBreed = e => setBreed(e.target.value);
+    const handleWeight = e => setWeight(e.target.value);
 
     useEffect(() => {
+        const loadDog = async () => {
+            const result = await getDogById(id);
+            setDogName(result.dogName);
+            setDogAge(result.dogAge);
+            setBreed(result.breed);
+            setWeight(result.weight);
+        }
         loadDog();
-      }, []);
+      }, [id]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-          await axios.put(`http://localhost:8080/api/dog/${id}`, dog);  // post the dog obj
+          await updateDogById(id, dogName, dogAge, breed, weight)  // post the dog obj
           navigate(`/user`); // navigate back to /user after submission
-        } catch (error) {
-          console.error("Error submitting form:", error); // handle error 
-        }
     };
-
-    const loadDog = async () => {
-        const result=await axios.get(`http://localhost:8080/api/dog/${id}`)
-        setDog(result.data)
-    }
-  
 
     return (
         <form onSubmit={onSubmit}>
@@ -61,7 +55,7 @@ export default function EditDog() {
                                 name="dogName"
                                 type="text"
                                 value={dogName}
-                                onChange={onInput}  
+                                onChange={handleDogName}  
                                 className="block w-3/4 rounded-md border-2"
                             />
                         </div>
@@ -80,7 +74,7 @@ export default function EditDog() {
                                 name="dogAge"
                                 type="number"
                                 value={dogAge}
-                                onChange={onInput}
+                                onChange={handleDogAge}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>
@@ -94,20 +88,15 @@ export default function EditDog() {
                             Breed
                         </label>
                         <div className="mt-2">
-                            <select
+                            <input
                                 id="breed"
                                 name="breed"
+                                type="text"
                                 value={breed}
-                                onChange={onInput}
+                                onChange={handleBreed}
                                 className="block rounded-md border-2"
                             >
-                                <option value = "">Select Breed</option>
-                                <option value = "German Shepherd">German Shepherd</option>
-                                <option value = "Bulldog">Bulldog</option>
-                                <option value = "Golden Retriever">Golden Retriever</option>
-                                <option value = "Beagle">Beagle</option>
-                                <option value = "Corgi">Corgi</option>
-                            </select>
+                            </input>
                         </div>
                     </div>
 
@@ -124,7 +113,7 @@ export default function EditDog() {
                                 name="weight"
                                 type="number"
                                 value={weight}
-                                onChange={onInput}
+                                onChange={handleWeight}
                                 className="block w-1/2 rounded-md border-2"
                             />
                         </div>
@@ -144,7 +133,7 @@ export default function EditDog() {
             <div className="flex justify-center">
                 <Link
                     className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500"
-                    to={`/user/dog/${id}`}
+                    to={`/dog/details/${id}`}
                 >
                     Cancel
                 </Link>
