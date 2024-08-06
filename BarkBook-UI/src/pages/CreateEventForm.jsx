@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createNewEvent } from "../service/EventService";
+import {getCurrentUser} from "../service/UserService.js";
 
 const CreateEventForm = () => {
 
@@ -20,7 +21,8 @@ const CreateEventForm = () => {
     e.preventDefault();
     try {
       await createNewEvent(name, location, date, description);
-      navigate("/user")
+      const currentUser = await getCurrentUser(); // this is a temp implementation TODO: make /user redirect on its own
+      navigate(`/user/${currentUser.id}`);
     } catch (error) {
       console.error("Error submitting form", error);
     }
