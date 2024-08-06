@@ -1,24 +1,27 @@
-import axios from "axios";
 import {useEffect, useState} from "react";
+import axiosInstance from "../config/AxiosConfig.js";
 
-const BASEAPIURL = "http://localhost:8080/api";
 
 export const login = async (email, password) => {
+    const body = {email, password};
     try {
-        const response = await axios.post(`${BASEAPIURL}/login`, null, {
-            params: {email, password},
-        });
+        const response = await axiosInstance.post(`/auth/login`, body);
 
-        console.log("Login Response:", response.data); // Log the entire response object
-
-        const {token, user} = response.data;
+        const {token, user, expiration} = response.data;
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
-        return user;
+        return null;
     } catch (error) {
         console.error("Login failed", error);
         throw error;
     }
+};
+
+export const createNewUser = async (email, displayName, password, verifyPassword) => {
+    const body = {email, displayName, password, verifyPassword};
+    const response = await axiosInstance.post(`/auth/register`, body);
+
+    return response.data;
 };
 
 export const logout = () => {
