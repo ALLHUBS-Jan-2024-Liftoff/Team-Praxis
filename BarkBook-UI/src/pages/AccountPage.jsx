@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {getCurrentUser, isAuthenticated} from "../service/AuthService.js";
 import {getUserById} from "../service/UserService.js";
+import axiosInstance from "../config/AxiosConfig.js";
 
 export const AccountPage = () => {
 
@@ -50,12 +51,14 @@ export const AccountPage = () => {
     const [event, setEvent] = useState([]);
 
     const loadDog = async () => {
-        const result = await axios.get(`http://localhost:8080/api/dog`)
+        // TODO: rework this
+        const result = await axiosInstance.get(`http://localhost:8080/api/dog`)
         setDog(result.data)
     }
 
     const loadEvent = async () => {
-        const result = await axios.get(`http://localhost:8080/api/event`)
+        // TODO: rework this
+        const result = await axiosInstance.get(`http://localhost:8080/api/event`)
         setEvent(result.data)
     }
 
