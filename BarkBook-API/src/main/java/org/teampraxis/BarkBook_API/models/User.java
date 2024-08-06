@@ -23,7 +23,7 @@ public class User implements UserDetails {
     private String displayName;
 
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 100) // TODO: despite setting max 100, 20 is still enforced
     @Email
     private String email;
 
