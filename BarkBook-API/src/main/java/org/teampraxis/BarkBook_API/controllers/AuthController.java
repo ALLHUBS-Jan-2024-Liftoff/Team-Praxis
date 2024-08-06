@@ -1,19 +1,18 @@
 package org.teampraxis.BarkBook_API.controllers;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.auth.dto.LoginUserDTO;
 import org.teampraxis.BarkBook_API.auth.dto.RegisterUserDTO;
 import org.teampraxis.BarkBook_API.auth.service.AuthService;
-import org.teampraxis.BarkBook_API.auth.service.JwtService;
 
 import java.util.Map;
 @RequestMapping("auth")
-@Controller
+@RestController
 public class AuthController {
     private final AuthService authService;
 
