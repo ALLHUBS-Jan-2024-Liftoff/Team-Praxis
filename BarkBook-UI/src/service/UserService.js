@@ -1,23 +1,24 @@
 import axiosInstance from "../config/AxiosConfig.js";
 
+const BASEPATH = "/api/user";
 
 export const getAllUsers = async () => {
-    const response = await axiosInstance.get(`/api/user/get/all`);
+    const response = await axiosInstance.get(`${BASEPATH}/get/all`);
     return response.data;
 };
 
 export const getCurrentUser = async () => {
-    const response = await axiosInstance.get(`/api/user/get/me`);
+    const response = await axiosInstance.get(`${BASEPATH}/get/me`);
     return response.data;
 }
 
 export const getUserById = async (id) => {
-    const response = await axiosInstance.get(`/api/user/get/${id}`)
+    const response = await axiosInstance.get(`${BASEPATH}/get/${id}`)
     return response.data;
 };
 
 export const updateUserById = async (id, displayName, currentPassword, newPassword, verifyNewPassword) => {
-    const response = await axiosInstance.put(`/api/user/update`, null, {
+    const response = await axiosInstance.put(`${BASEPATH}/update`, null, {
         params: {
             id,
             displayName,
@@ -30,6 +31,6 @@ export const updateUserById = async (id, displayName, currentPassword, newPasswo
 };
 
 export const deleteUserById = async (id) => {
-    const response = await axiosInstance.delete(`/api/user/delete/${id}`);
+    const response = await axiosInstance.delete(`${BASEPATH}/delete/${id}`);
     return response.data;
 };
