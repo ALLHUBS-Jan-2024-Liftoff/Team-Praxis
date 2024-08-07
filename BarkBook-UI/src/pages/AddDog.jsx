@@ -35,7 +35,7 @@ export default function AddDog() {
             <div className="border-b border-gray-900/10 pb-12 flex justify-center">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                <div className="col-span-full">
+                {/* <div className="col-span-full">
                         <label
                             htmlFor="dogImage"
                             className="block text-sm font-medium leading-6 text-gray-900">
@@ -52,7 +52,7 @@ export default function AddDog() {
                                 onChange={onInput}  
                                 className="block w-3/4 rounded-md border-2"/>
                         </div>
-                    </div>
+                    </div> */}
                     
                     <div className="sm:col-span-3">
                         <label
