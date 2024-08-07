@@ -4,21 +4,26 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Username is a required field")
+    @NotBlank(message = "Display Name is a required field")
     @Size(max = 20)
-    private String username;
+    private String displayName;
 
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 100) // TODO: despite setting max 100, 20 is still enforced
     @Email
     private String email;
 
@@ -28,9 +33,9 @@ public class User {
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String email, String displayName, String password) {
         this.email = email;
-        this.username = username;
+        this.displayName = displayName;
         this.password = password;
     }
 
@@ -38,12 +43,12 @@ public class User {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public @NotBlank @Size(max = 20) @Email String getEmail() {
@@ -60,5 +65,40 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // UserDetails Overrides for Spring Security
+
+    // getUsername returns email because it is unique, display name is not
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    // leaving as empty list because we are not using roles
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    // the following 4 methods MUST return true or auth will fail.
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
     }
 }

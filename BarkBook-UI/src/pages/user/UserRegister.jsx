@@ -1,24 +1,24 @@
 import {useState} from 'react';
 import {useNavigate, Link} from 'react-router-dom';
-import {createNewUser} from "/src/service/UserService.js";
+import {createNewUser} from "/src/service/AuthService.js";
 
 const UserRegister = () => {
 
     let navigate = useNavigate();
 
     const [email, setEmail] = useState("")
-    const [username, setUsername] = useState("")
+    const [displayName, setDisplayName] = useState("")
     const [password, setPassword] = useState("")
     const [verifyPassword, setVerifyPassword] = useState("")
 
     const handleEmail = e => setEmail(e.target.value);
-    const handleUsername = e => setUsername(e.target.value);
+    const handleDisplayName = e => setDisplayName(e.target.value);
     const handlePassword = e => setPassword(e.target.value)
     const handleVerify = e => setVerifyPassword(e.target.value)
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await createNewUser(email, username, password, verifyPassword); // returns user object
+        await createNewUser(email, displayName, password, verifyPassword); // returns user object
         navigate("/login");
     }
 
@@ -37,9 +37,9 @@ const UserRegister = () => {
                         </div>
 
                         <div className={"flex flex-col items-center p-2"}>
-                            <label htmlFor={"username"} className={"text-gray-200"}>Username</label>
-                            <input type="text" value={username} onChange={handleUsername}
-                                   id={"username"}
+                            <label htmlFor={"displayName"} className={"text-gray-200"}>Display Name</label>
+                            <input type="text" value={displayName} onChange={handleDisplayName}
+                                   id={"displayName"}
                                    className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}/>
                         </div>
 

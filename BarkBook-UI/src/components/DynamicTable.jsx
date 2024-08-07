@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getAllEvents } from "../service/EventService";
 import { getAllDogs } from "../service/DogService";
+import axiosInstance from "../config/AxiosConfig.js";
 
 export const DynamicTable = (props) => {
   const { data, type } = props;
@@ -35,7 +36,8 @@ export const DynamicTable = (props) => {
   const deleteEntry = async (id) => {
     const confirmed = window.confirm("Are you sure you want to delete this event? This cannot be undone.")
     if (confirmed) {
-      await axios.delete(`http://localhost:8080/api/${type}/${id}`);
+      // TODO: rework this
+      await axiosInstance.delete(`http://localhost:8080/api/${type}/${id}`);
       window.location.reload();
     }
   };

@@ -1,9 +1,10 @@
 import {DynamicTable} from "../components/DynamicTable.jsx";
-import {Link, useParams} from 'react-router-dom';
+import {Link, Navigate, useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {getCurrentUser, isAuthenticated} from "../service/AuthService.js";
 import {getUserById} from "../service/UserService.js";
+import axiosInstance from "../config/AxiosConfig.js";
 
 export const AccountPage = () => {
 
@@ -17,7 +18,7 @@ export const AccountPage = () => {
     // change into GET user data
 
     const [thisUser, setThisUser] = useState(false);
-    const [thisUsername, setThisUsername] = useState("");
+    const [thisDisplayName, setThisDisplayName] = useState("");
     const [thisUserLocation, setThisUserLocation] = useState("Kansas City");
 
     const [viewingUser, setViewingUser] = useState(false);
@@ -27,7 +28,7 @@ export const AccountPage = () => {
     useEffect(() => {
         const getUser = async () => {
             const result = await getUserById(id);
-            setThisUsername(result.username);
+            setThisDisplayName(result.displayName);
             setThisUser(result)
         }
         getUser();
@@ -50,14 +51,18 @@ export const AccountPage = () => {
     const [event, setEvent] = useState([]);
 
     const loadDog = async () => {
-        const result = await axios.get(`http://localhost:8080/api/dog`)
+        // TODO: rework this
+        const result = await axiosInstance.get(`http://localhost:8080/api/dog`)
         setDog(result.data)
     }
 
     const loadEvent = async () => {
-        const result = await axios.get(`http://localhost:8080/api/event`)
+        // TODO: rework this
+        const result = await axiosInstance.get(`http://localhost:8080/api/event`)
         setEvent(result.data)
     }
+
+    if (!id) return <Navigate to={"/"} />
 
     useEffect(() => {
         loadDog();
@@ -68,7 +73,7 @@ export const AccountPage = () => {
         <>
             <br/>
             <div className={"flex justify-center"}>
-                <h1 className={"font-bold p-4"}>{thisUsername}</h1>
+                <h1 className={"font-bold p-4"}>{thisDisplayName}</h1>
                 <p className={"p-4"}>{thisUserLocation}</p>
                 <div className={"grid place-content-center"}>
                     {viewingUserIsThisUser ? (
