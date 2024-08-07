@@ -25,6 +25,7 @@ import ViewEvent from "./pages/ViewEvent.jsx";
 import {ProtectedRoutes} from "./components/ProtectedRoutes.jsx";
 import {useEffect, useState} from "react";
 import {getCurrentUser, isAuthenticated} from "./service/AuthService.js";
+import {UserRedirect} from "./pages/user/UserRedirect.jsx";
 
 
 const App = () => {
@@ -51,7 +52,7 @@ const App = () => {
                     {/* users */}
                     <Route path={"allusers"} element={<ViewAllUsers />} />
                     <Route path={"viewuser/:id"} element={<ViewUserById />} />
-                    <Route path={"user"} element={<AccountPage />} /> {/*TODO: make this a redirect */}
+                    <Route path={"user"} element={<UserRedirect />} />
                     <Route path={"user/:id"} element={<AccountPage />} />
                     <Route path={"user/:id/edit"} element={<UserEdit />} />
                     {/* dogs */}
