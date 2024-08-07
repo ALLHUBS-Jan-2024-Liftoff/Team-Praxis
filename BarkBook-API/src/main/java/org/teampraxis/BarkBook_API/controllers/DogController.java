@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController // combines ResponseBody and Controller annotation. Used in restful web services. Automatically  converts return value of the methods to JSON
 @RequestMapping("/api/dog")
-@CrossOrigin(origins = "http://localhost:5173")
 public class DogController {
 
     @Autowired

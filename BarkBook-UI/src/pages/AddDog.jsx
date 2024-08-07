@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createNewDog } from '../service/DogService';
+import {getCurrentUser} from "../service/UserService.js";
 
 export default function AddDog() {
 
@@ -21,7 +22,8 @@ export default function AddDog() {
         e.preventDefault();
         try {
           await createNewDog(dogName, dogAge, breed, weight);  // post the dog obj
-          navigate('/user'); // navigate back to /user after submission
+          const currentUser = await getCurrentUser(); // this is a temp implementation TODO: make /user redirect on its own
+          navigate(`/user/${currentUser.id}`); // navigate back to /user after submission
         } catch (error) {
           console.error("Error submitting form:", error); // handle error 
         }

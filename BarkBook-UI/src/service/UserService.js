@@ -1,43 +1,36 @@
-import axios from "axios";
+import axiosInstance from "../config/AxiosConfig.js";
 
-const BASEAPIURL = "http://localhost:8080/api";
-
-export const createNewUser = async (email, username, password, verifyPassword) => {
-    const response = await axios.post(`${BASEAPIURL}/newUser`, null, {
-        params: {
-            email,
-            username,
-            password,
-            verifyPassword
-        },
-    });
-    return response.data;
-};
+const BASEPATH = "/api/user";
 
 export const getAllUsers = async () => {
-    const response = await axios.get(`${BASEAPIURL}/getUser/all`);
+    const response = await axiosInstance.get(`${BASEPATH}/get/all`);
     return response.data;
 };
+
+export const getCurrentUser = async () => {
+    const response = await axiosInstance.get(`${BASEPATH}/get/me`);
+    return response.data;
+}
 
 export const getUserById = async (id) => {
-    const response = await axios.get(`${BASEAPIURL}/getUser/${id}`)
+    const response = await axiosInstance.get(`${BASEPATH}/get/${id}`)
     return response.data;
 };
 
-export const updateUserById = async (id, username, password, verifyPassword) => {
-    const response = await axios.put(`${BASEAPIURL}/updateUser`, null, {
+export const updateUserById = async (id, displayName, currentPassword, newPassword, verifyNewPassword) => {
+    const response = await axiosInstance.put(`${BASEPATH}/update`, null, {
         params: {
             id,
-            username,
-            password,
-            verifyPassword
+            displayName,
+            currentPassword,
+            newPassword,
+            verifyNewPassword
         },
     });
-
     return response.data;
 };
 
 export const deleteUserById = async (id) => {
-    const response = await axios.delete(`${BASEAPIURL}/deleteUser/${id}`);
+    const response = await axiosInstance.delete(`${BASEPATH}/delete/${id}`);
     return response.data;
 };

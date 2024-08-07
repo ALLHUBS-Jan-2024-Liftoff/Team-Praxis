@@ -1,30 +1,30 @@
-import axios from "axios";
+import axiosInstance from "../config/AxiosConfig.js";
 
-const BASEAPIURL = "http://localhost:8080/api/event";
+const BASEPATH = "/api/event";
 
 export const createNewEvent = async (name, location, date, description) => {
     const event = { name, location, date, description };
-    const response = await axios.post(`${BASEAPIURL}/create-event`, event);
+    const response = await axiosInstance.post(`${BASEPATH}/create-event`, event);
     return response.data;
 }
 
 export const getAllEvents = async () => {
-    const response = await axios.get(`${BASEAPIURL}`)
+    const response = await axiosInstance.get(`${BASEPATH}`)
     return response.data;
 }
 
 export const getEventById = async (id) => {
-    const response = await axios.get(`${BASEAPIURL}/${id}`)
+    const response = await axiosInstance.get(`${BASEPATH}/${id}`)
     return response.data;
 }
 
 export const updateEventById = async (id, name, location, date, description) => {
     const event = { id, name, location, date, description };
-    const response = await axios.put(`${BASEAPIURL}/${id}`, event)
+    const response = await axiosInstance.put(`${BASEPATH}/${id}`, event)
     return response.data;
 }
 
 export const deleteEventById = async (id) => {
-    const response = await axios.delete(`${BASEAPIURL}/${id}`)
+    const response = await axiosInstance.delete(`${BASEPATH}/${id}`)
     return response.data;
 }

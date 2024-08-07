@@ -1,30 +1,30 @@
-import axios from "axios";
+import axiosInstance from "../config/AxiosConfig.js";
 
-const BASEAPIURL = "http://localhost:8080/api/dog";
+const BASEPATH = "/api/dog";
 
 export const createNewDog = async (dogName, dogAge, breed, weight) => {
     const dog = { dogName, dogAge, breed, weight };
-    const response = await axios.post(`${BASEAPIURL}/add-dog`, dog)
+    const response = await axiosInstance.post(`${BASEPATH}/add-dog`, dog)
     return response.data;
 }
 
 export const getAllDogs = async () => {
-    const response = await axios.get(`${BASEAPIURL}`)
+    const response = await axiosInstance.get(`${BASEPATH}`)
     return response.data;
 }
 
 export const getDogById = async (id) => {
-    const response = await axios.get(`${BASEAPIURL}/${id}`)
+    const response = await axiosInstance.get(`${BASEPATH}/${id}`)
     return response.data;
 }
 
 export const updateDogById = async (id, dogName, dogAge, breed, weight) => {
     const dog = { id, dogName, dogAge, breed, weight };
-    const response = await axios.put(`${BASEAPIURL}/${id}`, dog)
+    const response = await axiosInstance.put(`${BASEPATH}/${id}`, dog)
     return response.data;
 }
 
 export const deleteDogById = async (id) => {
-    const response = await axios.delete(`${BASEAPIURL}/${id}`)
+    const response = await axiosInstance.delete(`${BASEPATH}/${id}`)
     return response.data;
 }
