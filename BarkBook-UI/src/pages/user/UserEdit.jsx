@@ -29,7 +29,7 @@ const UserEdit = () => {
             setEmail(result.email);
         }
         getUser();
-    }, [id, navigate]);
+    }, [id]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -97,7 +97,7 @@ const UserEdit = () => {
                         <div className={"flex flex-col items-center p-7"}>
                             <Link
                                 className="bg-red-700 hover:bg-red-600 text-gray-100 font-bold text-sm py-1 px-2 rounded-md"
-                                to="/allusers">Cancel</Link>
+                                to="/user">Cancel</Link>
                         </div>
                     </form>
                     <div className={"flex flex-col items-center p-16"}>
@@ -109,7 +109,7 @@ const UserEdit = () => {
                     </div>
                 </div>
             ) : (
-                <Navigate to={"/"}/>
+                <Navigate to={"/user"}/>
             )}
         </>
     )

@@ -52,6 +52,7 @@ const UserLogin = () => {
                     </div>
                 </form>
                 <div className={"flex items-center p-2"}>
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <label className={"text-sm text-gray-600 p-2"} htmlFor={"login"}>Don't have an account yet?</label>
                     <Link
                         className="bg-green-600 hover:bg-green-500 text-gray-100 font-bold text-sm py-1 px-2 rounded-md"

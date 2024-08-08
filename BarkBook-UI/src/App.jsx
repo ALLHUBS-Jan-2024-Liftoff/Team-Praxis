@@ -7,14 +7,12 @@ import {
 import {MainLayout} from "./layouts/MainLayout.jsx";
 import {HomePage} from "./pages/HomePage.jsx";
 import {AboutPage} from "./pages/AboutPage.jsx";
-import UserLogin from "./pages/user/UserLogin.jsx"
-import UserRegister from "./pages/user/UserRegister.jsx"
+import UserLogin from "./pages/Auth/UserLogin.jsx"
+import UserRegister from "./pages/Auth/UserRegister.jsx"
 import CreateEventForm from "./pages/CreateEventForm.jsx";
 import AddDog from './pages/AddDog.jsx';
-import ViewAllUsers from "./pages/user/temp/ViewAllUsers.jsx";
 import UserEdit from "./pages/user/UserEdit.jsx";
-import ViewUserById from "./pages/user/temp/ViewUserById.jsx";
-import {AccountPage} from "./pages/AccountPage.jsx";
+import {UserProfile} from "./pages/user/UserProfile.jsx";
 import {MapContainer} from "./api/google/MapContainer.jsx";
 import ViewDog from './pages/ViewDog.jsx';
 import EditDog from './pages/EditDog.jsx';
@@ -25,7 +23,7 @@ import ViewEvent from "./pages/ViewEvent.jsx";
 import {ProtectedRoutes} from "./components/ProtectedRoutes.jsx";
 import {useEffect, useState} from "react";
 import {getCurrentUser, isAuthenticated} from "./service/AuthService.js";
-import {UserRedirect} from "./pages/user/UserRedirect.jsx";
+import {UserProfileRedirect} from "./pages/user/UserProfileRedirect.jsx";
 
 
 const App = () => {
@@ -50,10 +48,8 @@ const App = () => {
 
                 <Route element={<ProtectedRoutes user={user}/>} >
                     {/* users */}
-                    <Route path={"allusers"} element={<ViewAllUsers />} />
-                    <Route path={"viewuser/:id"} element={<ViewUserById />} />
-                    <Route path={"user"} element={<UserRedirect />} />
-                    <Route path={"user/:id"} element={<AccountPage />} />
+                    <Route path={"user"} element={<UserProfileRedirect />} />
+                    <Route path={"user/:id"} element={<UserProfile />} />
                     <Route path={"user/:id/edit"} element={<UserEdit />} />
                     {/* dogs */}
                     <Route path={"add-dog"} element={<AddDog />} />

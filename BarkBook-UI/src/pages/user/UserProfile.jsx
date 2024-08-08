@@ -1,12 +1,12 @@
-import {DynamicTable} from "../components/DynamicTable.jsx";
+import {DynamicTable} from "../../components/DynamicTable.jsx";
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {getCurrentUser, isAuthenticated} from "../service/AuthService.js";
-import {getUserById} from "../service/UserService.js";
-import axiosInstance from "../config/AxiosConfig.js";
+import {getCurrentUser, isAuthenticated} from "../../service/AuthService.js";
+import {getUserById} from "../../service/UserService.js";
+import axiosInstance from "../../config/AxiosConfig.js";
 
-export const AccountPage = () => {
+export const UserProfile = () => {
 
     const {id} = useParams();
 

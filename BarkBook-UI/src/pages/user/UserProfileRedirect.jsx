@@ -2,7 +2,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {getCurrentUser} from "../../service/AuthService.js";
 
-export const UserRedirect = () => {
+export const UserProfileRedirect = () => {
     const location = useLocation()
     const navigate = useNavigate();
 
