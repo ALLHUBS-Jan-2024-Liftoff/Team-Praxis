@@ -1,11 +1,17 @@
 package org.teampraxis.BarkBook_API.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.teampraxis.BarkBook_API.exceptions.DogNotFoundException;
 import org.teampraxis.BarkBook_API.models.Dog;
 import org.teampraxis.BarkBook_API.repositories.DogRepository;
+import org.teampraxis.BarkBook_API.service.StorageService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController // combines ResponseBody and Controller annotation. Used in restful web services. Automatically  converts return value of the methods to JSON
@@ -14,6 +20,9 @@ public class DogController {
 
     @Autowired
     private DogRepository dogRepository;
+
+    @Autowired
+    private StorageService service;
 
 
     // Used for adding a dog to database
@@ -34,11 +43,6 @@ public class DogController {
                 .orElseThrow(() -> new DogNotFoundException(id));
     }
 
-//    @GetMapping("/user/edit-dog/{id}")
-//    public Dog getEditDogById(@PathVariable Integer id) {
-//        return dogRepository.findById(id)
-//                .orElseThrow(() -> new DogNotFoundException(id));
-//    }
 
     // used for editing specific data dog by id
     @PutMapping("/{id}")
@@ -62,4 +66,19 @@ public class DogController {
         dogRepository.deleteById(id);
         return  "Dog with id "+id+" has been deleted successfully.";
     }
+
+
+    // used to upload image
+//    @PostMapping
+//    public ResponseEntity<?> uploadImage (@RequestParam("image")MultipartFile file) throws IOException {
+//        String uploadImage = service.uploadImage(file); // calls the service method & sets it equal to a local variable
+//        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);  // returns a 200 OK http response & sets the response body to the value of uploadImage
+//    }
+//
+//    // used to display the image
+//    @GetMapping
+//    public ResponseEntity<?> downloadImage (@PathVariable String fileName) {
+//        byte[] image = service.downloadImage(fileName); // calls service method & sets it equal to the byte array
+//        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);    // MediaType is dynamic, can add more later
+//    }
 }
