@@ -7,8 +7,8 @@ import {
 import {MainLayout} from "./layouts/MainLayout.jsx";
 import {HomePage} from "./pages/HomePage.jsx";
 import {AboutPage} from "./pages/AboutPage.jsx";
-import UserLogin from "./pages/Auth/UserLogin.jsx"
-import UserRegister from "./pages/Auth/UserRegister.jsx"
+import UserLogin from "./pages/auth/UserLogin.jsx"
+import UserRegister from "./pages/auth/UserRegister.jsx"
 import CreateEventForm from "./pages/CreateEventForm.jsx";
 import AddDog from './pages/AddDog.jsx';
 import UserEdit from "./pages/user/UserEdit.jsx";
