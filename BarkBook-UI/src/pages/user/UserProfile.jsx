@@ -1,13 +1,13 @@
-import {DynamicTable} from "../components/DynamicTable.jsx";
+import {DynamicTable} from "../../components/DynamicTable.jsx";
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
-import {getCurrentUser, isAuthenticated} from "../service/AuthService.js";
-import {getUserById} from "../service/UserService.js";
-import {getAllDogs} from "../service/DogService.js";
-import {getAllEvents} from "../service/EventService.js";
+import {getCurrentUser, isAuthenticated} from "../../service/AuthService.js";
+import {getUserById} from "../../service/UserService.js";
+import {getAllDogs} from "../../service/DogService.js";
+import {getAllEvents} from "../../service/EventService.js";
 
 
-export const AccountPage = () => {
+export const UserProfile = () => {
 
     const {id} = useParams();
     const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ export const AccountPage = () => {
         setViewingUser(getCurrentUser())
     }, []);
 
-    // if the logged in user owns this page, and can see "edit" button
+    // if the logged-in user owns this page, and can see "edit" button
     useEffect(() => {
         if (thisUser && viewingUser && thisUser.id === viewingUser.id) {
             setViewingUserIsThisUser(true);

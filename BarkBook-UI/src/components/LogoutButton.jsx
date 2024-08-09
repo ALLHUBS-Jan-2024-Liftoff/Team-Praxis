@@ -1,6 +1,6 @@
-import {useAuth} from "../../../AuthContext.jsx";
+import {useAuth} from "../AuthContext.jsx";
 
-export const UserLogout = () => {
+export const LogoutButton = () => {
 
     const {logout} = useAuth();
 
