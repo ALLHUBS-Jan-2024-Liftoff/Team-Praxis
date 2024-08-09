@@ -25,7 +25,7 @@ import ViewEvent from "./pages/ViewEvent.jsx";
 import {ProtectedRoutes} from "./components/ProtectedRoutes.jsx";
 import {useEffect, useState} from "react";
 import {getCurrentUser, isAuthenticated} from "./service/AuthService.js";
-import AddImage from './pages/Image.jsx';
+import AddImage from './pages/UploadImage.jsx';
 
 
 const App = () => {

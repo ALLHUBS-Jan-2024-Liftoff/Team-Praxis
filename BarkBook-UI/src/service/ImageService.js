@@ -11,8 +11,7 @@ export const uploadImage = async (file) => {
             'Content-Type': 'multipart/form-data', // Set the content type for file uploads
         },
     });
-    console.log(response)
-    console.log(response.data)
+
     return response.data;
 
 
