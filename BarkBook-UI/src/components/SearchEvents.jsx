@@ -1,35 +1,18 @@
-import testEventDataBig from "/src/assets/test-data/testEventDataBig.json";
 import {useEffect, useState} from "react";
 import {DynamicTable} from "./DynamicTable.jsx";
+import {getAllEvents} from "../service/EventService.js";
 
-
-// TODO: plug backend data in here, or as prop on component
-const useEventData = () => {
-
-    // once data is loaded externally, uncomment the next line and delete the one with the test data
-    // const [data, setData] = useState(null);
-    const [data, setData] = useState(testEventDataBig);
-
-    useEffect(() => {
-        if(!testEventDataBig) return;
-
-        setData(testEventDataBig);
-
-    }, []);
-
-    return data;
-}
 
 export const SearchEvents = () => {
 
     const [loading, setLoading] = useState(true);
-    const [eventData, setEventData] = useState(useEventData());
-    const [fields, setFields] = useState([]);
+    const [eventData, setEventData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [fields, setFields] = useState([]);
     const [selectedSearchField, setSelectedSearchField] = useState(fields[0] || "name");
 
     useEffect(() => {
-        if (eventData.length === 0) return;
+        if (!eventData || eventData.length === 0) return;
 
         setFields(Object.keys(eventData[0]));
 
@@ -41,6 +24,18 @@ export const SearchEvents = () => {
         setLoading(false);
 
     }, [eventData, fields]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const gotEvents = await getAllEvents();
+                setEventData(gotEvents);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchEvents();
+    }, []);
 
 
     const handleTermChange = e => {
@@ -78,7 +73,8 @@ export const SearchEvents = () => {
                                 checked={selectedSearchField === field}
                                 onChange={handleFieldChange}
                             />
-                            <label htmlFor={field} className={"px-1"}>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+                            <label htmlFor={field}
+                                   className={"px-1"}>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
                         </div>
                     ))}
                 </fieldset>
@@ -97,7 +93,7 @@ export const SearchEvents = () => {
     const searchResults = () => {
         if (filteredEvents.length !== 0) {
             return (
-                <DynamicTable data={filteredEvents}/>
+                <DynamicTable data={filteredEvents} type={"event"}/>
             )
         }
         return (
@@ -106,9 +102,7 @@ export const SearchEvents = () => {
     }
 
     if (loading) {
-        return (
-            <>Loading...</>
-        )
+        return <>Loading...</>;
     }
 
     return (
@@ -117,16 +111,7 @@ export const SearchEvents = () => {
                 {searchBar()}
             </div>
             <section>
-                {eventData.length === 0 ? (
-                    <p className={"grid justify-center p-3"}>Loading...</p>
-                ) : (
-                    <>
-                        <div className={"flex justify-center"}>
-                            <h1>Results</h1>
-                        </div>
-                        {searchResults()}
-                    </>
-                )}
+                {searchResults()}
             </section>
         </search>
     )

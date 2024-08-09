@@ -10,8 +10,6 @@ export const ProtectedRoutes = ({
     if (!user) {
         if (!isAuthenticated()) {
             return <Navigate to={redirectPath} replace/>;
-        } else {
-            return <Navigate to={"/"} replace/>
         }
     }
 
