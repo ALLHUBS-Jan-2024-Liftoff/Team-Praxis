@@ -12,7 +12,7 @@ import org.teampraxis.BarkBook_API.service.StorageService;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/api/image")
 public class ImageController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class ImageController {
     @PostMapping
     public ResponseEntity<?> uploadImage (@RequestParam("image") MultipartFile file) throws IOException {
         String uploadImage = service.uploadImage(file); // calls the service method & sets it equal to a local variable
-        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);  // returns a 200 OK http response & sets the response body to the value of uploadImage
+        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);  // returns a 200 OK http response & body response value of uploadImage
     }
 
     // used to display the image

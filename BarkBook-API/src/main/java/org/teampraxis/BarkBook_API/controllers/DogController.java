@@ -9,10 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.teampraxis.BarkBook_API.exceptions.DogNotFoundException;
 import org.teampraxis.BarkBook_API.models.Dog;
 import org.teampraxis.BarkBook_API.repositories.DogRepository;
+import org.teampraxis.BarkBook_API.repositories.ImageRepository;
 import org.teampraxis.BarkBook_API.service.StorageService;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController // combines ResponseBody and Controller annotation. Used in restful web services. Automatically  converts return value of the methods to JSON
 @RequestMapping("/api/dog")
@@ -23,6 +26,27 @@ public class DogController {
 
     @Autowired
     private StorageService service;
+
+    @Autowired
+    private ImageRepository imageRepository;
+
+
+    // because we need to return both Dog and the image, use ResponseEntity for flexibility
+//    @PostMapping("/add-dog")
+//    public ResponseEntity<Map<String, Object>> addDog (@RequestParam(value = "image") MultipartFile file, @RequestBody Dog reqDog) throws IOException {
+//        // need to use a HashMap to store BOTH uploadImage string and Dog object
+//        // this may complicate things on the front end
+//        Map<String, Object> response = new HashMap<>();
+//
+//        String uploadImage = service.uploadImage(file);
+//        response.put("uploadedImage", uploadImage);
+//
+//        // saves dog details, required by default & added to response
+//        Dog savedDog = dogRepository.save(reqDog);
+//        response.put("savedDog", savedDog);
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(response);
+//    }
 
 
     // Used for adding a dog to database
@@ -66,19 +90,4 @@ public class DogController {
         dogRepository.deleteById(id);
         return  "Dog with id "+id+" has been deleted successfully.";
     }
-
-
-    // used to upload image
-//    @PostMapping
-//    public ResponseEntity<?> uploadImage (@RequestParam("image")MultipartFile file) throws IOException {
-//        String uploadImage = service.uploadImage(file); // calls the service method & sets it equal to a local variable
-//        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);  // returns a 200 OK http response & sets the response body to the value of uploadImage
-//    }
-//
-//    // used to display the image
-//    @GetMapping
-//    public ResponseEntity<?> downloadImage (@PathVariable String fileName) {
-//        byte[] image = service.downloadImage(fileName); // calls service method & sets it equal to the byte array
-//        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);    // MediaType is dynamic, can add more later
-//    }
 }

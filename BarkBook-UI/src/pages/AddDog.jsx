@@ -12,15 +12,23 @@ export default function AddDog() {
     const [breed, setBreed] = useState("");
     const [weight, setWeight] = useState("");
 
+    // const [image, setImage] = useState(null);
+
 
     const handleDogName = e => setDogName(e.target.value);
     const handleDogAge = e => setDogAge(e.target.value);
     const handleBreed = e => setBreed(e.target.value);
     const handleWeight = e => setWeight(e.target.value);
 
+    // target.files is specfically for file types
+    // const handleImage = e => setImage(e.target.files[0]);
+
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
+            // NEED TO ADD IMAGES HERE
+            // const result = await uploadImage(image);
+            // setUploadStatus(result);
           await createNewDog(dogName, dogAge, breed, weight);  // post the dog obj
           const currentUser = await getCurrentUser(); // this is a temp implementation TODO: make /user redirect on its own
           navigate(`/user/${currentUser.id}`); // navigate back to /user after submission
@@ -45,13 +53,12 @@ export default function AddDog() {
                         </label>
                         <div className="mt-2">
                             <input
-                                id="dogImage"
-                                name="dogImage"
+                                id="image"
+                                name="image"
                                 type="file"
                                 accept="image/png, image/jpeg"
-                                // will need to change this to dogImage
-                                value={dogName}
-                                onChange={onInput}  
+                                value={image}
+                                onChange={handleImage}  
                                 className="block w-3/4 rounded-md border-2"/>
                         </div>
                     </div> */}

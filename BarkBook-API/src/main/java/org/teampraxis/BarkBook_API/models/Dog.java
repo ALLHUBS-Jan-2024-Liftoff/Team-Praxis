@@ -1,17 +1,24 @@
 package org.teampraxis.BarkBook_API.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 public class Dog {
     @Id
     @GeneratedValue
     private int id;
+
+    @Setter
+    @Getter
+    @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL)
+    private List<Image> image;
 
     private Dog() {}
 
@@ -28,11 +35,12 @@ public class Dog {
     @NotNull(message = "Enter your dogs weight")
     private int weight;
 
-    public Dog(String dogName, Integer dogAge, String breed, Integer weight) {
+    public Dog(String dogName, Integer dogAge, String breed, Integer weight, List<Image> images) {
         this.dogName = dogName;
         this.dogAge = dogAge;
         this.breed = breed;
         this.weight = weight;
+        this.image = images;
     }
 
     public int getId() {
@@ -70,4 +78,6 @@ public class Dog {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+
 }

@@ -23,6 +23,11 @@ public class Image {
     private String type;
 
     @Lob    // specifies DB should store the property as a large object
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] imageData;
+
+    @ManyToOne
+    @JoinColumn(name = "dog_id")
+    private Dog dog;
 
 }

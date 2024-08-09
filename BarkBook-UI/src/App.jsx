@@ -25,6 +25,7 @@ import ViewEvent from "./pages/ViewEvent.jsx";
 import {ProtectedRoutes} from "./components/ProtectedRoutes.jsx";
 import {useEffect, useState} from "react";
 import {getCurrentUser, isAuthenticated} from "./service/AuthService.js";
+import AddImage from './pages/Image.jsx';
 
 
 const App = () => {
@@ -65,6 +66,7 @@ const App = () => {
                     {/* misc */}
                     <Route index element={<HomePage />} />
                     <Route path={"map"} element={<MapContainer />} />
+                    <Route path={"/image"} element={<AddImage />} />
                 </Route>
             </Route>
         )
