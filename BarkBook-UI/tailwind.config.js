@@ -1,3 +1,5 @@
+import {fontFamily} from "tailwindcss/defaultTheme";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,7 +9,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'sans-serif']
+        // sans: ['Roboto', 'sans-serif']
+        heading: ['var(--font-heading)', ...fontFamily.sans],
+        body: ['var(--font-body)', ...fontFamily.mono]
       },
     },
   },

@@ -9,7 +9,7 @@ export const LogoutButton = () => {
     };
 
     return (
-        <button className={"text-black bg-gray-200 hover:text-white hover:bg-black"} onClick={handleSubmit}>
+        <button className={"text-sm text-gray-700"} onClick={handleSubmit}>
             Logout
         </button>
     );
