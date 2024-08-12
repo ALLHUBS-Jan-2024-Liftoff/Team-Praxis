@@ -23,6 +23,7 @@ import ViewEvent from "./pages/ViewEvent.jsx";
 import {ProtectedRoutes} from "./components/ProtectedRoutes.jsx";
 import {useEffect, useState} from "react";
 import {getCurrentUser, isAuthenticated} from "./service/AuthService.js";
+import AddImage from './pages/UploadImage.jsx';
 import {UserProfileRedirect} from "./pages/user/UserProfileRedirect.jsx";
 
 
@@ -62,6 +63,7 @@ const App = () => {
                     {/* misc */}
                     <Route index element={<HomePage />} />
                     <Route path={"map"} element={<MapContainer />} />
+                    <Route path={"/image"} element={<AddImage />} />
                 </Route>
             </Route>
         )

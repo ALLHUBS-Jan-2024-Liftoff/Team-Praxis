@@ -4,29 +4,36 @@ import { createNewDog } from '../service/DogService';
 
 
 export default function AddDog() {
-
     let navigate = useNavigate();
 
-    const [dogName, setDogName] = useState("");
-    const [dogAge, setDogAge] = useState("");
-    const [breed, setBreed] = useState("");
-    const [weight, setWeight] = useState("");
+    const [dogName, setDogName] = useState('');
+    const [dogAge, setDogAge] = useState('');
+    const [breed, setBreed] = useState('');
+    const [weight, setWeight] = useState('');
 
-    const handleDogName = e => setDogName(e.target.value);
-    const handleDogAge = e => setDogAge(e.target.value);
-    const handleBreed = e => setBreed(e.target.value);
-    const handleWeight = e => setWeight(e.target.value);
+    // const [image, setImage] = useState(null);
+
+    const handleDogName = (e) => setDogName(e.target.value);
+    const handleDogAge = (e) => setDogAge(e.target.value);
+    const handleBreed = (e) => setBreed(e.target.value);
+    const handleWeight = (e) => setWeight(e.target.value);
+
+    // target.files is specfically for file types
+    // const handleImage = e => setImage(e.target.files[0]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-          await createNewDog(dogName, dogAge, breed, weight);  // post the dog obj
-          navigate(`/user`); // navigate back to /user after submission
+            // NEED TO ADD IMAGES HERE
+            // const result = await uploadImage(image);
+            // setUploadStatus(result);
+            await createNewDog(dogName, dogAge, breed, weight); // post the dog obj
+            navigate(`/user`); // navigate back to /user after submission
         } catch (error) {
-          console.error("Error submitting form:", error); // handle error 
+            console.error('Error submitting form:', error); // handle error
         }
     };
-    
+
     return (
         <form onSubmit={onSubmit}>
             <h5 className="text-base font-semibold leading-7 flex justify-center text-2xl">
@@ -34,6 +41,24 @@ export default function AddDog() {
             </h5>
             <div className="border-b border-gray-900/10 pb-12 flex justify-center">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    {/* <div className="col-span-full">
+                        <label
+                            htmlFor="dogImage"
+                            className="block text-sm font-medium leading-6 text-gray-900">
+                            Upload an image of your dog (only png/jpeg)
+                        </label>
+                        <div className="mt-2">
+                            <input
+                                id="image"
+                                name="image"
+                                type="file"
+                                accept="image/png, image/jpeg"
+                                value={image}
+                                onChange={handleImage}  
+                                className="block w-3/4 rounded-md border-2"/>
+                        </div>
+                    </div> */}
+
                     <div className="sm:col-span-3">
                         <label
                             htmlFor="dogName"
@@ -47,7 +72,7 @@ export default function AddDog() {
                                 name="dogName"
                                 type="text"
                                 value={dogName}
-                                onChange={handleDogName}  
+                                onChange={handleDogName}
                                 className="block w-3/4 rounded-md border-2"
                             />
                         </div>
@@ -87,8 +112,7 @@ export default function AddDog() {
                                 value={breed}
                                 onChange={handleBreed}
                                 className="block rounded-md border-2"
-                            >
-                            </input>
+                            ></input>
                         </div>
                     </div>
 
