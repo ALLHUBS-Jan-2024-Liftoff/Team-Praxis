@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +13,11 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "user")
+@Data   // shortcut for setters and getters, reduces code
+@NoArgsConstructor // shortcut for empty constructor, reduces code
+@AllArgsConstructor // shortcut for constructors, reduces code
+@Builder    // create instances of this class with an API
 public class User implements UserDetails {
 
     @Id
@@ -31,25 +37,12 @@ public class User implements UserDetails {
     @Size(max = 120)
     private String password;
 
-    public User() {}
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Dog> dogs;
 
-    public User(String email, String displayName, String password) {
-        this.email = email;
-        this.displayName = displayName;
-        this.password = password;
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Event> events;
 
-    public int getId() {
-        return id;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
 
     public @NotBlank @Size(max = 20) @Email String getEmail() {
         return email;
@@ -59,13 +52,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     // UserDetails Overrides for Spring Security
 

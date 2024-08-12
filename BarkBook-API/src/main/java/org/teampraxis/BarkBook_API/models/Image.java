@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.net.SocketOption;
 
 @Entity
-@Table(name = "Images")
+@Table(name = "images")
 @Data   // shortcut for setters and getters, reduces code
 @NoArgsConstructor // shortcut for empty constructor, reduces code
 @AllArgsConstructor // shortcut for constructors, reduces code
