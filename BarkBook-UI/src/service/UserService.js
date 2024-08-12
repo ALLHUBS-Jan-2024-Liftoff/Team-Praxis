@@ -7,7 +7,7 @@ export const getAllUsers = async () => {
     return response.data;
 };
 
-export const getCurrentUser = async () => {
+export const fetchCurrentUser = async () => {
     const response = await axiosInstance.get(`${BASEPATH}/get/me`);
     return response.data;
 }

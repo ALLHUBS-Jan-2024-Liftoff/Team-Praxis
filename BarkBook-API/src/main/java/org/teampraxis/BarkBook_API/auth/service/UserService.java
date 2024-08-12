@@ -38,23 +38,28 @@ public class UserService {
 
         User user = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Could not find user with id: " + id));
 
-        if (currentPassword == null || currentPassword.isBlank()
-                || newPassword == null || newPassword.isBlank()) {
-            throw new IllegalArgumentException("Passwords cannot be blank");
+        if (currentPassword == null || currentPassword.isBlank()) {
+            throw new IllegalArgumentException("Current Password cannot be blank");
         }
 
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
             throw new IllegalArgumentException("'Current Password' incorrect");
         }
 
-        if (newPassword.equals(verifyNewPassword)) {
-            String hashedPassword = passwordEncoder.encode(newPassword);
+        // if no new password, update only display name
+        if (newPassword == null || newPassword.isBlank()) {
             user.setDisplayName(displayName);
-            user.setPassword(hashedPassword);
-
             return userRepository.save(user);
         } else {
-            throw new IllegalArgumentException("Passwords do not match");
+            if (newPassword.equals(verifyNewPassword)) {
+                String hashedPassword = passwordEncoder.encode(newPassword);
+                user.setDisplayName(displayName);
+                user.setPassword(hashedPassword);
+
+                return userRepository.save(user);
+            } else {
+                throw new IllegalArgumentException("New Password and Verify do not match");
+            }
         }
     }
 

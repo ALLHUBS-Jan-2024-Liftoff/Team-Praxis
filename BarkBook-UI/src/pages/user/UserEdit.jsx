@@ -14,11 +14,17 @@ const UserEdit = () => {
     const [email, setEmail] = useState("");
     const [displayName, setDisplayName] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
+    const [changePassword, setChangePassword] = useState(false);
     const [newPassword, setNewPassword] = useState("");
     const [verifyNewPassword, setVerifyNewPassword] = useState("");
 
     const handleDisplayName = e => setDisplayName(e.target.value);
     const handleCurrentPassword = e => setCurrentPassword(e.target.value);
+    const handleChangePassword = e => {
+        setChangePassword(e.target.checked);
+        setNewPassword("");
+        setVerifyNewPassword("");
+    }
     const handleNewPassword = e => setNewPassword(e.target.value);
     const handleVerify = e => setVerifyNewPassword(e.target.value);
 
@@ -29,18 +35,22 @@ const UserEdit = () => {
             setEmail(result.email);
         }
         getUser();
-    }, [id, navigate]);
+    }, [id]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (!newPassword.length > 0) {
-            window.alert("Password cannot be blank")
-        } else {
-            const confirmed = window.confirm("Are you sure you want to update your account?");
-            if (confirmed) {
-                await updateUserById(id, displayName, currentPassword, newPassword, verifyNewPassword); // returns user object
-                navigate(`/user/${id}`);
-            }
+        if (!currentPassword.length > 0) {
+            window.alert("Must enter 'Current Password'")
+            return;
+        }
+        if (changePassword && newPassword !== verifyNewPassword) {
+            window.alert("'New Password' and 'Verify' must match")
+            return;
+        }
+        const confirmed = window.confirm("Are you sure you want to update your account?");
+        if (confirmed) {
+            await updateUserById(id, displayName, currentPassword, newPassword, verifyNewPassword); // returns user object
+            navigate(`/user/${id}`);
         }
     }
 
@@ -75,18 +85,32 @@ const UserEdit = () => {
                                        className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
                                        onChange={handleCurrentPassword}/>
                             </div>
-                            <div className={"flex flex-col items-center p-2"}>
-                                <label htmlFor={"newPassword"} className={"text-gray-200"}>New Password</label>
-                                <input type="password" id={"newPassword"}
-                                       className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
-                                       onChange={handleNewPassword}/>
+
+                            <div className={"flex flex-row justify-center p-2"}>
+                                <input type={"checkbox"} id={"changePassword"} className={"px-2"}
+                                       onClick={handleChangePassword}/>
+                                <label htmlFor={"changePassword"} className={"text-gray-200 px-2"}>Change
+                                    Password?</label>
                             </div>
-                            <div className={"flex flex-col items-center p-2"}>
-                                <label htmlFor={"verifyNewPassword"} className={"text-gray-200"}>Verify New Password</label>
-                                <input type="password" id={"verifyNewPassword"}
-                                       className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
-                                       onChange={handleVerify}/>
-                            </div>
+
+                            {changePassword ? (
+                                <>
+                                    <div className={"flex flex-col items-center p-2"}>
+                                        <label htmlFor={"newPassword"} className={"text-gray-200"}>New Password</label>
+                                        <input type="password" id={"newPassword"}
+                                               className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
+                                               onChange={handleNewPassword}/>
+                                    </div>
+                                    <div className={"flex flex-col items-center p-2"}>
+                                        <label htmlFor={"verifyNewPassword"} className={"text-gray-200"}>Verify New
+                                            Password</label>
+                                        <input type="password" id={"verifyNewPassword"}
+                                               className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
+                                               onChange={handleVerify}/>
+                                    </div>
+                                </>
+                            ) : (<></>)}
+
                             <div className={"flex flex-col items-center p-2"}>
                                 <button
                                     className="bg-green-600 hover:bg-green-500 text-gray-200 font-bold py-2 px-4 rounded"
@@ -97,7 +121,7 @@ const UserEdit = () => {
                         <div className={"flex flex-col items-center p-7"}>
                             <Link
                                 className="bg-red-700 hover:bg-red-600 text-gray-100 font-bold text-sm py-1 px-2 rounded-md"
-                                to="/allusers">Cancel</Link>
+                                to="/user">Cancel</Link>
                         </div>
                     </form>
                     <div className={"flex flex-col items-center p-16"}>
@@ -109,7 +133,7 @@ const UserEdit = () => {
                     </div>
                 </div>
             ) : (
-                <Navigate to={"/"}/>
+                <Navigate to={"/user"}/>
             )}
         </>
     )
