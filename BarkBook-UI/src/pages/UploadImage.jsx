@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { uploadImage } from '../service/ImageService';
-import { getCurrentUser } from '../service/UserService';
 import { useNavigate } from 'react-router-dom';
 
 export default function AddImage() {
@@ -17,8 +16,7 @@ export default function AddImage() {
         try {
             const result = await uploadImage(image);
             setUploadStatus(result);
-            const currentUser = await getCurrentUser();
-            navigate(`/user/${currentUser.id}`);
+            navigate(`/user`);
         } catch (error) {
             console.error('Error uploading image:', error);
             setUploadStatus('Failed to upload');
