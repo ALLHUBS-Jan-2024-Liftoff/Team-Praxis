@@ -40,8 +40,14 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Dog> dogs;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Event> events;
+    // for user who created the event
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    private List<Event> createdEvents;
+
+    // for user who attends events
+    @ManyToMany
+    @JoinTable(name="user_event", joinColumns = @JoinColumn(name = "user_id"))
+    private List<Event> attendingEvents;
 
 
     public @NotBlank @Size(max = 20) @Email String getEmail() {

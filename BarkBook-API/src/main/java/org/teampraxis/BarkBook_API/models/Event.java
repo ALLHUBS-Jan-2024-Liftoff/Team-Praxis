@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
@@ -36,8 +37,13 @@ public class Event {
     @Size(max = 500, message = "Description is too long!")
     private String description;
 
+    // for user who created event
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "creator_id")
+    private User creator;
+
+    // for users attending event
+    @ManyToMany(mappedBy = "attendingEvents")
+    private List<User> attendees;
 
 }
