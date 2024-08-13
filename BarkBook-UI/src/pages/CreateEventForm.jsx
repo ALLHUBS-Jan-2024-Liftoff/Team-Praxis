@@ -122,6 +122,7 @@ const CreateEventForm = () => {
                   rows={4}
                   cols={35}
                   className="block rounded-md border-2"
+                  placeholder="Enter text here..."
                 />
               </div>
             </div>

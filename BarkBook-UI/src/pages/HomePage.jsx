@@ -6,7 +6,7 @@ export const HomePage = () => {
         <>
             <br/>
             <div className={"flex place-content-around"}>
-                <button className="bg-sky-500 hover:bg-sky-700">
+                <button className="bg-amber-900 hover:bg-amber-600 text-white font-medium px-3 py-2 text-sm rounded-md">
                     Add a Dog!
                 </button>
             </div>

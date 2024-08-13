@@ -5,6 +5,7 @@ import { LogoutButton } from "./LogoutButton";
 import { useEffect, useState } from "react";
 import { getCurrentUser, isAuthenticated } from "../service/AuthService";
 
+
 // edit and add destinations as needed, for now
 // setting `valid` to false means it will not render in the navbar
 const destinations = [
@@ -80,7 +81,7 @@ const Navbar = () => {
                         to={item.path}
                         aria-current={item.valid ? 'page' : undefined}
                         className={classNames(
-                          item.valid ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          item.valid ? 'bg-amber-900 text-white' : 'text-brown hover:bg-amber-900 hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium',
                         )}
                       >

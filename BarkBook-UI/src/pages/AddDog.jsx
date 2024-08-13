@@ -35,6 +35,15 @@ export default function AddDog() {
     };
 
     return (
+    <div>
+        <section className="w-full bg-primary py-20 px-4 md:px-6">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h1 className="text-3xl font-bold text-primary-foreground sm:text-5xl">Add Your Furry Friend!</h1>
+          <p className="mt-4 text-lg text-primary-foreground">
+          Tell us about your dog!
+          </p>
+        </div>
+      </section>
         <form onSubmit={onSubmit}>
             <h5 className="text-base font-semibold leading-7 flex justify-center text-2xl">
                 Enter your dog information
@@ -155,5 +164,6 @@ export default function AddDog() {
                 </Link>
             </div>
         </form>
+    </div>
     );
 }
