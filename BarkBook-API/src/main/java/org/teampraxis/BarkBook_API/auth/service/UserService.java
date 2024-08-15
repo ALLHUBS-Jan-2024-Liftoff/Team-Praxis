@@ -1,6 +1,8 @@
 package org.teampraxis.BarkBook_API.auth.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.teampraxis.BarkBook_API.models.User;
@@ -28,6 +30,13 @@ public class UserService {
     public User getUserById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found: " + id));
+    }
+
+    public User getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+        currentUser.setPassword(null);
+        return currentUser;
     }
 
     public User updateUser(int id,
