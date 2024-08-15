@@ -2,8 +2,6 @@ package org.teampraxis.BarkBook_API.controllers;
 
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.auth.service.UserService;
@@ -37,9 +35,7 @@ public class UserController {
     // TODO: implement this into front end so that user object needn't be stored in client localStorage
     @GetMapping("/get/me")
     public ResponseEntity<User> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User) authentication.getPrincipal();
-        currentUser.setPassword(null);
+        User currentUser = userService.getAuthenticatedUser();
         return ResponseEntity.ok(currentUser);
     }
 
