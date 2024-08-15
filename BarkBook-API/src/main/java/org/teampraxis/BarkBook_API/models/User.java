@@ -41,12 +41,12 @@ public class User implements UserDetails {
     private List<Dog> dogs;
 
     // for user who created the event
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "creator")
     private List<Event> createdEvents;
 
     // for user who attends events
     @ManyToMany
-    @JoinTable(name="user_event", joinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name="user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
     private List<Event> attendingEvents;
 
 
