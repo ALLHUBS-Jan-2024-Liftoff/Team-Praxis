@@ -7,7 +7,7 @@ const destinations = [
     {name: 'about', path: '/about', valid: true},
     {name: 'create-event', path: '/create-event', valid: true},
     {name: 'add-dog', path: '/add-dog', valid: true},
-    {name: 'map test', path: '/map', valid: true},
+    {name: 'places', path: '/save-places', valid: true},
     {name: 'user stuff', path: '/userstuff', valid: true},
 ]
 

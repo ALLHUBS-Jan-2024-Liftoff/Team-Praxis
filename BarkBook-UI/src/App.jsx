@@ -13,7 +13,6 @@ import CreateEventForm from "./pages/CreateEventForm.jsx";
 import AddDog from './pages/AddDog.jsx';
 import UserEdit from "./pages/user/UserEdit.jsx";
 import {UserProfile} from "./pages/user/UserProfile.jsx";
-import {MapContainer} from "./api/google/MapContainer.jsx";
 import ViewDog from './pages/ViewDog.jsx';
 import EditDog from './pages/EditDog.jsx';
 import {AuthProvider} from "./AuthContext.jsx";
@@ -25,6 +24,8 @@ import {useEffect, useState} from "react";
 import {getCurrentUser, isAuthenticated} from "./service/AuthService.js";
 import AddImage from './pages/UploadImage.jsx';
 import {UserProfileRedirect} from "./pages/user/UserProfileRedirect.jsx";
+import {SavePlaces} from "./pages/maps/SavePlaces.jsx";
+import {ViewPlace} from "./pages/maps/ViewPlace.jsx";
 
 
 const App = () => {
@@ -62,7 +63,8 @@ const App = () => {
                     <Route path={"/event/edit/:id"} element={<EditEvent />} />
                     {/* misc */}
                     <Route index element={<HomePage />} />
-                    <Route path={"map"} element={<MapContainer />} />
+                    <Route path={"save-places"} element={<SavePlaces />} />
+                    <Route path={"view-places"} element={<ViewPlace />} />
                     <Route path={"/image"} element={<AddImage />} />
                 </Route>
             </Route>
