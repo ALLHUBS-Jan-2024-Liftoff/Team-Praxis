@@ -9,12 +9,12 @@ import { getCurrentUser, isAuthenticated } from "../service/AuthService";
 // edit and add destinations as needed, for now
 // setting `valid` to false means it will not render in the navbar
 const destinations = [
-    {name: 'home', path: '/', valid: true},
-    {name: 'about', path: '/about', valid: true},
-    {name: 'create-event', path: '/create-event', valid: true},
-    {name: 'add-dog', path: '/add-dog', valid: true},
-    {name: 'places', path: '/save-places', valid: true},
-    {name: 'user stuff', path: '/userstuff', valid: true},
+    {name: 'Home', path: '/', valid: true},
+    {name: 'About', path: '/about', valid: true},
+    // {name: 'create-event', path: '/create-event', valid: true},
+    // {name: 'add-dog', path: '/add-dog', valid: true},
+    {name: 'Places', path: '/save-places', valid: true},
+    // {name: 'user stuff', path: '/userstuff', valid: true},
 ]
 
 function classNames(...classes) {
