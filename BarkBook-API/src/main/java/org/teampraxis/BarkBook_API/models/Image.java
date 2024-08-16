@@ -6,9 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.net.SocketOption;
-import java.util.Set;
-
 @Entity
 @Table(name = "images")
 @Data   // shortcut for setters and getters, reduces code

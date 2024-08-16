@@ -1,7 +1,6 @@
 package org.teampraxis.BarkBook_API.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +8,7 @@ import org.teampraxis.BarkBook_API.exceptions.EventNotFoundException;
 import org.teampraxis.BarkBook_API.models.Event;
 import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.repositories.EventRepository;
-import org.teampraxis.BarkBook_API.util.EventService;
+import org.teampraxis.BarkBook_API.service.EventService;
 
 import java.util.List;
 

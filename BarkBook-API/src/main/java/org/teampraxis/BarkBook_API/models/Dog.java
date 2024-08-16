@@ -1,5 +1,6 @@
 package org.teampraxis.BarkBook_API.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,8 +37,9 @@ public class Dog {
     @NotNull(message = "Enter your dogs weight")
     private int weight;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JsonBackReference // basically prevents recursion issue. manages reversed part of the reference that does not get serialised
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
 }

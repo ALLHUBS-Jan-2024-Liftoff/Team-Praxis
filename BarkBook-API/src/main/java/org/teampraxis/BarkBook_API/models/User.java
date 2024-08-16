@@ -43,8 +43,9 @@ public class User implements UserDetails {
     @JsonManagedReference // basically prevents recursion issue. manages forward part of the reference that gets serialised
     private List<Event> createdEvents;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<Dog> dogs;
+    @OneToMany(mappedBy = "owner")
+    @JsonManagedReference
+    private List<Dog> dogs;
 
     // for user who attends events
 //    @ManyToMany
