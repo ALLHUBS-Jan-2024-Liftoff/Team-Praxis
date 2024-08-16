@@ -33,57 +33,59 @@ export default function ViewDog() {
     };
 
     return (
-        <div className='container'>
-            <div className='row'>
-                <div className='col-md-6 offset-md-3 border round p-4 mt-2 shadow'>
-                    <h1 className='text-center text-2xl'>Dog Details</h1>
+        <div>
+            <div className='p-4 mt-2'>
+                <div className='border rounded-lg p-4 mt-2 shadow-md'>
+                    <h1 className='text-center text-3xl font-bold text-primary-foreground sm:text-5xl'>Dog Details</h1>
 
-                    <div className='card'>
+                    <div className='text-center p-7'>
                         <div className='card-header'>
-                            <ul className='list-group list-group-flush'>
-                                <li className='list-group-item'>
+                            <ul className='text-lg'>
+                                <li className=''>
                                     <b>Name: </b>
                                     {dogName}
                                 </li>
-                                <li className='list-group-item'>
+                                <li className=''>
                                     <b>Age: </b>
                                     {dogAge}                                    
                                 </li>
-                                <li className='list-group-item'>
+                                <li className=''>
                                     <b>Breed: </b>
                                     {breed}                                    
                                 </li>
-                                <li className='list-group-item'>
+                                <li className=''>
                                     <b>Weight (Pounds): </b>
                                     {weight}
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div className='flex justify-center'>
+                    <div className='flex space-x-3 justify-center'>
                         <Link 
-                        className='btn btn-primary my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500' 
-                            to={"/user"}>
+                            className='my-2 rounded-md bg-blue-500 hover:bg-blue-900 px-3 py-3 text-sm font-semibold text-white' 
+                            to={"/user"}
+                        >
                                 Back to user
                         </Link>
-                    </div>
 
-                    <div className='flex justify-center'>
-                        <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-green-500'
-                            to={`/dog/edit/${id}`}>
+                        <Link 
+                            className='my-2 rounded-md bg-green-500 hover:bg-green-900 px-3 py-3 text-sm font-semibold text-white '
+                            to={`/dog/edit/${id}`}
+                        >
                                 Edit
                         </Link>
-                    </div>
 
-                    <div className='flex justify-center'>
-                        <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500' 
+                        <Link 
+                            className='my-2 rounded-md bg-red-500 hover:bg-red-900 px-3 py-3 text-sm font-semibold text-white ' 
                             onClick={() => deleteDog(id)} 
-                            to="/user">
+                            to="/user"
+                        >
                                 Delete
                         </Link>
                     </div>
                 </div>
             </div>
+            <div className="text-center p-3">Cute dog photo here :)</div>
         </div>
     )
 }

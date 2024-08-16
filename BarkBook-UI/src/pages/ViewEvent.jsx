@@ -32,16 +32,28 @@ export default function ViewEvent() {
         }
     };
 
-    return (
-        <div className='container'>
-            <div className='row'>
-                <div className='col-md-6 offset-md-3 border round p-4 mt-2 shadow'>
-                    <h1 className='text-center text-2xl'>Event Details</h1>
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        });
+    };
 
-                    <div className='card'>
+    return (
+        <div>
+            <div className='p-4 mt-2'>
+                <div className='border rounded-lg p-4 mt-2 shadow-md'>
+                    <h1 className='text-center text-3xl font-bold text-primary-foreground sm:text-5xl'>Event Details</h1>
+
+                    <div className='text-center p-7'>
                         <div className='card-header'>
-                            <ul className='list-group list-group-flush'>
-                                <li className='list-group-item'>
+                            <ul className='text-lg'>
+                                <li className=''>
                                     <b>Name: </b>
                                     {name}
                                 </li>
@@ -51,7 +63,7 @@ export default function ViewEvent() {
                                 </li>
                                 <li className='list-group-item'>
                                     <b>Date: </b>
-                                    {date}                                    
+                                    {formatDate(date)}                                    
                                 </li>
                                 <li className='list-group-item'>
                                     <b>Description: </b>
@@ -60,29 +72,33 @@ export default function ViewEvent() {
                             </ul>
                         </div>
                     </div>
-                    <div className='flex justify-center'>
+                    <div className='flex space-x-3 justify-center'>
                         <Link 
-                        className='btn btn-primary my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500' 
-                            to={"/user"}>
+                            className='my-2 rounded-md bg-blue-500 hover:bg-blue-900 px-3 py-3 text-sm font-semibold text-white' 
+                            to={"/user"}
+                        >
                                 Back to user
                         </Link>
-                    </div>
 
-                    <div className='flex justify-center'>
-                        <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-green-500'
-                            to={`/event/edit/${id}`}>
+                        <Link 
+                            className='my-2 rounded-md bg-green-500 hover:bg-green-900 px-3 py-3 text-sm font-semibold text-white '
+                            to={`/event/edit/${id}`}
+                        >
                                 Edit
                         </Link>
-                    </div>
 
-                    <div className='flex justify-center'>
-                        <Link className='btn my-2 rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500' 
+                        <Link 
+                            className='my-2 rounded-md bg-red-500 hover:bg-red-900 px-3 py-3 text-sm font-semibold text-white ' 
                             onClick={() => deleteEvent(id)} 
-                            to="/user">
+                            to="/user"
+                        >
                                 Delete
                         </Link>
                     </div>
                 </div>
+            </div>
+            <div className="text-center p-3">
+                MAP HERE :)
             </div>
         </div>
     )

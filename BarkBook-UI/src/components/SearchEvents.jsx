@@ -50,10 +50,7 @@ export const SearchEvents = () => {
     const searchBar = () => {
         return (
             <form className={"grid"}>
-                <legend
-                    className={"text-sm font-bold mb-2"}
-                >Search For events
-                </legend>
+                <legend className={"text-sm font-bold mb-2"}>Search For events</legend>
                 <input
                     className={"w-auto px-3 py-3 rounded-md border-2 focus:border-blue-500"}
                     type={"search"}
@@ -61,7 +58,7 @@ export const SearchEvents = () => {
                     onChange={handleTermChange}
                     id={"searchBar"}
                 />
-                <legend className={"p-1 mt-2 text-sm font-bold"}>Choose search field</legend>
+                <legend className={"p-3 mt-2 text-sm font-bold"}>Choose search field</legend>
                 <fieldset className={"flex"}>
                     {fields.map((field, index) => (
                         <div className={"px-1"} key={index}>
@@ -74,7 +71,10 @@ export const SearchEvents = () => {
                                 onChange={handleFieldChange}
                             />
                             <label htmlFor={field}
-                                   className={"px-1"}>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+                                   className={"px-1"}
+                                >
+                                    {field.charAt(0).toUpperCase() + field.slice(1)}
+                            </label>
                         </div>
                     ))}
                 </fieldset>

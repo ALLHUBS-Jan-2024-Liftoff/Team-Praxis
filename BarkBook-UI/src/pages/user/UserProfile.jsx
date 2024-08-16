@@ -71,13 +71,12 @@ export const UserProfile = () => {
 
     return (
         <>
-            <br/>
-            <div className={"flex justify-center"}>
-                <h1 className={"font-bold p-4"}>{thisDisplayName}</h1>
-                <p className={"p-4"}>{thisUserLocation}</p>
-                <div className={"grid place-content-center"}>
+            <div className="flex justify-center p-4">
+                <h1 className="font-bold p-4">{thisDisplayName}</h1>
+                <p className="p-4">{thisUserLocation}</p>
+                <div className="grid place-content-center">
                     {viewingUserIsThisUser ? (
-                        <Link className="bg-green-600 hover:bg-green-500 text-gray-100 font-bold py-2 px-4 rounded"
+                        <Link className="bg-green-500 hover:bg-green-800 text-white font-bold px-3 py-2 rounded"
                               to={`/user/${thisUser.id}/edit`}>Edit</Link>
                     ) : (
                         <></>
@@ -86,8 +85,8 @@ export const UserProfile = () => {
             </div>
 
             <br/>
-            <div className={"flex place-content-around"}>
-                <h1 className={"underline font-bold"}>My Dogs</h1>
+            <div className="flex place-content-around">
+                <h1 className=" font-bold text-lg">My Dogs</h1>
                 <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-4 rounded" to="/add-dog">
                     Add a Dog!
                 </Link>
@@ -95,8 +94,8 @@ export const UserProfile = () => {
             <DynamicTable data={dogs} type="dog"/>
 
             <br/>
-            <div className={"flex place-content-around"}>
-                <h1 className={"underline font-bold"}>My Events</h1>
+            <div className="flex place-content-around">
+                <h1 className="font-bold text-lg">My Events</h1>
                 <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-4 rounded" to="/create-event">
                     Find Events!
                 </Link>

@@ -48,15 +48,6 @@ export const DynamicTable = (props) => {
         });
     };
 
-    const openModal = (item) => {
-        setSelectedItem(item);
-        setIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
     const generateTable = () => {
         return (
             <>
