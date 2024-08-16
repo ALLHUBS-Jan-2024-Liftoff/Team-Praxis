@@ -1,5 +1,6 @@
 package org.teampraxis.BarkBook_API.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -39,6 +40,7 @@ public class User implements UserDetails {
 
     // for user who created the event
     @OneToMany(mappedBy = "creator")
+    @JsonManagedReference // basically prevents recursion issue. manages forward part of the reference that gets serialised
     private List<Event> createdEvents;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

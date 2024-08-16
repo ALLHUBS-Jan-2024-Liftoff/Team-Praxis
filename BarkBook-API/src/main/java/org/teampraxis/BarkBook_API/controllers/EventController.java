@@ -1,11 +1,14 @@
 package org.teampraxis.BarkBook_API.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.teampraxis.BarkBook_API.exceptions.EventNotFoundException;
 import org.teampraxis.BarkBook_API.models.Event;
+import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.repositories.EventRepository;
-import org.teampraxis.BarkBook_API.repositories.UserRepository;
 import org.teampraxis.BarkBook_API.util.EventService;
 
 import java.util.List;
@@ -22,15 +25,11 @@ public class EventController {
     private EventService eventService;
 
 
-    // original
-//    @PostMapping("/create-event")
-//    public Event newEvent(@RequestBody Event newEvent) {
-//        return eventRepository.save(newEvent);
-//    }
-
+    // @AuthenticationPrincipal ensures it gets the authenticated current user
     @PostMapping("/create-event")
-    public Event newEvent(@RequestParam Integer userId, @RequestBody Event newEvent) {
-        return eventService.newEvent(userId, newEvent);
+    public ResponseEntity<?> createEvent(@AuthenticationPrincipal User currentUser, @RequestBody Event newEvent) {
+        Event createdEvent = eventService.createEvent(currentUser.getId(), newEvent);
+        return ResponseEntity.ok(createdEvent);
     }
 
      @GetMapping

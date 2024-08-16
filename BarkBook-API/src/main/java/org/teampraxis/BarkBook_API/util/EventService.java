@@ -1,5 +1,7 @@
 package org.teampraxis.BarkBook_API.util;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.teampraxis.BarkBook_API.auth.service.UserService;
@@ -19,25 +21,13 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    @Autowired
-    private UserService userService;
+   // sets current user creating an event to creator id
+    public Event createEvent(Integer userId, Event event) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found: " + userId));
+        event.setCreator(user);
+        return eventRepository.save(event);
+    }
 
-   // this code is used if you want to handle user in the backend
-//
-//    public Event createEvent(Integer userId, Event event) {
-//        // Logic to associate the event with the userId
-//        event.setUserId(userId); // Assuming your Event entity has a userId field
-//        return eventRepository.save(event);
-//    }
-
-
-
-
-// this code is used if you want to handle userId on the frontend
-//    public Event newEvent (Integer userId, Event newEvent) {
-//        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-//        newEvent.setCreator(user);
-//        return eventRepository.save(newEvent);
-//    }
 
 }

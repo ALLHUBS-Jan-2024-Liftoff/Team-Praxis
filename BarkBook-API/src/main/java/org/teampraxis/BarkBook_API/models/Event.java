@@ -1,5 +1,6 @@
 package org.teampraxis.BarkBook_API.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,6 +40,7 @@ public class Event {
 
     // for user who created event
     @ManyToOne
+    @JsonBackReference // basically prevents recursion issue. manages reversed part of the reference that does not get serialised
     @JoinColumn(name = "creator_id")
     private User creator;
 
