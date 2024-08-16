@@ -25,14 +25,22 @@ public class PlaceController {
     }
 
     @GetMapping("/get/all")
-    public ResponseEntity<List<Place>> getAllPlaces() {
-        List<Place> places = placeService.getAllPlaces();
+    public ResponseEntity<List<PlaceDTO>> getAllPlaces() {
+        List<PlaceDTO> places = placeService.getAllPlaces();
         return ResponseEntity.ok(places);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get/id/{id}")
     public ResponseEntity<PlaceDTO> getPlaceById(@PathVariable Long id) {
         PlaceDTO response = placeService.getPlaceDtoById(id);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/get/place-id")
+    public ResponseEntity<PlaceDTO> getPlaceByPlaceId(@RequestBody String placeId) {
+        PlaceDTO response = placeService.getPlaceDtoByPlaceId(placeId);
+        return ResponseEntity.ok(response);
+    }
+
+
 }

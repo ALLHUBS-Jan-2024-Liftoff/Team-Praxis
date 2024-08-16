@@ -34,12 +34,24 @@ public class PlaceService {
         }
     }
 
-    public List<Place> getAllPlaces() {
-        return new ArrayList<>(placeRepository.findAll());
+    public List<PlaceDTO> getAllPlaces() {
+        ArrayList<Place> places = new ArrayList<>(placeRepository.findAll());
+        ArrayList<PlaceDTO> placeDTOs = new ArrayList<>(places.size());
+        places.forEach(
+                place -> placeDTOs.add(convertToDto(place))
+        );
+        System.out.println(placeDTOs);
+        return placeDTOs;
     }
 
     public PlaceDTO getPlaceDtoById(Long id) {
         Place place = placeRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
+        return convertToDto(place);
+    }
+
+    public PlaceDTO getPlaceDtoByPlaceId(String placeId) {
+        Place place = placeRepository.findByPlaceId(placeId)
                 .orElseThrow(NoSuchElementException::new);
         return convertToDto(place);
     }
