@@ -43,7 +43,7 @@ public class Event {
     private User creator;
 
     // for users attending event
-    @ManyToMany(mappedBy = "attendingEvents")
-    private List<User> attendees;
+//    @ManyToMany(mappedBy = "attendingEvents")
+//    private List<User> attendees;
 
 }

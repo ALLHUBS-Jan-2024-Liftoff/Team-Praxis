@@ -21,10 +21,16 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+
+    // original
+//    @PostMapping("/create-event")
+//    public Event newEvent(@RequestBody Event newEvent) {
+//        return eventRepository.save(newEvent);
+//    }
+
     @PostMapping("/create-event")
     public Event newEvent(@RequestParam Integer userId, @RequestBody Event newEvent) {
         return eventService.newEvent(userId, newEvent);
-                //eventRepository.save(newEvent);
     }
 
      @GetMapping

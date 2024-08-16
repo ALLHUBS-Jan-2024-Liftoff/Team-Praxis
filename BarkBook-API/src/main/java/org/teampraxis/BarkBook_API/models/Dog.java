@@ -36,8 +36,8 @@ public class Dog {
     @NotNull(message = "Enter your dogs weight")
     private int weight;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
 }

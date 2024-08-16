@@ -37,17 +37,17 @@ public class User implements UserDetails {
     @Size(max = 120)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Dog> dogs;
-
     // for user who created the event
     @OneToMany(mappedBy = "creator")
     private List<Event> createdEvents;
 
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Dog> dogs;
+
     // for user who attends events
-    @ManyToMany
-    @JoinTable(name="user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
-    private List<Event> attendingEvents;
+//    @ManyToMany
+//    @JoinTable(name="user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+//    private List<Event> attendingEvents;
 
 
     public @NotBlank @Size(max = 20) @Email String getEmail() {
