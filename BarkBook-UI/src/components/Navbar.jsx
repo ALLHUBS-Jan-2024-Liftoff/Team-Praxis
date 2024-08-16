@@ -9,19 +9,17 @@ import { getCurrentUser, isAuthenticated } from "../service/AuthService";
 // edit and add destinations as needed, for now
 // setting `valid` to false means it will not render in the navbar
 const destinations = [
-    {name: 'Home', path: '/', valid: false},
-    {name: 'About', path: '/about', valid: false},
-    // {name: 'Create Event', path: '/create-event', valid: false},
-    // {name: 'Add Dog', path: '/add-dog', valid: false},
-    {name: 'Map', path: '/map', valid: false},
-    // {name: 'Account', path: '/userstuff', valid: false},
+    {name: 'home', path: '/', valid: true},
+    {name: 'about', path: '/about', valid: true},
+    {name: 'create-event', path: '/create-event', valid: true},
+    {name: 'add-dog', path: '/add-dog', valid: true},
+    {name: 'places', path: '/save-places', valid: true},
+    {name: 'user stuff', path: '/userstuff', valid: true},
 ]
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
-
-
+  return classes.filter(Boolean).join(' ')
+}
 
 // TODO: make navbar sticky
 const Navbar = () => {
