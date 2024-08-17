@@ -51,8 +51,8 @@ export const DynamicTable = (props) => {
     const generateTable = () => {
         return (
             <>
-                <table className="w-full text-sm text-left rtl:text-right text-amber-500 dark:text-amber-700">
-                    <thead className="text-xs text-amber-700 uppercase bg-amber-50 dark:bg-amber-100 dark:text-amber-700">
+                <table className="w-full text-sm text-left rtl:text-right text-amber-700">
+                    <thead className="text-xs uppercase border-b border-amber-500 bg-amber-100">
                         <tr>
                             {columns.map((column, index) => (
                                 <th key={index} className={"text-left px-6 py-3"}>
@@ -67,7 +67,7 @@ export const DynamicTable = (props) => {
                     <tbody>
                     {data.map((item, index) => (
                         <tr key={index}
-                            className="odd:bg-white odd:dark:bg-amber-100 even:bg-amber-100 even:dark:bg-amber-100 border-b dark:border-amber-500">
+                            className="bg-amber-100 border-b border-amber-500">
                             {columns.map((column, colIndex) => (
                                 <td key={colIndex} className="text-left px-6 py-4">
                                     {column.toLowerCase().includes('date') || column.toLowerCase().includes('time')
@@ -112,7 +112,7 @@ export const DynamicTable = (props) => {
     }
 
     return (
-        <div className={"container h-64 w-auto overflow-scroll overscroll-auto mx-auto"}>
+        <div className={"container h-64 w-auto no-scrollbar mx-auto overflow-auto"}>
             <div className={"relative overflow-x-auto shadow-md sm:rounded-lg"}>
                 {data ? (<>{generateTable()}</>) : (<></>)}
             </div>

@@ -72,40 +72,40 @@ const UserEdit = () => {
                         <span className={"font-normal"}> {email}</span>
                     </h2>
                     <form onSubmit={(e) => onSubmit(e)}>
-                        <div className={"grid grid-cols-1 border border-gray-400 rounded-lg p-4 bg-slate-700"}>
+                        <div className={"grid grid-cols-1 border border-amber-400 rounded-lg p-4 bg-amber-100"}>
                             <div className={"flex flex-col items-center p-2"}>
-                                <label htmlFor={"displayName"} className={"text-gray-200"}>New Display Name</label>
+                                <label htmlFor={"displayName"} className={"text-black"}>New Display Name</label>
                                 <input type="text" value={displayName} id={"displayName"}
-                                       className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
+                                       className={"p-2 border-2 border-amber-400 rounded-md bg-white text-black focus:outline-none focus:border-amber-500"}
                                        onChange={handleDisplayName}/>
                             </div>
                             <div className={"flex flex-col items-center p-2"}>
-                                <label htmlFor={"currentPassword"} className={"text-gray-200"}>Current Password</label>
+                                <label htmlFor={"currentPassword"} className={"text-black"}>Current Password</label>
                                 <input type="password" id={"currentPassword"}
-                                       className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
+                                       className={"p-2 border-2 border-amber-400 rounded-md bg-white text-black focus:outline-none focus:border-amber-500"}
                                        onChange={handleCurrentPassword}/>
                             </div>
 
                             <div className={"flex flex-row justify-center p-2"}>
                                 <input type={"checkbox"} id={"changePassword"} className={"px-2"}
                                        onClick={handleChangePassword}/>
-                                <label htmlFor={"changePassword"} className={"text-gray-200 px-2"}>Change
+                                <label htmlFor={"changePassword"} className={"text-black px-2"}>Change
                                     Password?</label>
                             </div>
 
                             {changePassword ? (
                                 <>
                                     <div className={"flex flex-col items-center p-2"}>
-                                        <label htmlFor={"newPassword"} className={"text-gray-200"}>New Password</label>
+                                        <label htmlFor={"newPassword"} className={"text-black"}>New Password</label>
                                         <input type="password" id={"newPassword"}
-                                               className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
+                                               className={"p-2 border-2 border-amber-400 rounded-md bg-white text-black focus:outline-none focus:border-amber-500"}
                                                onChange={handleNewPassword}/>
                                     </div>
                                     <div className={"flex flex-col items-center p-2"}>
-                                        <label htmlFor={"verifyNewPassword"} className={"text-gray-200"}>Verify New
+                                        <label htmlFor={"verifyNewPassword"} className={"text-black"}>Verify New
                                             Password</label>
                                         <input type="password" id={"verifyNewPassword"}
-                                               className={"p-2 border-0 border-slate-400 rounded-md bg-slate-900 text-gray-400 focus:outline-none"}
+                                               className={"p-2 border-2 border-amber-400 rounded-md bg-white text-black focus:outline-none focus:border-amber-500"}
                                                onChange={handleVerify}/>
                                     </div>
                                 </>
@@ -113,20 +113,20 @@ const UserEdit = () => {
 
                             <div className={"flex flex-col items-center p-2"}>
                                 <button
-                                    className="bg-green-600 hover:bg-green-500 text-gray-200 font-bold py-2 px-4 rounded"
+                                    className="bg-amber-400 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded"
                                     type="submit" value="Submit">Submit
                                 </button>
                             </div>
                         </div>
                         <div className={"flex flex-col items-center p-7"}>
                             <Link
-                                className="bg-red-700 hover:bg-red-600 text-gray-100 font-bold text-sm py-1 px-2 rounded-md"
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold text-sm py-1 px-2 rounded-md"
                                 to="/user">Cancel</Link>
                         </div>
                     </form>
-                    <div className={"flex flex-col items-center p-16"}>
+                    <div className={"flex flex-col items-center p-5"}>
                         <button
-                            className="bg-red-700 hover:bg-red-600 text-gray-100 font-bold text-sm py-1 px-2 rounded-md"
+                            className="bg-red-500 hover:bg-red-700 text-white font-bold text-sm py-1 px-2 rounded-md"
                             onClick={() => deleteUser(id)}
                         >DELETE ACCOUNT
                         </button>
