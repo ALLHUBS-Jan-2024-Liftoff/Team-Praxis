@@ -37,7 +37,7 @@ export const SavePlaces = () => {
             <div className={"grid place-content-center"}>
                 <div className={"p-1 grid place-content-center"}>
                     <Link to={"/view-places"}
-                          className="bg-green-600 hover:bg-green-500 text-gray-200 font-bold rounded-md w-auto p-1"
+                          className="bg-green-600 hover:bg-green-500 text-white font-bold rounded w-auto p-1"
                     >
                         View saved places
                     </Link>
@@ -50,7 +50,7 @@ export const SavePlaces = () => {
                             <br/>
                             <Link target={"_blank"}
                                   to={chosenPlace.googleMapsURI}
-                                  className={"rounded-md bg-slate-800 text-gray-200 p-1"}
+                                  className={"bg-blue-600 hover:bg-blue-500 text-white p-1 rounded"}
                             >
                                 More Details
                             </Link>
@@ -58,7 +58,7 @@ export const SavePlaces = () => {
                         <div className={"p-1"}>
                             <form onSubmit={(e) => onSubmit(e)}>
                                 <button type={"submit"} value={"submitLocation"}
-                                        className="bg-green-600 hover:bg-green-500 text-gray-200 font-bold py-2 px-4 rounded">
+                                        className="bg-green-600 hover:bg-green-500 text-white p-1 rounded">
                                     Save this place
                                 </button>
                             </form>
@@ -82,7 +82,7 @@ export const SavePlaces = () => {
                         ) : (<></>)}
                     </APIProvider>
                     <div className={"grid place-content-center p-4"}>
-                        <h1 className={"font-bold"}>Brief instructions</h1>
+                        <h1 className={"font-bold"}>Instructions:</h1>
                         <p>Enter a location to search from, click the pin, click "choose," then save.</p>
                     </div>
                 </div>

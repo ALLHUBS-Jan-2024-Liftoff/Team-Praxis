@@ -24,7 +24,7 @@ export const MarkerWithInfoWindow = ({place, isOpen, onClick, onClose, setChoice
                     {setChoice ? (
                         <>
                             <button onClick={setChoice}
-                                    className={"rounded-md bg-slate-800 text-gray-200 p-1"}
+                                    className={"rounded-md bg-blue-700 text-white p-1"}
                             >Choose
                             </button>
                         </>

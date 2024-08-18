@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {deleteEventById} from "../service/EventService";
-import {deleteDogById} from "../service/DogService";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { deleteEventById } from "../service/EventService";
+import { deleteDogById } from "../service/DogService";
 
 
 export const DynamicTable = (props) => {
@@ -50,23 +50,23 @@ export const DynamicTable = (props) => {
     const generateTable = () => {
         return (
             <>
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        {columns.map((column, index) => (
-                            <th key={index} className={"text-left px-6 py-3"}>
-                                {column}
-                            </th>
-                        ))}
-                        {type ? (<>
-                            <th className="text-left px-6 py-3">Actions</th>
-                        </>) : (<></>)}
-                    </tr>
+                <table className="w-full text-sm text-left rtl:text-right text-amber-700">
+                    <thead className="text-xs uppercase border-b border-amber-500 bg-amber-100">
+                        <tr>
+                            {columns.map((column, index) => (
+                                <th key={index} className={"text-left px-6 py-3"}>
+                                    {column}
+                                </th>
+                            ))}
+                            {type ? (<>
+                                <th className="text-left px-6 py-3">Actions</th>
+                            </>) : (<></>)}
+                        </tr>
                     </thead>
                     <tbody>
                     {data.map((item, index) => (
                         <tr key={index}
-                            className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            className="bg-amber-100 border-b border-amber-500">
                             {columns.map((column, colIndex) => (
                                 <td key={colIndex} className="text-left px-6 py-4">
                                     {column.toLowerCase().includes('date') || column.toLowerCase().includes('time')
@@ -78,22 +78,22 @@ export const DynamicTable = (props) => {
                                 <td className="flex flex-row p-2">
                                     <Link
                                         to={`/${type}/details/${item.id}`}
-                                        className="bg-blue-500 hover:bg-blue-800 text-white p-1 mr-2 rounded"
+                                        className="bg-amber-500 hover:bg-amber-900 text-white p-1 mr-2 rounded"
                                     >
                                         View
                                     </Link>
                                     <Link
                                         to={`/${type}/edit/${item.id}`}
-                                        className="bg-green-500 hover:bg-green-800 text-white p-1 mr-2 rounded"
+                                        className="bg-green-600 hover:bg-green-900 text-white p-1 mr-2 rounded"
                                     >
                                         Edit
                                     </Link>
-                                    <button
-                                        className="bg-red-500 hover:bg-red-800 text-white p-1 mr-2 rounded"
+                                    {/* <button
+                                        className="bg-red-600 hover:bg-red-900 text-white p-1 mr-2 rounded"
                                         onClick={() => deleteEntry(item.id)}
                                     >
                                         Delete
-                                    </button>
+                                    </button> */}
                                 </td>
                             ) : (
                                 <></>
@@ -106,12 +106,13 @@ export const DynamicTable = (props) => {
         )
     }
 
+    
     if (loading) {
         return <>Loading...</>
     }
 
     return (
-        <div className={"container h-64 w-auto overflow-scroll overscroll-auto mx-auto"}>
+        <div className={"container h-64 w-auto no-scrollbar mx-auto overflow-auto"}>
             <div className={"relative overflow-x-auto shadow-md sm:rounded-lg"}>
                 {data ? (<>{generateTable()}</>) : (<></>)}
             </div>

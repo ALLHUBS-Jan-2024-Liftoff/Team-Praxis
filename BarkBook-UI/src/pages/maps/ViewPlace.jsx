@@ -37,7 +37,7 @@ export const ViewPlace = () => {
 
             <div className={"p-1 grid place-content-center"}>
                 <Link to={"/save-places"}
-                      className="bg-green-600 hover:bg-green-500 text-gray-200 font-bold rounded-md w-auto p-1">
+                      className="bg-green-600 hover:bg-green-500 text-white font-bold rounded-md w-auto p-1">
                     Save a new place
                 </Link>
             </div>
@@ -48,7 +48,7 @@ export const ViewPlace = () => {
                         {allPlaces.map((place, index) => (
                             <button key={index}
                                     onClick={() => onClick(place)}
-                                    className="bg-slate-600 hover:bg-slate-500 text-gray-200 font-bold rounded-md w-auto"
+                                    className="bg-amber-100 hover:bg-amber-200 text-black font-bold rounded-md w-auto"
                             >
                                 {place.displayName}
                             </button>

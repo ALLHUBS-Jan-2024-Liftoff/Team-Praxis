@@ -4,17 +4,15 @@ export const HomePage = () => {
 
     return (
         <>
-            <br/>
-            <div className={"flex place-content-around"}>
-                <button className="bg-sky-500 hover:bg-sky-700">
-                    Add a Dog!
-                </button>
+            <div className="">
+                <h1 className="text-3xl text-center font-bold text-primary-foreground sm:text-5xl p-3">Welcome to BarkBook!</h1>
+                <div className="text-center p-4">
+                    <SearchEvents />
+                </div>
+                <div className="grid place-content-center p-4">
+                    Map goes here
+                </div>
             </div>
-            <div>
-                <SearchEvents />
-            </div>
-            <br/>
-            <div className={"grid place-content-center"}>Map goes here</div>
         </>
     )
 }

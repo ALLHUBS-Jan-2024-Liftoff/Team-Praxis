@@ -35,6 +35,15 @@ export default function AddDog() {
     };
 
     return (
+    <div>
+        <section className="w-full bg-primary py-20 px-4 md:px-6">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h1 className="text-3xl font-bold text-primary-foreground sm:text-5xl">Add Your Furry Friend!</h1>
+          <p className="mt-4 text-lg text-primary-foreground">
+          Tell us about your dog!
+          </p>
+        </div>
+      </section>
         <form onSubmit={onSubmit}>
             <h5 className="text-base font-semibold leading-7 flex justify-center text-2xl">
                 Enter your dog information
@@ -140,7 +149,7 @@ export default function AddDog() {
             <div className="flex justify-center my-5">
                 <button
                     type="submit"
-                    className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500"
+                    className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
                 >
                     Save
                 </button>
@@ -148,12 +157,13 @@ export default function AddDog() {
 
             <div className="flex justify-center">
                 <Link
-                    className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500"
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                     to="/user"
                 >
                     Cancel
                 </Link>
             </div>
         </form>
+    </div>
     );
 }

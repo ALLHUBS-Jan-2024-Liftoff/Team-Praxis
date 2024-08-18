@@ -28,8 +28,17 @@ const CreateEventForm = () => {
   };
 
   return (
+  <div className="w-full">
+    <section className="w-full bg-primary py-20 px-4 md:px-6">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h1 className="text-3xl font-bold text-primary-foreground sm:text-5xl">Unleash the Fun at Our Dog Meetup</h1>
+          <p className="mt-4 text-lg text-primary-foreground">
+            Join fellow dog lovers for a day of play, socializing, and making new furry friends.
+          </p>
+        </div>
+      </section>
     <form onSubmit={onSubmit}>
-      <h1 className="text-base font-semibold leading-7 flex justify-center">
+      <h1 className="text-base text-3xl font-semibold leading-7 flex justify-center">
           Create A New Event
         </h1>
         <div className="border-b border-gray-900/10 pb-12 flex justify-center">
@@ -113,6 +122,7 @@ const CreateEventForm = () => {
                   rows={4}
                   cols={35}
                   className="block rounded-md border-2"
+                  placeholder="Enter text here..."
                 />
               </div>
             </div>
@@ -121,20 +131,21 @@ const CreateEventForm = () => {
       <div className="flex justify-center my-5">
         <button
           type="submit"
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
         >
           Submit
         </button>
       </div>
       <div className="flex justify-center">
         <Link
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         to="/user"
         >
           Cancel
         </Link>
       </div>
     </form>
+  </div>
   );
 };
 

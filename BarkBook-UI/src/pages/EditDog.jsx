@@ -124,7 +124,7 @@ export default function EditDog() {
             <div className="flex justify-center my-5">
                 <button
                     type="submit"
-                    className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-blue-500"
+                    className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
                 >
                     Save
                 </button>
@@ -132,7 +132,7 @@ export default function EditDog() {
 
             <div className="flex justify-center">
                 <Link
-                    className="rounded-md bg-black px-5 py-4 text-sm font-semibold text-white hover:bg-red-500"
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                     to={`/dog/details/${id}`}
                 >
                     Cancel
