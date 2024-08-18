@@ -1,15 +1,23 @@
 package org.teampraxis.BarkBook_API.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "event")
+@Data   // shortcut for setters and getters, reduces code
+@NoArgsConstructor // shortcut for empty constructor, reduces code
+@AllArgsConstructor // shortcut for constructors, reduces code
+@Builder    // create instances of this class with an API
 public class Event {
 
     @Id
@@ -29,48 +37,14 @@ public class Event {
     @Size(max = 500, message = "Description is too long!")
     private String description;
 
-    public Event(String name, String location, LocalDateTime date, String description) {
-        this.name = name;
-        this.location = location;
-        this.date = date;
-        this.description = description;
-    }
+    // for user who created event
+    @ManyToOne
+    @JsonBackReference // basically prevents recursion issue. manages reversed part of the reference that does not get serialised
+    @JoinColumn(name = "creator_id")
+    private User creator;
 
-    public Event() {}
+    // for users attending event
+//    @ManyToMany(mappedBy = "attendingEvents")
+//    private List<User> attendees;
 
-    public int getId() {
-        return id;
-    }
-
-    public @NotBlank(message = "Name of event is required.") @Size(min = 3, max = 50, message = "Name of event must be between 3 and 50 characters.") String getName() {
-        return name;
-    }
-
-    public void setName(@NotBlank(message = "Name of event is required.") @Size(min = 3, max = 50, message = "Name of event must be between 3 and 50 characters.") String name) {
-        this.name = name;
-    }
-
-    public @NotBlank(message = "Location is required.") String getLocation() {
-        return location;
-    }
-
-    public void setLocation(@NotBlank(message = "Location is required.") String location) {
-        this.location = location;
-    }
-
-    public @NotNull(message = "Event date is required.") LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(@NotNull(message = "Event date is required.") LocalDateTime date) {
-        this.date = date;
-    }
-
-    public @Size(max = 500, message = "Description is too long!") String getDescription() {
-        return description;
-    }
-
-    public void setDescription(@Size(max = 500, message = "Description is too long!") String description) {
-        this.description = description;
-    }
 }

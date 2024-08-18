@@ -1,21 +1,18 @@
 package org.teampraxis.BarkBook_API.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.teampraxis.BarkBook_API.exceptions.DogNotFoundException;
 import org.teampraxis.BarkBook_API.models.Dog;
+import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.repositories.DogRepository;
 import org.teampraxis.BarkBook_API.repositories.ImageRepository;
+import org.teampraxis.BarkBook_API.service.DogService;
 import org.teampraxis.BarkBook_API.service.StorageService;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController // combines ResponseBody and Controller annotation. Used in restful web services. Automatically  converts return value of the methods to JSON
 @RequestMapping("/api/dog")
@@ -29,6 +26,9 @@ public class DogController {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Autowired
+    private DogService dogService;
 
 
     // because we need to return both Dog and the image, use ResponseEntity for flexibility
@@ -50,10 +50,17 @@ public class DogController {
 
 
     // Used for adding a dog to database
+//    @PostMapping("/add-dog")
+//    public Dog addDog(@RequestBody Dog reqDog) {
+//        return dogRepository.save(reqDog);
+//    }
+
     @PostMapping("/add-dog")
-    public Dog addDog(@RequestBody Dog reqDog) {
-        return dogRepository.save(reqDog);
+    public ResponseEntity<?> addDog(@AuthenticationPrincipal User currentUser, @RequestBody Dog reqDog) {
+        Dog newDog = dogService.addDog(currentUser.getId(), reqDog);
+        return ResponseEntity.ok(newDog);
     }
+
 
     // both methods below used for displaying dog data
     @GetMapping
