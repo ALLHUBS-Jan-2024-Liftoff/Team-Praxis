@@ -106,6 +106,7 @@ export const DynamicTable = (props) => {
         )
     }
 
+    
     if (loading) {
         return <>Loading...</>
     }
