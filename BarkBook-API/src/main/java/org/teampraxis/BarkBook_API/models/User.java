@@ -1,9 +1,11 @@
 package org.teampraxis.BarkBook_API.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +14,11 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "user")
+@Data   // shortcut for setters and getters, reduces code
+@NoArgsConstructor // shortcut for empty constructor, reduces code
+@AllArgsConstructor // shortcut for constructors, reduces code
+@Builder    // create instances of this class with an API
 public class User implements UserDetails {
 
     @Id
@@ -31,25 +38,20 @@ public class User implements UserDetails {
     @Size(max = 120)
     private String password;
 
-    public User() {}
+    // for user who created the event
+    @OneToMany(mappedBy = "creator")
+    @JsonManagedReference // basically prevents recursion issue. manages forward part of the reference that gets serialised
+    private List<Event> createdEvents;
 
-    public User(String email, String displayName, String password) {
-        this.email = email;
-        this.displayName = displayName;
-        this.password = password;
-    }
+    @OneToMany(mappedBy = "owner")
+    @JsonManagedReference
+    private List<Dog> dogs;
 
-    public int getId() {
-        return id;
-    }
+    // for user who attends events
+//    @ManyToMany
+//    @JoinTable(name="user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+//    private List<Event> attendingEvents;
 
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
 
     public @NotBlank @Size(max = 20) @Email String getEmail() {
         return email;
@@ -59,13 +61,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     // UserDetails Overrides for Spring Security
 
