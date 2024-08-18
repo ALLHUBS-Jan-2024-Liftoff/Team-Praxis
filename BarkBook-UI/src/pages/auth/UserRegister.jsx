@@ -59,7 +59,7 @@ const UserRegister = () => {
 
                         <div className='flex flex-col items-center p-2'>
                             <button
-                                className="bg-amber-400 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded"
+                                className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
                                 type="submit" value="Register">Register
                             </button>
                         </div>

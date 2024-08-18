@@ -1,8 +1,7 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteEventById } from "../service/EventService";
 import { deleteDogById } from "../service/DogService";
-import { Dialog, Transition } from "@headlessui/react";
 
 
 export const DynamicTable = (props) => {
@@ -89,12 +88,12 @@ export const DynamicTable = (props) => {
                                     >
                                         Edit
                                     </Link>
-                                    <button
+                                    {/* <button
                                         className="bg-red-600 hover:bg-red-900 text-white p-1 mr-2 rounded"
                                         onClick={() => deleteEntry(item.id)}
                                     >
                                         Delete
-                                    </button>
+                                    </button> */}
                                 </td>
                             ) : (
                                 <></>

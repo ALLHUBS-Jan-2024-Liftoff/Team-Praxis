@@ -26,7 +26,7 @@ export const MapHeader = ({radius, radiusChange, centerChange, placesLib}) => {
     };
 
     return (
-        <div className={"bg-green-200 p-1"}>
+        <div className={"bg-amber-100 p-1"}>
             <div className={"flex p-1"}>
                 <PlacesAutocomplete onPlaceSelect={handleCenterChange}/>
             </div>

@@ -76,7 +76,7 @@ export const UserProfile = () => {
                 <p className="p-4">{thisUserLocation}</p>
                 <div className="grid place-content-center">
                     {viewingUserIsThisUser ? (
-                        <Link className="bg-green-500 hover:bg-green-800 text-white font-bold px-3 py-2 rounded"
+                        <Link className="bg-green-600 hover:bg-green-500 text-white font-bold px-2 py-1 rounded"
                               to={`/user/${thisUser.id}/edit`}>Edit</Link>
                     ) : (
                         <></>
@@ -87,7 +87,7 @@ export const UserProfile = () => {
             <br/>
             <div className="flex place-content-around">
                 <h1 className=" font-bold text-lg">My Dogs</h1>
-                <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-4 rounded" to="/add-dog">
+                <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-2 rounded" to="/add-dog">
                     Add a Dog!
                 </Link>
             </div>
@@ -96,8 +96,8 @@ export const UserProfile = () => {
             <br/>
             <div className="flex place-content-around">
                 <h1 className="font-bold text-lg">My Events</h1>
-                <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-4 rounded" to="/create-event">
-                    Find Events!
+                <Link className="bg-sky-500 hover:bg-sky-700 text-white font-bold p-1 mr-2 py-2 px-2 rounded" to="/create-event">
+                    Create an Event!
                 </Link>
             </div>
             <DynamicTable data={events} type="event"/>

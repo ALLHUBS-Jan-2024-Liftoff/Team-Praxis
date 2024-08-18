@@ -131,14 +131,14 @@ const CreateEventForm = () => {
       <div className="flex justify-center my-5">
         <button
           type="submit"
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
         >
           Submit
         </button>
       </div>
       <div className="flex justify-center">
         <Link
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         to="/user"
         >
           Cancel

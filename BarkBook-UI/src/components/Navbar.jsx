@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Disclosure, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { LogoutButton } from "./LogoutButton";
 import { useEffect, useState } from "react";
 import { getCurrentUser, isAuthenticated } from "../service/AuthService";
@@ -11,15 +10,8 @@ import { getCurrentUser, isAuthenticated } from "../service/AuthService";
 const destinations = [
     {name: 'Home', path: '/', valid: true},
     {name: 'About', path: '/about', valid: true},
-    // {name: 'create-event', path: '/create-event', valid: true},
-    // {name: 'add-dog', path: '/add-dog', valid: true},
     {name: 'Places', path: '/save-places', valid: true},
-    // {name: 'user stuff', path: '/userstuff', valid: true},
 ]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 // TODO: make navbar sticky
 const Navbar = () => {
@@ -30,26 +22,6 @@ const Navbar = () => {
         setUser(getCurrentUser())
     }, []);
 
-
-
-    // return (
-    //     <div className={"w-full h-20 flex justify-between items-center px-8 bg-amber-100"}>
-    //         <h1 className="text-2xl font-bold text-amber-600">Bark Book</h1>
-    //         <div className="insert-x-0 top-0 space-x-4">
-    //             {destinations.map((item) => (
-    //                 item.valid ? (
-    //                     <Link
-    //                         key={item.name}
-    //                         to={item.path}
-    //                         className={'px-3 text-black bg-amber-300 hover:text-white hover:bg-amber-600'}
-    //                     >
-    //                         {item.name}
-    //                     </Link>
-    //                 ) : null
-    //             ))}
-    //         </div>
-    //     </div>
-    // )
     return (
         <Disclosure as="nav" className="bg-amber-100">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -58,11 +30,12 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
+                {/* Image below if we decide to add a logo - Tailwind logo commented out as example */}
+                  {/* <img
                     alt="Your Company"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     className="h-8 w-auto"
-                  />
+                  /> */}
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -80,15 +53,7 @@ const Navbar = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* <button
-                  type="button"
-                  className="relative rounded-full bg-amber-100 p-1 text-amber-500 hover:text-amber-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon aria-hidden="true" className="h-6 w-6" />
-                </button> */}
-    
+
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
