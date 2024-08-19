@@ -24,10 +24,15 @@ public class EventService {
     }
 
    // sets current user creating an event to creator id
-    public Event createEvent(Integer userId, Event event) {
+    public Event createEvent(Integer userId, String placeId, Event event) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found: " + userId));
+        Place place = placeRepository.findByPlaceId(placeId)
+                .orElseThrow(() -> new EntityNotFoundException("Place not found: " + placeId));
         event.setCreator(user);
+        event.setPlace(place);
+        place.getEvents().add(event);
+
         return eventRepository.save(event);
     }
 
