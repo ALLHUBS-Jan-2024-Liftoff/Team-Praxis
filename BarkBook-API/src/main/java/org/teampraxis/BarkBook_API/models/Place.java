@@ -1,7 +1,11 @@
 package org.teampraxis.BarkBook_API.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Place {
@@ -25,6 +29,10 @@ public class Place {
 
     @NotNull
     private String googleMapsURI;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("place-ref")
+    private List<Event> events = new ArrayList<>();
 
     public Place() {}
 
@@ -82,5 +90,13 @@ public class Place {
 
     public void setGoogleMapsURI(@NotNull String googleMapsURI) {
         this.googleMapsURI = googleMapsURI;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

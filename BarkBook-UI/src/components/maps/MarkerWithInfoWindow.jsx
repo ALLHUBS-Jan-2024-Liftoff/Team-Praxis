@@ -21,14 +21,23 @@ export const MarkerWithInfoWindow = ({place, isOpen, onClick, onClose, setChoice
                 <InfoWindow anchor={marker} onClose={onClose}>
                     <h2>{displayName}</h2>
                     <p>Address: <span>{formattedAddress}</span></p>
-                    {setChoice ? (
-                        <>
-                            <button onClick={setChoice}
-                                    className={"rounded-md bg-blue-700 text-white p-1"}
-                            >Choose
-                            </button>
-                        </>
-                    ) : (<></>)}
+
+                        <div className={"flex items-center"}>
+                            <div className={"p-1"}>
+                                <button onClick={setChoice}
+                                        className={"bg-blue-600 hover:bg-blue-700 text-white p-1 rounded inline-flex"}
+                                >Choose
+                                </button>
+                            </div>
+                            <div className={"p-1"}>
+                                <Link target={"_blank"}
+                                      to={googleMapsURI}
+                                      className={"bg-blue-600 hover:bg-blue-700 text-white p-1 rounded inline-flex"}
+                                >
+                                    Details
+                                </Link>
+                            </div>
+                        </div>
                 </InfoWindow>
             )}
         </>

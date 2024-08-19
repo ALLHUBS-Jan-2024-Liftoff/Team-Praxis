@@ -1,16 +1,12 @@
-import {useCallback, useEffect, useRef, useState} from "react";
-import {createPlace} from "../../service/PlaceService.js";
-import {Link} from "react-router-dom";
+import {useState} from "react";
 import {APIProvider} from "@vis.gl/react-google-maps";
 import MapChoosePlace from "../../components/maps/MapChoosePlace.jsx";
 import {MapHeader} from "../../components/maps/MapHeader.jsx";
-import {PlacesAutocomplete} from "../../components/maps/PlacesAutocomplete.jsx";
 
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
-export const SavePlaces = () => {
-    const [chosenPlace, setChosenPlace] = useState(null);
+export const SavePlaces = ({onLocationChoice}) => {
     const [center, setCenter] = useState(null);
     const [radius, setRadius] = useState(5);
 
@@ -23,48 +19,14 @@ export const SavePlaces = () => {
     };
 
     const handleLocationChoice = (placeObj) => {
-        setChosenPlace(placeObj);
+        onLocationChoice(placeObj);
     };
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        await createPlace(chosenPlace);
-    }
 
 
     return (
         <>
             <div className={"grid place-content-center"}>
-                <div className={"p-1 grid place-content-center"}>
-                    <Link to={"/view-places"}
-                          className="bg-green-600 hover:bg-green-500 text-white font-bold rounded w-auto p-1"
-                    >
-                        View saved places
-                    </Link>
-                </div>
-                {chosenPlace ?
-                    (<>
-                        <h2 className={"font-bold"}>Chosen Place: </h2>
-                        <div className={"w-auto p-1"}>
-                            <span>{chosenPlace.displayName}<br/>{chosenPlace.formattedAddress}</span>
-                            <br/>
-                            <Link target={"_blank"}
-                                  to={chosenPlace.googleMapsURI}
-                                  className={"bg-blue-600 hover:bg-blue-500 text-white p-1 rounded"}
-                            >
-                                More Details
-                            </Link>
-                        </div>
-                        <div className={"p-1"}>
-                            <form onSubmit={(e) => onSubmit(e)}>
-                                <button type={"submit"} value={"submitLocation"}
-                                        className="bg-green-600 hover:bg-green-500 text-white p-1 rounded">
-                                    Save this place
-                                </button>
-                            </form>
-                        </div>
-                    </>) : (<h2 className={"font-bold"}>Choose a Location</h2>)}
-                <div style={{width: '85vw', height: '60vh'}}>
+                <div style={{width: '40vw', height: '40vh'}}>
                     <APIProvider apiKey={API_KEY}>
                         <MapHeader
                             radius={radius}
@@ -81,10 +43,6 @@ export const SavePlaces = () => {
                             </>
                         ) : (<></>)}
                     </APIProvider>
-                    <div className={"grid place-content-center p-4"}>
-                        <h1 className={"font-bold"}>Instructions:</h1>
-                        <p>Enter a location to search from, click the pin, click "choose," then save.</p>
-                    </div>
                 </div>
             </div>
         </>
