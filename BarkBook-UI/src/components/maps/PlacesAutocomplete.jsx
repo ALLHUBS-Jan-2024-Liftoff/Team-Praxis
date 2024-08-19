@@ -38,7 +38,7 @@ export const PlacesAutocomplete = ({onPlaceSelect}) => {
 
 
     return (
-        <div className={"autocomplete-container"}>
+        <div className={"autocomplete-container w-96"}>
             <input
                 ref={inputRef}
                 placeholder={"Search for a place"}
