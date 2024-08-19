@@ -28,8 +28,10 @@ public class Event {
     @Size(min = 3, max = 50, message = "Name of event must be between 3 and 50 characters.")
     private String name;
 
-    @NotBlank(message = "Location is required.")
-    private String location;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("place-ref")
+    @JoinColumn(name = "place_id")
+    private Place place;
 
     @NotNull(message = "Event date is required.")
     private LocalDateTime date;
