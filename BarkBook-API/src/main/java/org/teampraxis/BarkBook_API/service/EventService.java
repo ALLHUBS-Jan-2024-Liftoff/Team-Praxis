@@ -1,22 +1,27 @@
 package org.teampraxis.BarkBook_API.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.teampraxis.BarkBook_API.models.Event;
+import org.teampraxis.BarkBook_API.models.Place;
 import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.repositories.EventRepository;
+import org.teampraxis.BarkBook_API.repositories.PlaceRepository;
 import org.teampraxis.BarkBook_API.repositories.UserRepository;
 
 
 @Service
 public class EventService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final EventRepository eventRepository;
+    private final PlaceRepository placeRepository;
 
-    @Autowired
-    private EventRepository eventRepository;
+    public EventService(UserRepository userRepository, EventRepository eventRepository, PlaceRepository placeRepository) {
+        this.userRepository = userRepository;
+        this.eventRepository = eventRepository;
+        this.placeRepository = placeRepository;
+    }
 
    // sets current user creating an event to creator id
     public Event createEvent(Integer userId, Event event) {
