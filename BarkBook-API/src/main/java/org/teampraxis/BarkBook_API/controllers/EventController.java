@@ -27,8 +27,8 @@ public class EventController {
 
     // @AuthenticationPrincipal ensures it gets the authenticated current user
     @PostMapping("/create-event")
-    public ResponseEntity<?> createEvent(@AuthenticationPrincipal User currentUser, @RequestBody Event newEvent) {
-        Event createdEvent = eventService.createEvent(currentUser.getId(), newEvent);
+    public ResponseEntity<?> createEvent(@AuthenticationPrincipal User currentUser, @RequestBody Event newEvent, @RequestParam String placeId) {
+        Event createdEvent = eventService.createEvent(currentUser.getId(), placeId, newEvent);
         return ResponseEntity.ok(createdEvent);
     }
 
@@ -43,12 +43,13 @@ public class EventController {
                 .orElseThrow(()-> new EventNotFoundException(id));
      }
 
+     // TODO: fix updateEvent with place map in front end
      @PutMapping("/{id}")
      public Event updateEvent(@RequestBody Event newEvent, @PathVariable Integer id) {
         return eventRepository.findById(id)
                 .map(event -> {
                     event.setName(newEvent.getName());
-                    event.setLocation(newEvent.getLocation());
+//                    event.setLocation(newEvent.getLocation());
                     event.setDate(newEvent.getDate());
                     event.setDescription(newEvent.getDescription());
                     return eventRepository.save(event);

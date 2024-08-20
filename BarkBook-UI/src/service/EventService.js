@@ -2,9 +2,11 @@ import axiosInstance from "../config/AxiosConfig.js";
 
 const BASEPATH = "/api/event";
 
-export const createNewEvent = async (name, location, date, description) => {
-    const event = { name, location, date, description };
-    const response = await axiosInstance.post(`${BASEPATH}/create-event`, event);
+export const createNewEvent = async (name, date, description, placeId) => {
+    const event = { name, date, description };
+    const response = await axiosInstance.post(`${BASEPATH}/create-event`, event, {
+        params: {placeId}
+    });
     return response.data;
 }
 

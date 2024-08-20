@@ -3,7 +3,8 @@ import {PlacesAutocomplete} from "./PlacesAutocomplete.jsx";
 
 export const MapHeader = ({radius, radiusChange, centerChange, placesLib}) => {
 
-    const handleGetUserLocation = () => {
+    const handleGetUserLocation = (e) => {
+        e.preventDefault();
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 handleCenterChange({
@@ -27,20 +28,25 @@ export const MapHeader = ({radius, radiusChange, centerChange, placesLib}) => {
 
     return (
         <div className={"bg-amber-100 p-1"}>
-            <div className={"flex p-1"}>
-                <PlacesAutocomplete onPlaceSelect={handleCenterChange}/>
-            </div>
-            <div className={"flex p-1"}>
-                <button onClick={handleGetUserLocation} className={"rounded-md bg-black text-white p-1"}>
-                    Use my Location
-                </button>
-            </div>
-            <div className={"flex p-1"}>
-                <label>Max distance: {radius} miles
-                    <Slider
-                        value={radius} onChange={handleRadiusChange}
-                        min={"0.5"} max={"5"} step={"0.1"}/>
-                </label>
+            <div className={" w-96"}>
+                <div className={"flex p-1"}>
+                    <PlacesAutocomplete onPlaceSelect={handleCenterChange}/>
+                </div>
+                <div className={"flex p-1 items-center justify-evenly"}>
+                    <div>
+                        <button onClick={handleGetUserLocation}
+                                className={"bg-blue-800 hover:bg-blue-900 text-white p-1 rounded"}>
+                            Use my Location
+                        </button>
+                    </div>
+                    <div className={"flex p-1"}>
+                        <label>Max distance: {radius} miles
+                            <Slider
+                                value={radius} onChange={handleRadiusChange}
+                                min={"0.5"} max={"5"} step={"0.1"}/>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     );
