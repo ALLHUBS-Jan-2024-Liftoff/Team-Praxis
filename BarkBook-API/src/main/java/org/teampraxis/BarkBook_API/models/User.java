@@ -48,9 +48,9 @@ public class User implements UserDetails {
     private List<Dog> dogs;
 
     // for user who attends events
-//    @ManyToMany
-//    @JoinTable(name="user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
-//    private List<Event> attendingEvents;
+    @ManyToMany
+    @JoinTable(name="attending_event", joinColumns = @JoinColumn(name = "attendee_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<Event> attendingEvents;
 
 
     public @NotBlank @Size(max = 20) @Email String getEmail() {

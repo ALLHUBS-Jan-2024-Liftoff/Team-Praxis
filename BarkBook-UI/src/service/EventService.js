@@ -28,3 +28,14 @@ export const deleteEventById = async (id) => {
     const response = await axiosInstance.delete(`${BASEPATH}/${id}`)
     return response.data;
 }
+
+export const addUserToEvent = async (eventId, attendeeId) => {
+    try {
+        const response = await axiosInstance.post(`${BASEPATH}/${eventId}`, { attendeeId });
+        return response.data;
+    } catch (error) {
+        console.error("Error adding user to event:", error);
+        throw error;
+    }
+};
+
