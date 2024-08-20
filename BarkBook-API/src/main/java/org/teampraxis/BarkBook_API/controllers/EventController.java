@@ -11,6 +11,7 @@ import org.teampraxis.BarkBook_API.repositories.EventRepository;
 import org.teampraxis.BarkBook_API.service.EventService;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -63,4 +64,18 @@ public class EventController {
         eventRepository.deleteById(id);
         return "Event with ID " + id + " has been deleted.";
      }
+
+     // user
+     @PostMapping("/{id}")
+     public ResponseEntity<String> addUserToEvent(@PathVariable("id") Integer eventId,@RequestBody Map<String, Integer> attendee){
+         try {
+             Integer attendeeId = attendee.get("attendeeId");
+             eventService.addUserToEvent(attendeeId, eventId);
+             return ResponseEntity.ok("Attendee added to event successfully");
+         } catch (Exception e) {
+             return ResponseEntity.badRequest().body("Error adding attendee to event");
+         }
+     }
+
+
 }
