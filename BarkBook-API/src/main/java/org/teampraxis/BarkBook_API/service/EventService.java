@@ -1,11 +1,7 @@
 package org.teampraxis.BarkBook_API.service;
 
 import jakarta.persistence.EntityNotFoundException;
-<<<<<<< HEAD
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-=======
->>>>>>> origin/main
 import org.springframework.stereotype.Service;
 import org.teampraxis.BarkBook_API.models.Event;
 import org.teampraxis.BarkBook_API.models.Place;
