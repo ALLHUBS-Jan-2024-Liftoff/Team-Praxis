@@ -30,16 +30,16 @@ public class Event {
     @Size(min = 3, max = 50, message = "Name of event must be between 3 and 50 characters.")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("place-ref")
-    @JoinColumn(name = "place_id")
-    private Place place;
-
     @NotNull(message = "Event date is required.")
     private LocalDateTime date;
 
     @Size(max = 500, message = "Description is too long!")
     private String description;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference("place-ref")
+    @JoinColumn(name = "place_id")
+    private Place place;
 
     // for user who created event
     @ManyToOne
