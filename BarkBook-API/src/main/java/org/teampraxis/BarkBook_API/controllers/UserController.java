@@ -2,7 +2,10 @@ package org.teampraxis.BarkBook_API.controllers;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.teampraxis.BarkBook_API.models.Dog;
+import org.teampraxis.BarkBook_API.models.Event;
 import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.auth.service.UserService;
 
@@ -30,6 +33,18 @@ public class UserController {
         User user = userService.getUserById(id);
 
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/get/created-events")
+    public ResponseEntity<List<Event>> getUserCreatedEvents(@AuthenticationPrincipal User currentUser) {
+        List<Event> userEvents = currentUser.getCreatedEvents();
+        return ResponseEntity.ok(userEvents);
+    }
+
+    @GetMapping("/get/dogs")
+    public ResponseEntity<List<Dog>> getUserCreatedDogs(@AuthenticationPrincipal User currentUser) {
+        List<Dog> userDogs = currentUser.getDogs();
+        return ResponseEntity.ok(userDogs);
     }
 
     // TODO: implement this into front end so that user object needn't be stored in client localStorage
