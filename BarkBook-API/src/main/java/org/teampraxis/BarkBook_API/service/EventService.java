@@ -10,6 +10,8 @@ import org.teampraxis.BarkBook_API.repositories.EventRepository;
 import org.teampraxis.BarkBook_API.repositories.PlaceRepository;
 import org.teampraxis.BarkBook_API.repositories.UserRepository;
 
+import java.util.Optional;
+
 
 @Service
 public class EventService {
@@ -51,6 +53,30 @@ public class EventService {
         eventRepository.save(event);
     }
 
+    public Event updateEvent(Integer eventId, Event newEvent) {
+        return eventRepository.findById(eventId)
+                .map(event -> {
+                    event.setName(newEvent.getName());
+                    event.setDate(newEvent.getDate());
+                    event.setDescription(newEvent.getDescription());
+                    return eventRepository.save(event);
+                }).orElseThrow(() -> new EntityNotFoundException("Event not found: " + eventId));
+    }
 
+    public Event updateEventAndPlace(Integer eventId, Event event, String placeId) {
+
+        // if oldEvent has a place, remove that event from that old place... if it's there :)
+        Optional.ofNullable(event.getPlace())
+                .ifPresent(oldPlace -> oldPlace.getEvents().remove(event));
+
+
+        Event updatedEvent = updateEvent(eventId, event);
+        Place newPlace = placeRepository.findByPlaceId(placeId)
+                .orElseThrow(() -> new EntityNotFoundException("Place not found: " + placeId));
+        updatedEvent.setPlace(newPlace);
+        newPlace.getEvents().add(updatedEvent);
+
+        return eventRepository.save(updatedEvent);
+    }
 
 }

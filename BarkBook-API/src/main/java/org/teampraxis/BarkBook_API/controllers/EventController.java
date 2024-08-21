@@ -1,6 +1,5 @@
 package org.teampraxis.BarkBook_API.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +9,23 @@ import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.repositories.EventRepository;
 import org.teampraxis.BarkBook_API.service.EventService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 
 @RestController
 @RequestMapping("/api/event")
 public class EventController {
 
-    @Autowired
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
+    private final EventService eventService;
 
-    @Autowired
-    private EventService eventService;
-
+    public EventController(EventRepository eventRepository, EventService eventService) {
+        this.eventRepository = eventRepository;
+        this.eventService = eventService;
+    }
 
     // @AuthenticationPrincipal ensures it gets the authenticated current user
     @PostMapping("/create-event")
@@ -38,23 +40,32 @@ public class EventController {
      }
 
      @GetMapping("/{id}")
-     public Event getEventById(@PathVariable Integer id) {
-        return eventRepository.findById(id)
-                .orElseThrow(()-> new EventNotFoundException(id));
+     public ResponseEntity<HashMap<String, Object>> getEventById(@PathVariable Integer id) {
+         Event event = eventRepository.findById(id)
+                 .orElseThrow(() -> new NoSuchElementException("Event with id " + id + " not found"));
+
+         HashMap<String, Object> body = new HashMap<>();
+         body.put("event", event);
+         body.put("place", event.getPlace());
+         body.put("creator", event.getCreator());
+         body.put("attendees", event.getAttendees());
+         return ResponseEntity.ok(body);
      }
 
-     // TODO: fix updateEvent with place map in front end
-     @PutMapping("/{id}")
-     public Event updateEvent(@RequestBody Event newEvent, @PathVariable Integer id) {
-        return eventRepository.findById(id)
-                .map(event -> {
-                    event.setName(newEvent.getName());
-//                    event.setLocation(newEvent.getLocation());
-                    event.setDate(newEvent.getDate());
-                    event.setDescription(newEvent.getDescription());
-                    return eventRepository.save(event);
-                }).orElseThrow(() -> new EventNotFoundException(id));
-     }
+    @PutMapping("/{eventId}")
+    public ResponseEntity<Event> updateEvent(@RequestBody Event newEvent,
+                                             @RequestParam(required = false) String placeId,
+                                             @PathVariable Integer eventId) {
+        Event updatedEvent;
+
+        if (placeId == null) {
+            updatedEvent = eventService.updateEvent(eventId, newEvent);
+        } else {
+            updatedEvent = eventService.updateEventAndPlace(eventId, newEvent, placeId);
+        }
+
+        return ResponseEntity.ok(updatedEvent);
+    }
 
      @DeleteMapping("/{id}")
      String deleteEvent(@PathVariable Integer id) {
