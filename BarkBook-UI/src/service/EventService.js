@@ -20,9 +20,11 @@ export const getEventById = async (id) => {
     return response.data;
 }
 
-export const updateEventById = async (id, name, location, date, description) => {
-    const event = { id, name, location, date, description };
-    const response = await axiosInstance.put(`${BASEPATH}/${id}`, event)
+export const updateEventById = async (eventId, name, date, description, placeId) => {
+    const event = {eventId, name, date, description};
+    const response = await axiosInstance.put(`${BASEPATH}/${eventId}`, event, {
+        params: {placeId}
+    });
     return response.data;
 }
 
