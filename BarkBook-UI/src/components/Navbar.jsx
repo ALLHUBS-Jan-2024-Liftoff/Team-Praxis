@@ -11,6 +11,7 @@ const destinations = [
     {name: 'Home', path: '/', valid: true},
     {name: 'About', path: '/about', valid: true},
     {name: 'Places', path: '/save-places', valid: true},
+    {name: 'Images', path: '/image', valid: true}
 ]
 
 // TODO: make navbar sticky

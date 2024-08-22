@@ -2,9 +2,14 @@ package org.teampraxis.BarkBook_API.controllers;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.teampraxis.BarkBook_API.models.Dog;
+import org.teampraxis.BarkBook_API.models.Event;
 import org.teampraxis.BarkBook_API.models.User;
 import org.teampraxis.BarkBook_API.auth.service.UserService;
+import org.teampraxis.BarkBook_API.repositories.DogRepository;
+import org.teampraxis.BarkBook_API.repositories.EventRepository;
 
 import java.util.*;
 
@@ -13,9 +18,13 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
+    private final DogRepository dogRepository;
+    private final EventRepository eventRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, DogRepository dogRepository, EventRepository eventRepository) {
         this.userService = userService;
+        this.dogRepository = dogRepository;
+        this.eventRepository = eventRepository;
     }
 
     @GetMapping("/get/all")
@@ -30,6 +39,18 @@ public class UserController {
         User user = userService.getUserById(id);
 
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/get/created-events")
+    public ResponseEntity<List<Event>> getUserCreatedEvents(@AuthenticationPrincipal User currentUser) {
+        List<Event> userEvents = eventRepository.findByCreator(currentUser);
+        return ResponseEntity.ok(userEvents);
+    }
+
+    @GetMapping("/get/dogs")
+    public ResponseEntity<List<Dog>> getUserCreatedDogs(@AuthenticationPrincipal User currentUser) {
+        List<Dog> userDogs = dogRepository.findByOwner(currentUser);
+        return ResponseEntity.ok(userDogs);
     }
 
     // TODO: implement this into front end so that user object needn't be stored in client localStorage

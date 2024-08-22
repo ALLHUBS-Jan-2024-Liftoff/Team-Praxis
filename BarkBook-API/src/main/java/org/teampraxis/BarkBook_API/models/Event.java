@@ -42,7 +42,7 @@ public class Event {
     private Place place;
 
     // for user who created event
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference // basically prevents recursion issue. manages reversed part of the reference that does not get serialised
     @JoinColumn(name = "creator_id")
     private User creator;

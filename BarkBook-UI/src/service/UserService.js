@@ -17,6 +17,16 @@ export const getUserById = async (id) => {
     return response.data;
 };
 
+export const getUserCreatedEvents = async () => {
+    const response = await axiosInstance.get(`${BASEPATH}/get/created-events`)
+    return response.data;
+}
+
+export const getUserCreatedDogs = async () => {
+    const response = await axiosInstance.get(`${BASEPATH}/get/dogs`)
+    return response.data;
+}
+
 export const updateUserById = async (id, displayName, currentPassword, newPassword, verifyNewPassword) => {
     const response = await axiosInstance.put(`${BASEPATH}/update`, null, {
         params: {
