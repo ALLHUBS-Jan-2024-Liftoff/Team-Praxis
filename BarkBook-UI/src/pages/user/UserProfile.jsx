@@ -2,7 +2,7 @@ import {DynamicTable} from "../../components/DynamicTable.jsx";
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {useEffect, useState} from "react";
 import {getCurrentUser, isAuthenticated} from "../../service/AuthService.js";
-import {getUserById} from "../../service/UserService.js";
+import {getUserById, getUserCreatedDogs, getUserCreatedEvents} from "../../service/UserService.js";
 import {getAllDogs} from "../../service/DogService.js";
 import {getAllEvents} from "../../service/EventService.js";
 
@@ -48,8 +48,8 @@ export const UserProfile = () => {
         const getData = async () => {
             try {
                 const [gotDogs, gotEvents] = await Promise.all([
-                    getAllDogs(),
-                    getAllEvents()
+                    getUserCreatedDogs(),
+                    getUserCreatedEvents()
                 ]);
                 setDogs(gotDogs);
                 setEvents(gotEvents);

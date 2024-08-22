@@ -37,7 +37,7 @@ public class Dog {
     @NotNull(message = "Enter your dogs weight")
     private int weight;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference // basically prevents recursion issue. manages reversed part of the reference that does not get serialised
     @JoinColumn(name = "owner_id")
     private User owner;
