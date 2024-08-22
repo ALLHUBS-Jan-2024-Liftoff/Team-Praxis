@@ -1,42 +1,59 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getEventById, deleteEventById, addUserToEvent } from '../service/EventService';
-import { getCurrentUser } from '../service/AuthService';
+import {useEffect, useState} from 'react';
+import {Link, useNavigate, useParams} from 'react-router-dom';
+import {getEventById, deleteEventById, addUserToEvent} from '../service/EventService';
+import {getCurrentUser} from '../service/AuthService';
+import {ViewSinglePlace} from "./maps/ViewSinglePlace.jsx";
 
 
 export default function ViewEvent() {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const {id} = useParams();
 
+    const [eventData, setEventData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [name, setName] = useState('');
-    const [location, setLocation] = useState('');
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
+    const [place, setPlace] = useState(null);
+    const [creator, setCreator] = useState(null);
+    const [attendees, setAttendees] = useState([]);
 
     const [currentUser, setCurrentUser] = useState(null);
+    const [currentUserIsCreator, setCurrentUserIsCreator] = useState(false);
 
-    const loadEvent = async () => {
-        const result = await getEventById(id);
-        setName(result.name);
-        setLocation(result.location);
-        setDate(result.date);
-        setDescription(result.description);
-    };
-
-    // load the currentUser
-    const loadCurrentUser = async () => {
-        try {
-            const user = await getCurrentUser();
-            setCurrentUser(user);
-        } catch (error) {
-            console.error('Error fetching current user:', error);
-        }
-    };
 
     useEffect(() => {
-        loadEvent();
-        loadCurrentUser(); 
+        getEventById(id).then((result) => {
+            setEventData(result);
+        }).catch((error) => {
+            console.error(error);
+        });
+
+        const userData = getCurrentUser();
+        setCurrentUser(userData);
+
     }, [id]);
+
+    useEffect(() => {
+        if (!eventData) return;
+
+        setName(eventData.event.name);
+        setDate(eventData.event.date);
+        setDescription(eventData.event.description);
+        setPlace(eventData.place);
+        setCreator(eventData.creator);
+        setAttendees(eventData.attendees);
+    }, [eventData, creator])
+
+
+    useEffect(() => {
+        if (!place || !currentUser || !creator) return;
+        if (currentUser.id === creator.id) {
+            setCurrentUserIsCreator(true);
+        }
+        setLoading(false);
+    }, [place, currentUser, creator]);
+
 
     //delete event data, window pops up first to confirm
     const deleteEvent = async (id) => {
@@ -45,7 +62,7 @@ export default function ViewEvent() {
         );
         if (confirmed) {
             await deleteEventById(id);
-            loadEvent();
+            navigate("/user");
         }
     };
 
@@ -66,12 +83,13 @@ export default function ViewEvent() {
         try {
             await addUserToEvent(id, currentUser.id);
             alert("You're signed up");
-            navigate('/user');
+            window.location.reload();
         } catch (error) {
             console.log('Signup error', error);
         }
     };
 
+    if (loading) return <p>Loading... </p>;
     return (
         <div>
             <div className="p-4 mt-2">
@@ -79,17 +97,12 @@ export default function ViewEvent() {
                     <h1 className="text-center text-3xl font-bold text-primary-foreground sm:text-5xl">
                         Event Details
                     </h1>
-
-                    <div className="text-center p-7">
-                        <div className="card-header">
-                            <ul className="text-lg">
+                    <div className={"grid grid-cols-1 gap-4 "}>
+                        <div className={"p-5"}>
+                            <ul className="text-lg text-center">
                                 <li className="">
                                     <b>Name: </b>
                                     {name}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Location: </b>
-                                    {location}
                                 </li>
                                 <li className="list-group-item">
                                     <b>Date: </b>
@@ -99,42 +112,89 @@ export default function ViewEvent() {
                                     <b>Description: </b>
                                     {description}
                                 </li>
+                                <li className="list-group-item">
+                                    <b>Creator: </b>
+                                    <Link to={`/user/${creator.id}`}
+                                          className={"text-blue-500 underline"}
+                                    >{creator.displayName}</Link>
+                                </li>
+                                <li className="list-group-item">
+                                    <b>Attendees: </b>
+                                    {attendees.length > 0 ?
+                                        (<>
+                                            {attendees.map((attendee, index) => (
+                                                <Link key={index}
+                                                      to={`/user/${attendee.id}`}
+                                                      className={"text-blue-500 underline p-1"}
+                                                >{attendee.displayName}</Link>
+                                            ))}
+                                        </>) : (<span>None yet! Sign up now!</span>)
+                                    }
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div className="flex space-x-3 justify-center">
                         <Link
                             className="my-2 rounded-md bg-blue-500 hover:bg-blue-900 px-3 py-3 text-sm font-semibold text-white"
-                            to={'/user'}
+                            to={'/'}
                         >
-                            Back to user
+                            Back
                         </Link>
 
-                        <Link
-                            className="my-2 rounded-md bg-green-500 hover:bg-green-900 px-3 py-3 text-sm font-semibold text-white "
-                            to={`/event/edit/${id}`}
-                        >
-                            Edit
-                        </Link>
+                        {currentUserIsCreator ?
+                            (
+                                <>
+                                    <Link
+                                        className="my-2 rounded-md bg-green-500 hover:bg-green-900 px-3 py-3 text-sm font-semibold text-white "
+                                        to={`/event/edit/${id}`}
+                                    >
+                                        Edit
+                                    </Link>
 
-                        <Link
-                            className="my-2 rounded-md bg-red-500 hover:bg-red-900 px-3 py-3 text-sm font-semibold text-white "
-                            onClick={() => deleteEvent(id)}
-                            to="/user"
-                        >
-                            Delete
-                        </Link>
+                                    <button
+                                        className="my-2 rounded-md bg-red-500 hover:bg-red-900 px-3 py-3 text-sm font-semibold text-white "
+                                        onClick={() => deleteEvent(id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </>
+                            ) : (<></>)
+                        }
 
-                        <Link
+                        <button
                             className="my-2 rounded-md bg-purple-500 hover:bg-purple-900 px-3 py-3 text-sm font-semibold text-white "
                             onClick={() => attendEvent()}
                         >
                             Attend
-                        </Link>
+                        </button>
+                    </div>
+                </div>
+
+                <div className={"grid justify-center p-5"}>
+                    <div className={"w-auto p-1"}>
+                        <h2 className={"font-bold"}>Current Event Location: </h2>
+                        <div className={"flex items-center"}>
+                            <div>
+                                <span>{place.displayName}<br/>{place.formattedAddress}</span>
+                            </div>
+                            <div className={"p-2"}>
+                                <Link target={"_blank"}
+                                      to={place.googleMapsURI}
+                                      className={"bg-blue-600 hover:bg-blue-700 text-white p-1 rounded inline-flex"}
+                                >
+                                    Details
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <ViewSinglePlace place={place}/>
                     </div>
                 </div>
             </div>
-            <div className="text-center p-3">MAP HERE :)</div>
+
+
         </div>
     );
 }

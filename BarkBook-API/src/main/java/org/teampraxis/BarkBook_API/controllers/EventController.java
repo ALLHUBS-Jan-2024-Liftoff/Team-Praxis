@@ -44,6 +44,7 @@ public class EventController {
          Event event = eventRepository.findById(id)
                  .orElseThrow(() -> new NoSuchElementException("Event with id " + id + " not found"));
 
+         event.getCreator().setPassword(null);
          HashMap<String, Object> body = new HashMap<>();
          body.put("event", event);
          body.put("place", event.getPlace());
