@@ -24,8 +24,8 @@ public class Image {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] imageData;
 
-    @ManyToOne
-    @JoinColumn(name = "dog_id")
-    private Dog dog;
+//    @ManyToOne
+//    @JoinColumn(name = "dog_id")
+//    private Dog dog;
 
 }

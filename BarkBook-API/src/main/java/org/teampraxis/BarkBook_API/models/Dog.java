@@ -21,8 +21,8 @@ public class Dog {
     @GeneratedValue
     private int id;
 
-    @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL)
-    private List<Image> images;
+//    @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL)
+//    private List<Image> images;
 
     @NotBlank(message = "Name your dog!")
     @Size(max = 10)

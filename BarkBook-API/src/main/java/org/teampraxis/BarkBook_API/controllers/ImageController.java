@@ -28,7 +28,7 @@ public class ImageController {
     // used to display the image
     @GetMapping("/{fileName}")
     public ResponseEntity<?> downloadImage (@PathVariable String fileName) {
-        byte[] image = service.downloadImage(fileName); // calls service method & sets it equal to the byte array
+        byte[] image = service.downloadImage(fileName);// calls service method & sets it equal to the byte array
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);    // MediaType is dynamic, can add more later
     }
 }

@@ -13,6 +13,11 @@ export const uploadImage = async (file) => {
     });
 
     return response.data;
-
-
 };
+
+export const displayImage = async (fileName) => {
+    const response = await axiosInstance.get(`${BASEPATH}/${fileName}`, {
+        responseType: "blob",
+    });
+    return response;
+}
