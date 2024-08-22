@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Disclosure, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { LogoutButton } from "./LogoutButton";
+import { LogoutRedirect } from "./LogoutRedirect.jsx";
 import { useEffect, useState } from "react";
 import { getCurrentUser, isAuthenticated } from "../service/AuthService";
 
@@ -83,9 +83,9 @@ const Navbar = () => {
                       </Link>
                     </MenuItem>
                     <MenuItem>
-                      <a className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                        <LogoutButton></LogoutButton>
-                      </a>
+                      <Link to={`/logout`} className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                          Logout
+                      </Link>
                     </MenuItem>
                   </MenuItems>
                 </Menu>

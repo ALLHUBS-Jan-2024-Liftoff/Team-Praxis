@@ -16,7 +16,6 @@ import {UserProfile} from "./pages/user/UserProfile.jsx";
 import ViewDog from './pages/ViewDog.jsx';
 import EditDog from './pages/EditDog.jsx';
 import {AuthProvider} from "./AuthContext.jsx";
-import {UserStuff} from "./pages/user/temp/UserStuff.jsx";
 import EditEvent from "./pages/EditEvent.jsx";
 import ViewEvent from "./pages/ViewEvent.jsx";
 import {ProtectedRoutes} from "./components/ProtectedRoutes.jsx";
@@ -26,6 +25,7 @@ import AddImage from './pages/UploadImage.jsx';
 import {UserProfileRedirect} from "./pages/user/UserProfileRedirect.jsx";
 import {SavePlaces} from "./pages/maps/SavePlaces.jsx";
 import {ViewPlace} from "./pages/maps/ViewPlace.jsx";
+import {LogoutRedirect} from "./components/LogoutRedirect.jsx";
 
 
 const App = () => {
@@ -41,7 +41,7 @@ const App = () => {
         createRoutesFromElements(
             <Route path="/" element={<MainLayout />}>
                 <Route path={"about"} element={<AboutPage />} />
-                <Route path={"userstuff"} element={<UserStuff />} />
+                <Route path={"logout"} element={<LogoutRedirect />} />
 
                 <Route element={<ProtectedRoutes user={!user}/>} >
                     <Route path={"login"} element={<UserLogin />} />
