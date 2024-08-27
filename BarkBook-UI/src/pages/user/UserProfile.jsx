@@ -48,8 +48,8 @@ export const UserProfile = () => {
         const getData = async () => {
             try {
                 const [gotDogs, gotEvents] = await Promise.all([
-                    getUserCreatedDogs(),
-                    getUserCreatedEvents()
+                    getUserCreatedDogs(id),
+                    getUserCreatedEvents(id)
                 ]);
                 setDogs(gotDogs);
                 setEvents(gotEvents);

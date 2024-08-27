@@ -17,13 +17,13 @@ export const getUserById = async (id) => {
     return response.data;
 };
 
-export const getUserCreatedEvents = async () => {
-    const response = await axiosInstance.get(`${BASEPATH}/get/created-events`)
+export const getUserCreatedEvents = async (id) => {
+    const response = await axiosInstance.get(`${BASEPATH}/get/created-events/${id}`)
     return response.data;
 }
 
-export const getUserCreatedDogs = async () => {
-    const response = await axiosInstance.get(`${BASEPATH}/get/dogs`)
+export const getUserCreatedDogs = async (id) => {
+    const response = await axiosInstance.get(`${BASEPATH}/get/dogs/${id}`)
     return response.data;
 }
 

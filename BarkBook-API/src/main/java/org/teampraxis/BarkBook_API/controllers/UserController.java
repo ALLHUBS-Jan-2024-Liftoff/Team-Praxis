@@ -41,15 +41,17 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/get/created-events")
-    public ResponseEntity<List<Event>> getUserCreatedEvents(@AuthenticationPrincipal User currentUser) {
-        List<Event> userEvents = eventRepository.findByCreator(currentUser);
+    @GetMapping("/get/created-events/{id}")
+    public ResponseEntity<List<Event>> getUserCreatedEvents(@PathVariable Integer id) {
+        User user = userService.getUserById(id);
+        List<Event> userEvents = eventRepository.findByCreator(user);
         return ResponseEntity.ok(userEvents);
     }
 
-    @GetMapping("/get/dogs")
-    public ResponseEntity<List<Dog>> getUserCreatedDogs(@AuthenticationPrincipal User currentUser) {
-        List<Dog> userDogs = dogRepository.findByOwner(currentUser);
+    @GetMapping("/get/dogs/{id}")
+    public ResponseEntity<List<Dog>> getUserCreatedDogs(@PathVariable Integer id) {
+        User user = userService.getUserById(id);
+        List<Dog> userDogs = dogRepository.findByOwner(user);
         return ResponseEntity.ok(userDogs);
     }
 
